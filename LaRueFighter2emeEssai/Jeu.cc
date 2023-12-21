@@ -1,6 +1,7 @@
 #include "Jeu.hh"
 #include "Personnage.hh"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 Jeu::Jeu(/* args */)
 {
     //Créer les joueurs  (1 et 2 pour l'instants)
@@ -56,13 +57,15 @@ int Jeu::lancer(Afficheur* afficheur)
 {
     bool lancerJeu = true;
 
-    
+    // Affichage de texte
+    std::cout << "Lancement de la partie jeu.lancer()" << std::endl;
+
 
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
 
         afficheur->afficher(this); // Affiche le jeu
-
+    
         // Conditions pour quitter le jeu
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {

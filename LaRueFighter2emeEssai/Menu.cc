@@ -1,11 +1,14 @@
 
 #include "Menu.hh"
 #include "Afficheur.hh"
+#include <iostream>
 
 int Menu::lancer(Afficheur* afficheur){
 
-
     bool lancerMenu = true;
+
+    // Affichage de texte
+    std::cout << "Lancement du menu menu.lancer()" << std::endl;
 
     while(afficheur->getWindow()->isOpen() && lancerMenu){
         
