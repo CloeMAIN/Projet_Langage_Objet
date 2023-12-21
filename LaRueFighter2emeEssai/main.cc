@@ -1,6 +1,6 @@
 #include "Menu.hh"
 // #include "Jeu.hh"
-// #include "Afficheur.hh"
+#include "Afficheur.hh"
 // #include "InputUser.hh"
 // #include "Personnage.hh"
 
@@ -8,9 +8,11 @@ int main(int argc, char const *argv[])
 {
     // lancer le menu
 
-    Menu menu;
+    Afficheur afficheur;
 
-    menu.lancer();
+    Menu menu; // Remove the parentheses here
+
+    menu.lancer(&afficheur);
     
     // //Initialise un jeu
     // Jeu jeu;

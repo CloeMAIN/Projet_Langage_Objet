@@ -2,11 +2,10 @@
 #include "Menu.hh"
 #include "Afficheur.hh"
 
-int Menu::lancer(){
+int Menu::lancer(Afficheur* afficheur){
 
-    Afficheur afficheur;
 
-    while(afficheur.getWindow()->isOpen()){
+    while(afficheur->getWindow()->isOpen()){
         
         // sf::Event event;        
         // while(window.pollEvent(event)){
@@ -27,7 +26,11 @@ int Menu::lancer(){
         // afficheur.afficherMenu();
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-            afficheur.getWindow()->close();
+            afficheur->getWindow()->close();
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+            return 1;
         }
     }
     return 0;

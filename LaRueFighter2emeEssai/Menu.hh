@@ -1,6 +1,8 @@
 #ifndef MENU_HH
 #define MENU_HH
 
+#include "Afficheur.hh"
+
 class Menu
 {
 private:
@@ -8,7 +10,7 @@ private:
 public:
     Menu(/* args */);
     ~Menu();
-    int lancer();
+    int lancer(Afficheur* afficheur);
 };
 
 #endif // MENU_HH

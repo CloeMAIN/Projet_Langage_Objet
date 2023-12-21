@@ -1,9 +1,9 @@
-class enum Point{
-    int x; 
+struct Point {
+    int x;
     int y;
 };
 
-class enum HitBox{
+struct HitBox {
     Point GaucheHaut;
     Point DroiteBas;
 };
@@ -16,4 +16,3 @@ public:
     ElementJeu(/* args */);
     ~ElementJeu();
 };
-
