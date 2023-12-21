@@ -1,20 +1,21 @@
 #include "Menu.hh"
-#include "Jeu.hh"
-#include "Afficheur.hh"
-#include "InputUser.hh"
-#include "Personnage.hh"
+// #include "Jeu.hh"
+// #include "Afficheur.hh"
+// #include "InputUser.hh"
+// #include "Personnage.hh"
 
-
-int main{
-
+int main(int argc, char const *argv[])
+{
     // lancer le menu
 
     Menu menu;
-    menu.lancer();
-    //Initialise un jeu
-    Jeu jeu;
-    //Le jeu lance la partie
-    jeu.lancer();
 
-    return 0; 
+    menu.lancer();
+    
+    // //Initialise un jeu
+    // Jeu jeu;
+    // //Le jeu lance la partie
+    // jeu.lancer();
+
+    return 0;
 }

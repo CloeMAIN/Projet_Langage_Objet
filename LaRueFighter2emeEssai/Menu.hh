@@ -1,3 +1,6 @@
+#ifndef MENU_HH
+#define MENU_HH
+
 class Menu
 {
 private:
@@ -5,13 +8,7 @@ private:
 public:
     Menu(/* args */);
     ~Menu();
+    int lancer();
 };
 
-Menu::Menu(/* args */)
-{
-}
-
-Menu::~Menu()
-{
-}
-
+#endif // MENU_HH
