@@ -1,6 +1,12 @@
 #ifndef AFFICHEUR_HH
 #define AFFICHEUR_HH
+
 #include <SFML/Graphics.hpp>
+#include "Personnage.hh"
+
+// Déclaration anticipée de la classe Jeu pour éviter la dépendance cyclique
+class Jeu;
+
 class Afficheur
 {
 private:
@@ -11,6 +17,10 @@ public:
 
     /* Getter */
     sf::RenderWindow* getWindow(){return &window;}
+
+    /* Méthodes */
+    void afficher(Personnage joueur);
+    void afficher(Jeu* jeu);
 };
 
 #endif // AFFICHEUR_HH

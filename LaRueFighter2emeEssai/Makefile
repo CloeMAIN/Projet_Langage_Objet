@@ -7,6 +7,8 @@ EXECUTABLE=mon_programme
 
 all: $(SOURCES) $(EXECUTABLE)
 
+main:
+
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 	./$(EXECUTABLE)

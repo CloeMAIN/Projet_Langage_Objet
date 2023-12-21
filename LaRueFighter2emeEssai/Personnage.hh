@@ -7,23 +7,21 @@
 class Personnage : public ElementJeu{
 private:
     //Hitbox hitbox;
-    Point position;
     int vie;
-    std::string cheminImage;
 public:
     //constructeur
     Personnage();
+    Personnage(Point position, int vie, std::string cheminImage);
     ~Personnage();
 
-    //getter
     //Hitbox getHitbox();
-    Point getPosition(){return position;};
-        int getVie();
+    Point getPosition(){return position;}
+    int getVie(){return vie;}
 
-        //setter
-        //void setHitbox(Hitbox hitbox);
-        void setPosition(Point position);
-        void setVie(int vie);   
+    //setter
+    //void setHitbox(Hitbox hitbox);
+    void setPosition(Point position){this->position = position;}
+    void setVie(int vie){this->vie = vie;}   
 
 };
 

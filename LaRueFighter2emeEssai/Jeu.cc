@@ -1,6 +1,5 @@
 #include "Jeu.hh"
 #include "Personnage.hh"
-#include "Afficheur.hh"
 #include <SFML/Graphics.hpp>
 Jeu::Jeu(/* args */)
 {
@@ -57,21 +56,12 @@ int Jeu::lancer(Afficheur* afficheur)
 {
     bool lancerJeu = true;
 
-    // Créer un fond vert
-    sf::RectangleShape background(sf::Vector2f(afficheur->getWindow()->getSize().x, afficheur->getWindow()->getSize().y));
-    background.setFillColor(sf::Color::Green);
+    
 
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
-    
 
-        // Affichage du fond vert
-        afficheur->getWindow()->clear(sf::Color::Black); // Fond noir
-        afficheur->getWindow()->draw(background);
-
-        // Dessiner le contenu du jeu ici
-
-        afficheur->getWindow()->display();
+        afficheur->afficher(this); // Affiche le jeu
 
         // Conditions pour quitter le jeu
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
