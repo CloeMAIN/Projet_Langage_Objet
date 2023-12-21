@@ -5,7 +5,9 @@
 int Menu::lancer(Afficheur* afficheur){
 
 
-    while(afficheur->getWindow()->isOpen()){
+    bool lancerMenu = true;
+
+    while(afficheur->getWindow()->isOpen() && lancerMenu){
         
         // sf::Event event;        
         // while(window.pollEvent(event)){
@@ -30,7 +32,7 @@ int Menu::lancer(Afficheur* afficheur){
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-            return 1;
+            lancerMenu = false;
         }
     }
     return 0;

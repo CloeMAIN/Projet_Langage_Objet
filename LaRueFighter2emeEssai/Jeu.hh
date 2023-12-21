@@ -1,3 +1,9 @@
+#ifndef JEU_HH
+#define JEU_HH
+
+#include "Afficheur.hh"
+#include "Personnage.hh"
+
 class Jeu
 {
 private:
@@ -7,8 +13,10 @@ private:
 public:
     Jeu(/* args */);
     ~Jeu();
-    void lancer();
+    int lancer(Afficheur* afficheur);
     
     
 };
+
+#endif // JEU_HH
 

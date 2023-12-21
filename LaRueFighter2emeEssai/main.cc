@@ -1,5 +1,5 @@
 #include "Menu.hh"
-// #include "Jeu.hh"
+#include "Jeu.hh"
 #include "Afficheur.hh"
 // #include "InputUser.hh"
 // #include "Personnage.hh"
@@ -15,9 +15,9 @@ int main(int argc, char const *argv[])
     menu.lancer(&afficheur);
     
     // //Initialise un jeu
-    // Jeu jeu;
+    Jeu jeu;
     // //Le jeu lance la partie
-    // jeu.lancer();
+    jeu.lancer(&afficheur);
 
     return 0;
 }
