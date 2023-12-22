@@ -35,13 +35,25 @@ void Afficheur:: afficher(Jeu* jeu){
 
 }
 
-// Afficheur:: afficher(Bouton){
-//     en fonction image
-// }
+void Afficheur:: afficher(std::string cheminbouton, Point position, HitBox taille){
+sf::Texture texture;
+    texture.loadFromFile(cheminbouton);
+    sf::Sprite bouton;
+    bouton.setTexture(texture);
+    bouton.setPosition(position.x, position.y);
+    bouton.setScale((taille.DroiteBas.x - taille.GaucheHaut.x) / bouton.getLocalBounds().width, (taille.DroiteBas.y - taille.GaucheHaut.y) / bouton.getLocalBounds().height);
+    window.draw(bouton);
+}
 
-// Afficheur:: afficher(Background){
-
-// }
+void Afficheur:: afficher(std::string cheminBackground){
+    sf::Texture texture;
+    texture.loadFromFile(cheminBackground);
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+    sprite.setPosition(0, 0);
+    sprite.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sprite.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sprite.getLocalBounds().height));
+    window.draw(sprite);
+}
 
 // Afficheur:: afficher(Sol){
 
@@ -57,15 +69,18 @@ void Afficheur:: afficher(Jeu* jeu){
 
 //     // la barre de vie
 
-// }
+// }    
 
-// Afficheur::afficherMenu(){
-
-//     // en fonction du nom du bouton, on affiche une image différente
-//     //On utilisera background et bouton.
-
-
-// }
+void Afficheur::afficherMenu(){
+    /* Affichage du background */
+    afficher(CHEMIN_BACKGROUND_MENU);
+    
+    /*Affichage des différents boutons*/
+    afficher(CHEMIN_BOUTON_JOUER, POSITION_BOUTON_JOUER, TAILLE_BOUTON_JOUER);
+    // afficher(CHEMIN_BOUTON_COMMANDES, POSITION_BOUTON_COMMANDES, TAILLE_BOUTON_COMMANDES);
+    afficher(CHEMIN_BOUTON_QUITTER, POSITION_BOUTON_QUITTER, TAILLE_BOUTON_QUITTER);
+    window.display();
+}
 
 // Afficheur::afficherCommande(){
     

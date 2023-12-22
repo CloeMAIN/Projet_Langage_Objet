@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Personnage.hh"
+#include "constant.hh"
 
 // Déclaration anticipée de la classe Jeu pour éviter la dépendance cyclique
 class Jeu;
@@ -21,6 +22,9 @@ public:
     /* Méthodes */
     void afficher(Personnage joueur);
     void afficher(Jeu* jeu);
+    void afficherMenu();
+    void afficher(std::string cheminbouton, Point position, HitBox taille);
+    void afficher(std::string cheminBackground);
 };
 
 #endif // AFFICHEUR_HH
