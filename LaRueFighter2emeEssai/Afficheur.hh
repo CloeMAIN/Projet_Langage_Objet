@@ -9,18 +9,19 @@ class Jeu;
 
 class Afficheur
 {
-private:
-    sf::RenderWindow window;
-public:
-    Afficheur(/* args */);
-    ~Afficheur();
+    private:
+        sf::RenderWindow window;
+    public:
+        Afficheur(/* args */);
+        ~Afficheur();
 
-    /* Getter */
-    sf::RenderWindow* getWindow(){return &window;}
+        /* Getter */
+        sf::RenderWindow* getWindow(){return &window;}
 
-    /* Méthodes */
-    void afficher(Personnage joueur);
-    void afficher(Jeu* jeu);
+        /* Méthodes */
+        void afficher(const Personnage& joueur);
+        void afficher(Jeu& jeu);
+
 };
 
 #endif // AFFICHEUR_HH

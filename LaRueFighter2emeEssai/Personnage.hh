@@ -4,25 +4,31 @@
 #include <string>
 #include "ElementJeu.hh"
 
-class Personnage : public ElementJeu{
+class Personnage {
+
 private:
-    //Hitbox hitbox;
     int vie;
+    std::string cheminImage;  // Ajout du chemin de l'image
+    sf::Texture texture;     // Ajout de la texture
+    sf::Sprite sprite;       // Ajout du sprite
+    sf::Vector2f position;
 public:
-    //constructeur
+    // Constructeurs et destructeur
     Personnage();
-    Personnage(Point position, int vie, std::string cheminImage);
+    Personnage(sf::Vector2f position, int vie, std::string cheminImage);
     ~Personnage();
 
-    //Hitbox getHitbox();
-    Point getPosition(){return position;}
-    int getVie(){return vie;}
+    // Méthodes d'accès
+    sf::Vector2f getPosition() const { return position; }
+    int getVie() const { return vie; }
+    std::string getCheminImage() const { return cheminImage; }
+    sf::Sprite getSprite() const { return sprite; }
+    sf::Texture getTexture() const { return texture; }
 
-    //setter
-    //void setHitbox(Hitbox hitbox);
-    void setPosition(Point position){this->position = position;}
-    void setVie(int vie){this->vie = vie;}   
-
+    // Méthodes de modification
+    void setVie(int vie) { this->vie = vie; }
 };
+
+
 
 #endif // PERSONNAGE_HH
