@@ -14,7 +14,7 @@ struct HitBox {
     Point DroiteBas;
 };
 
-class ElementJeu : public sf::Drawable
+class ElementJeu
 {
 protected:
     sf::Texture texture;
@@ -23,12 +23,12 @@ protected:
     Point position;
 public:
     ElementJeu(/* args */);
+    ElementJeu(Point position, std::string cheminImage);
     ~ElementJeu();
-    void chargerTexture();
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {
-        // Dessinez le sprite de l'élément
-        target.draw(sprite, states);
-    }
+
+    /*Getter*/
+    sf::Texture getTexture(){return texture;}
+    sf::Sprite getSprite(){return sprite;}
 };
 
 #endif // ELEMENTJEU_HH
