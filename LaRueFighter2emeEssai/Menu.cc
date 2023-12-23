@@ -8,18 +8,18 @@ int Menu::lancer(Afficheur* afficheur){
 
     bool lancerMenu = true;
 
-    sf::RenderWindow* window = afficheur->getWindow();
+    // sf::RenderWindow* window = afficheur->getWindow();
 
     // Affichage de texte
     std::cout << "Lancement du menu menu.lancer()" << std::endl;
 
-    while(window->isOpen() && lancerMenu){
+    while(afficheur->getWindow()->isOpen() && lancerMenu){
         
         sf::Event event;        
-        while(window->pollEvent(event)){
+        while(afficheur->getWindow()->pollEvent(event)){
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                window->close();
+                afficheur->getWindow()->close();
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
                 lancerMenu = false;
@@ -37,7 +37,7 @@ int Menu::lancer(Afficheur* afficheur){
                     else if (event.mouseButton.x >= TAILLE_BOUTON_COMMANDES.GaucheHaut.x && event.mouseButton.x <= TAILLE_BOUTON_COMMANDES.DroiteBas.x && event.mouseButton.y >= TAILLE_BOUTON_COMMANDES.GaucheHaut.y && event.mouseButton.y <= TAILLE_BOUTON_COMMANDES.DroiteBas.y){
                         std::cout << "Commandes" << std::endl;
                         afficheur->afficher(CHEMIN_BACKGROUND_COMMANDES);
-                        window->display();
+                        afficheur->getWindow()->display();
                         //On attend que l'utilisateur appuie sur la touche B pour revenir au menu
                         while(!sf::Keyboard::isKeyPressed(sf::Keyboard::B)){}
                         }
@@ -45,7 +45,7 @@ int Menu::lancer(Afficheur* afficheur){
                     //else si je clique sur le bouton quitter
                     else if (event.mouseButton.x >= TAILLE_BOUTON_QUITTER.GaucheHaut.x && event.mouseButton.x <= TAILLE_BOUTON_QUITTER.DroiteBas.x && event.mouseButton.y >= TAILLE_BOUTON_QUITTER.GaucheHaut.y && event.mouseButton.y <= TAILLE_BOUTON_QUITTER.DroiteBas.y){
                         std::cout << "Quitter" << std::endl;
-                        window->close();
+                        afficheur->getWindow()->close();
                         return 2;}
 
                 }

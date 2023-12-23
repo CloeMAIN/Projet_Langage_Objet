@@ -9,7 +9,7 @@ class Jeu
 private:
     Personnage joueur1{sf::Vector2f(200, 100), 100, "luffy.png"};
     Personnage joueur2{sf::Vector2f(600, 100), 100, "luffy.png"};
-    Afficheur afficheur;
+    // Afficheur* afficheur;
 public:
     Jeu(/* args */);
     ~Jeu();

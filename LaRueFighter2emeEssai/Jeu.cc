@@ -55,7 +55,7 @@ int Jeu::lancer(Afficheur* afficheur)
 {
     bool lancerJeu = true;
 
-    sf::RenderWindow* window = afficheur->getWindow();
+    // sf::RenderWindow* window = afficheur->getWindow();
 
     // Affichage de texte
     std::cout << "Lancement de la partie jeu.lancer()" << std::endl;
@@ -63,10 +63,10 @@ int Jeu::lancer(Afficheur* afficheur)
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
         sf::Event event;        
-        while(window->pollEvent(event)){
+        while(afficheur->getWindow()->pollEvent(event)){
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-                window->close();
+                afficheur->getWindow()->close();
             }
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
