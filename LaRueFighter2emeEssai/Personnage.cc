@@ -13,6 +13,8 @@ Personnage::Personnage(sf::Vector2f position, int vie, std::string cheminImage)
     }
 
     sprite.setTexture(texture);
+    sprite.setTextureRect(sf::IntRect(0, 80, 40, 40));
+    sprite.setScale(5.0f, 5.0f);  // Ajuster l'échelle (5.0f signifie 2 fois plus grand)
     sprite.setPosition(position);
 
     // Affichage de sattribut du joueur
