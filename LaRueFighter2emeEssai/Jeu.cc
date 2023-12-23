@@ -4,14 +4,12 @@
 #include <iostream>
 Jeu::Jeu(/* args */)
 {
-    //Créer les joueurs  (1 et 2 pour l'instants)
-    Personnage joueur1;
-    Personnage joueur2;
-    //On créée l'afficheur:
-    Afficheur afficheur;
+    // Créer les joueurs (1 et 2 pour l'instant)
     // si ca foire on met userinput en plus ici
-    int round = 1;
+   // int round = 1;
+
 }
+
 
 Jeu::~Jeu()
 {
@@ -74,11 +72,11 @@ int Jeu::lancer(Afficheur* afficheur)
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
                 lancerJeu = false;
             }
-
-        afficheur->afficher(this); // Affiche le jeu
-
+            
         }
-    
+        afficheur->afficher(*this); // Affiche le jeu 5PB d'affichage vient de là
+        //afficheur->afficher(joueur1); // Affiche le joueur 1
+        window->display();
        
     }
 
