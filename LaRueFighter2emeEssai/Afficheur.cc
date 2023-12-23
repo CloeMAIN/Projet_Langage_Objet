@@ -39,9 +39,9 @@ void Afficheur::afficher(Jeu& jeu) {
 
 // }
 
-Afficheur:: afficher(Sol){
+// Afficheur:: afficher(Sol){
     
-}
+// }
 
 // Afficheur:: afficher(Texte){
 
