@@ -1,7 +1,6 @@
 #include "Afficheur.hh"
 #include "Jeu.hh"  // Ajoutez cette ligne pour inclure la définition complète de la classe Jeu
-
-
+#include <iostream>
 
 Afficheur::Afficheur(/* args */) : window(sf::VideoMode::getDesktopMode(), "Jeu", sf::Style::Fullscreen)
 {
@@ -13,27 +12,22 @@ Afficheur::~Afficheur()
 {
 }
 
-void Afficheur:: afficher(Personnage joueur){
-
-    // met le personnage à sa position dans la window
-    joueur.setPosition(joueur.Personnage::getPosition()); // Important de preciser qu'il s'agit de la fonction de la classe Personnage car sf::drawable en ont une aussi
-    joueur.chargerTexture();
-    window.draw(joueur);
-    // e n fonction de l'action du personnage, on affiche une image différente
-
+void Afficheur::afficher(const Personnage& joueur) {
+    // Met le personnage à sa position dans la window
+    joueur.getSprite().setPosition(joueur.getPosition());
+    // Affiche le personnage
+    window.draw(joueur.getSprite());
 }
 
-void Afficheur:: afficher(Jeu* jeu){
 
-    // inclue le nom du personnage au dessus et une pdp du perso
-
+void Afficheur::afficher(Jeu& jeu) {
+    // inclut le nom du personnage au-dessus et une pdp du perso
     // la barre de vie
-    window.clear(sf::Color::Green); 
-
-    // Dessiner le contenu du jeu ici
-    window.display();
-
+    afficher(jeu.getJoueur1()); // Affiche le joueur 1
+    afficher(jeu.getJoueur2()); // Affiche le joueur 2
+    // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
 }
+
 
 void Afficheur:: afficher(std::string cheminbouton, Point position, HitBox taille){
 sf::Texture texture;
@@ -44,6 +38,11 @@ sf::Texture texture;
     bouton.setScale((taille.DroiteBas.x - taille.GaucheHaut.x) / bouton.getLocalBounds().width, (taille.DroiteBas.y - taille.GaucheHaut.y) / bouton.getLocalBounds().height);
     window.draw(bouton);
 }
+
+
+// Afficheur:: afficher(Bouton){
+//     en fonction image
+// }
 
 void Afficheur:: afficher(std::string cheminBackground){
     sf::Texture texture;
@@ -56,7 +55,7 @@ void Afficheur:: afficher(std::string cheminBackground){
 }
 
 // Afficheur:: afficher(Sol){
-
+    
 // }
 
 // Afficheur:: afficher(Texte){
