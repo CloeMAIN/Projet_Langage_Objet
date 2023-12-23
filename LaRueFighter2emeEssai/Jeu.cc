@@ -74,7 +74,7 @@ int Jeu::lancer(Afficheur* afficheur)
             }
             
         }
-        afficheur->afficher(*this); // Affiche le jeu
+        afficheur->afficher(*this); // Affiche le jeu 5PB d'affichage vient de là
         //afficheur->afficher(joueur1); // Affiche le joueur 1
         window->display();
        

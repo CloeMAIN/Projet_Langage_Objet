@@ -23,6 +23,7 @@ void Afficheur::afficher(const Personnage& joueur) {
 void Afficheur::afficher(Jeu& jeu) {
     // inclut le nom du personnage au-dessus et une pdp du perso
     // la barre de vie
+    window.clear(sf::Color::Green); // enlever le menu
     afficher(jeu.getJoueur1()); // Affiche le joueur 1
     afficher(jeu.getJoueur2()); // Affiche le joueur 2
     // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
