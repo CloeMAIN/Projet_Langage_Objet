@@ -1,11 +1,18 @@
 {
     "files.associations": {
+<<<<<<< HEAD
         "string": "cpp",
         "*.tcc": "cpp",
+=======
+>>>>>>> cae179c12676526f5b2743e220158bdb7fe7f481
         "iostream": "cpp",
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
+<<<<<<< HEAD
+=======
+        "*.tcc": "cpp",
+>>>>>>> cae179c12676526f5b2743e220158bdb7fe7f481
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
@@ -21,6 +28,10 @@
         "cwctype": "cpp",
         "deque": "cpp",
         "map": "cpp",
+<<<<<<< HEAD
+=======
+        "string": "cpp",
+>>>>>>> cae179c12676526f5b2743e220158bdb7fe7f481
         "unordered_map": "cpp",
         "vector": "cpp",
         "exception": "cpp",

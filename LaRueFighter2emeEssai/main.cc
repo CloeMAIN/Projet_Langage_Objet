@@ -10,14 +10,17 @@ int main(int argc, char const *argv[])
     Afficheur afficheur;
 
     Menu menu; // Remove the parentheses here
-
-    menu.lancer(&afficheur);
+    int test = 0;
+    test  = menu.lancer(&afficheur);
     
     //Initialise un jeu
     Jeu jeu;
-    
-    // //Le jeu lance la partie
+    if (test == 0){
+    //Le jeu lance la partie
     jeu.lancer(&afficheur);
+    }
+
+   
 
     return 0;
 }
