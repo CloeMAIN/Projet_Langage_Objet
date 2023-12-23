@@ -25,7 +25,7 @@ class Afficheur
         void afficherMenu();
         void afficher(std::string cheminbouton, Point position, HitBox taille);
         void afficher(std::string cheminBackground);
-
+        void afficherSol();
 };
 
 #endif // AFFICHEUR_HH

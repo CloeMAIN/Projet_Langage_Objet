@@ -23,8 +23,12 @@ const unsigned int DEGAT_DIRECT = 5;
 const float VITESSE_ZIGZAG = 2;
 const unsigned int DEGAT_ZIGZAG = 5;
 
+// Taille fenêtre
 const sf::Vector2u TAILLE_FENETRE = sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
 
+// Taille du sol
+
+const int HAUTEUR_SOL = 150;
 //Position des boutons:
 const Point POSITION_BOUTON_JOUER = {TAILLE_FENETRE.x/2 -100 , TAILLE_FENETRE.y - 325};
 const Point POSITION_BOUTON_COMMANDES = { TAILLE_FENETRE.x / 2 - 100 , TAILLE_FENETRE.y- 225};
