@@ -1,6 +1,7 @@
 #include "Afficheur.hh"
 #include "Jeu.hh"  // Ajoutez cette ligne pour inclure la définition complète de la classe Jeu
 #include <iostream>
+#include "constant.hh"
 
 Afficheur::Afficheur(/* args */) : window(sf::VideoMode::getDesktopMode(), "Jeu", sf::Style::Fullscreen)
 {
@@ -24,9 +25,11 @@ void Afficheur::afficher(Jeu& jeu) {
     // inclut le nom du personnage au-dessus et une pdp du perso
     // la barre de vie
     window.clear(sf::Color::Green); // enlever le menu
+    afficherSol();
     afficher(jeu.getJoueur1()); // Affiche le joueur 1
     afficher(jeu.getJoueur2()); // Affiche le joueur 2
     // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
+    window.display();
 }
 
 
@@ -55,9 +58,12 @@ void Afficheur:: afficher(std::string cheminBackground){
     window.draw(sprite);
 }
 
-// Afficheur:: afficher(Sol){
-    
-// }
+void Afficheur::afficherSol() {
+    sf::RectangleShape sol(sf::Vector2f(TAILLE_FENETRE.x, HAUTEUR_SOL)); // Utilisation de Vector2f pour la taille
+    sol.setPosition(0, TAILLE_FENETRE.y-HAUTEUR_SOL); // Positionné au bas au milieu
+    sol.setFillColor(sf::Color::Blue);
+    window.draw(sol);
+}
 
 // Afficheur:: afficher(Texte){
 
