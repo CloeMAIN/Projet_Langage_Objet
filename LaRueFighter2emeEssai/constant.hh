@@ -26,12 +26,15 @@ const unsigned int DEGAT_ZIGZAG = 5;
 const sf::Vector2u TAILLE_FENETRE = sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
 
 //Position des boutons:
+const Point POSITION_BOUTON_JOUER = {TAILLE_FENETRE.x/2 -100 , TAILLE_FENETRE.y - 325};
+const Point POSITION_BOUTON_COMMANDES = { TAILLE_FENETRE.x / 2 - 100 , TAILLE_FENETRE.y- 225};
+const Point POSITION_BOUTON_QUITTER = {TAILLE_FENETRE.x/2 - 100, TAILLE_FENETRE.y - 125};
+
+
+
 const Point POSITION_DEPART_JOUEUR1 = {0, 0};
 const Point POSITION_DEPART_JOUEUR2 = {0, 0};
-const Point POSITION_BOUTON_QUITTER = {TAILLE_FENETRE.x/2 - 100, TAILLE_FENETRE.y - 100};
 const Point POSITION_BOUTON_RETOUR = {0, 0};
-const Point POSITION_BOUTON_COMMANDES = { TAILLE_FENETRE.x / 2 - 100 , TAILLE_FENETRE.y- 250 };
-const Point POSITION_BOUTON_JOUER = {TAILLE_FENETRE.x/2 -100 , TAILLE_FENETRE.y - 250};
 const Point POSITION_BOUTON_PAUSE = {TAILLE_FENETRE.x - 300, 0};
 const Point POSITION_SOL = {0, TAILLE_FENETRE.y - 100};
 
@@ -50,14 +53,14 @@ const HitBox TAILLE_BOUTON_JOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JO
 const std::string CHEMIN_BACKGROUND_MENU("images/BackgroundMenu.jpg");
 const std::string CHEMIN_BOUTON_JOUER("images/Jouer.jpg");
 const std::string CHEMIN_BOUTON_QUITTER("images/Quitter.jpg");
+const std::string CHEMIN_BOUTON_COMMANDES("images/Commandes.jpg");
+const std::string CHEMIN_BACKGROUND_COMMANDES("images/BackgroundCommandes.jpg");
 
 
 const std::string CHEMIN_IMAGE_JOUEUR1("../images/luffy.png");
 const std::string CHEMIN_IMAGE_JOUEUR2("../images/Joueur2.jpg");
 const std::string CHEMIN_BOUTON_RETOUR("../images/Home.jpg");
 const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");
-const std::string CHEMIN_BOUTON_COMMANDE("../images/Commandes.jpg");
-const std::string CHEMIN_BACKGROUND_COMMANDES("../images/Commandes.jpg");
 const std::string CHEMIN_BACKGROUND_ROUND1("../images/Round2.jpg");
 const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 

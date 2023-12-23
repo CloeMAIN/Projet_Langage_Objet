@@ -31,18 +31,22 @@ int Menu::lancer(Afficheur* afficheur){
                     //si le bouton jouer est cliqué, on return
                     if (event.mouseButton.x >= TAILLE_BOUTON_JOUER.GaucheHaut.x && event.mouseButton.x <= TAILLE_BOUTON_JOUER.DroiteBas.x && event.mouseButton.y >= TAILLE_BOUTON_JOUER.GaucheHaut.y && event.mouseButton.y <= TAILLE_BOUTON_JOUER.DroiteBas.y){
                         std::cout << "Jouer" << std::endl;
-                        break;}
+                        return 0;}
 
                     //else si je clique sur le bouton commandes
                     else if (event.mouseButton.x >= TAILLE_BOUTON_COMMANDES.GaucheHaut.x && event.mouseButton.x <= TAILLE_BOUTON_COMMANDES.DroiteBas.x && event.mouseButton.y >= TAILLE_BOUTON_COMMANDES.GaucheHaut.y && event.mouseButton.y <= TAILLE_BOUTON_COMMANDES.DroiteBas.y){
                         std::cout << "Commandes" << std::endl;
-                        return 1;}
+                        afficheur->afficher(CHEMIN_BACKGROUND_COMMANDES);
+                        window->display();
+                        //On attend que l'utilisateur appuie sur la touche B pour revenir au menu
+                        while(!sf::Keyboard::isKeyPressed(sf::Keyboard::B)){}
+                        }
 
                     //else si je clique sur le bouton quitter
                     else if (event.mouseButton.x >= TAILLE_BOUTON_QUITTER.GaucheHaut.x && event.mouseButton.x <= TAILLE_BOUTON_QUITTER.DroiteBas.x && event.mouseButton.y >= TAILLE_BOUTON_QUITTER.GaucheHaut.y && event.mouseButton.y <= TAILLE_BOUTON_QUITTER.DroiteBas.y){
                         std::cout << "Quitter" << std::endl;
                         window->close();
-                        return 1;}
+                        return 2;}
 
                 }
             }
