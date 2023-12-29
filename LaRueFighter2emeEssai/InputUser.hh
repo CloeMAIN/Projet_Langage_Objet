@@ -2,17 +2,30 @@
 #define INPUTUSER_HH
 
 #include <SFML/Graphics.hpp>
+#include "Personnage.hh"
 
-struct Action {
+enum Action {
+    Droite,Gauche,Rien
+};
+struct Commande {
     sf::Keyboard::Key Droite;
     sf::Keyboard::Key Gauche;
     // Ajoutez d'autres actions ici (ex: Attaquer droite, Attaquer gauche, Sauter, S'accroupir)
 };
 
+struct EtatJoueur {
+    Action actionJ1;
+    Action actionJ2;
+};
+
+
+
 class InputUser {
 private:
-    Action ActionJ1;
-    Action ActionJ2;
+    Commande CommandeJ1;
+    Action actionJ1;
+    Commande CommandeJ2;
+    Action actionJ2;
 
 public:
     InputUser();
@@ -20,16 +33,19 @@ public:
 
     /* Getters */
 
-    Action getActionJ1() const { return ActionJ1; }
-    Action getActionJ2() const { return ActionJ2; }
+    Commande getCommandeJ1() const { return CommandeJ1; }
+    Commande getCommandeJ2() const { return CommandeJ2; }
+
+    /* Setter */
+
+    Action setActionJ1(Action action){actionJ1=action;};
+    Action setActionJ2(Action action){actionJ2=action;};
 
     /* Méthode */
 
-    // std::string Ouput(sf::Keyboard touche){
-    //     if ( touche est droite pour J2){
-    //         return " J2, Droite "
-    //     }
-    // }
+    EtatJoueur getOuput(sf::Keyboard::Key key); 
+    std::string str();
+
 
 };
 
