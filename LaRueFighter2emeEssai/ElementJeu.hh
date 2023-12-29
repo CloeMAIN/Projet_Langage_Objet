@@ -14,13 +14,18 @@ struct HitBox {
     Point DroiteBas;
 };
 
-class ElementJeu : public sf::Drawable
+class ElementJeu 
 {
-private:
+protected:
+    Point position; 
+    std::string chemin_image;
+
 public:
     ElementJeu(/* args */);
     ~ElementJeu();
-    
+    Point getPosition(){return position;}
+    void setPosition(Point p){position = p;}
+    std::string getCheminImage(){return chemin_image;}
 };
 
 #endif // ELEMENTJEU_HH

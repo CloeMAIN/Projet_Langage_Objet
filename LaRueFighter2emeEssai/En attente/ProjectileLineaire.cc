@@ -1,1 +1,0 @@
-#include "ProjectileLineaire.hh"
