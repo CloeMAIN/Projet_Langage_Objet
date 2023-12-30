@@ -4,11 +4,12 @@
 
 
 InputUser::InputUser() {
-    CommandeJ1.Droite = sf::Keyboard::Right;
-    CommandeJ1.Gauche = sf::Keyboard::Left;
+    CommandeJ1.Droite = sf::Keyboard::D;
+    CommandeJ1.Gauche = sf::Keyboard::Q;
 
-    CommandeJ2.Droite = sf::Keyboard::Q;
-    CommandeJ2.Gauche = sf::Keyboard::D;
+    CommandeJ2.Droite = sf::Keyboard::Right;
+    CommandeJ2.Gauche = sf::Keyboard::Left;
+    
 }
 
 InputUser::~InputUser() {

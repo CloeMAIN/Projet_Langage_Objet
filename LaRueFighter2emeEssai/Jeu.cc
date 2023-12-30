@@ -61,7 +61,6 @@ int Jeu::lancer(Afficheur* afficheur)
 
     // sf::RenderWindow* window = afficheur->getWindow();
 
-
     // Affichage de texte
     std::cout << "Lancement de la partie jeu.lancer()" << std::endl;
 
@@ -85,7 +84,7 @@ int Jeu::lancer(Afficheur* afficheur)
 
                 }else
                 {
-                    
+
                     EtatJoueur etatJoueur;
                     etatJoueur = inputUser.getOuput(key);
                     // afficher etat joueur en console
@@ -109,7 +108,12 @@ int Jeu::lancer(Afficheur* afficheur)
 //         actionJ2 = input.getActionJ2();
 //         }
 
-            /* MAJ des états des joueurs si besoin (vie)*/
+
+
+            /* MAJ des attributs des joueurs*/
+
+            majJoueurs(inputUser);
+
 
 //         On met à jour le jeu en fonction des inputs
 //         On met à jour les joueurs
@@ -130,4 +134,9 @@ int Jeu::lancer(Afficheur* afficheur)
     }
 
     return 0;
+}
+
+void Jeu::majJoueurs(InputUser inputUser){
+    joueur1.maj(inputUser.getActionJ1());
+    joueur2.maj(inputUser.getActionJ2());
 }
