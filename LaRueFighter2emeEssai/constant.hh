@@ -44,8 +44,13 @@ const Point POSITION_BOUTON_QUITTER = {float(TAILLE_FENETRE.x)/2 - 100, float(TA
 
 
 const Point POSITION_BOUTON_RETOUR = {0, 0};
+<<<<<<< HEAD
 const Point POSITION_BOUTON_PAUSE = {float(TAILLE_FENETRE.x) - 300, 0};
 const Point POSITION_SOL = {0, float(TAILLE_FENETRE.y) - 100};
+=======
+const Point POSITION_BOUTON_PAUSE = {int(TAILLE_FENETRE.x) - 300, 0};
+const Point POSITION_SOL = {0, int(TAILLE_FENETRE.y) - HAUTEUR_SOL};
+>>>>>>> 5c17cd090f653a511d6e3b54694ccde80921d97d
 
 
 
@@ -66,7 +71,9 @@ const std::string CHEMIN_BOUTON_COMMANDES("images/Commandes.jpg");
 const std::string CHEMIN_BACKGROUND_COMMANDES("images/BackgroundCommandes.jpg");
 
 
-const std::string CHEMIN_IMAGE_JOUEUR1("../images/luffy.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_RIEN("images/Fighter/Idle.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_DROITE("images/Fighter/Walk_Right.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_GAUCHE("images/Fighter/Walk_Left.png");
 const std::string CHEMIN_IMAGE_JOUEUR2("../images/Joueur2.jpg");
 const std::string CHEMIN_BOUTON_RETOUR("../images/Home.jpg");
 const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");
@@ -75,4 +82,8 @@ const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 
 
 //Vitesse :
+<<<<<<< HEAD
 const float VITESSE_JOUEUR1 = 7;
+=======
+const int VITESSE_JOUEUR1 = 25;
+>>>>>>> 5c17cd090f653a511d6e3b54694ccde80921d97d

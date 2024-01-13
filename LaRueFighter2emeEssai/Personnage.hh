@@ -4,6 +4,9 @@
 #include <string>
 #include "ElementJeu.hh"
 
+enum Action {
+    Droite,Gauche,Rien
+};
 class Personnage {
 
 private:
@@ -12,6 +15,7 @@ private:
     sf::Texture texture;     // Ajout de la texture
     sf::Sprite sprite;       // Ajout du sprite
     sf::Vector2f position;
+    sf::Vector2f taille;
 public:
     // Constructeurs et destructeur
     Personnage();
@@ -27,6 +31,10 @@ public:
 
     // Méthodes de modification
     void setVie(int vie) { this->vie = vie; }
+    
+
+    /* Méthode */
+    void maj(Action action);
 };
 
 

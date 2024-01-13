@@ -4,9 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Personnage.hh"
 
-enum Action {
-    Droite,Gauche,Rien
-};
+
 struct Commande {
     sf::Keyboard::Key Droite;
     sf::Keyboard::Key Gauche;
@@ -35,11 +33,14 @@ public:
 
     Commande getCommandeJ1() const { return CommandeJ1; }
     Commande getCommandeJ2() const { return CommandeJ2; }
+    Action getActionJ1(){return actionJ1;};
+    Action getActionJ2(){return actionJ2;};
+
 
     /* Setter */
 
-    Action setActionJ1(Action action){actionJ1=action;};
-    Action setActionJ2(Action action){actionJ2=action;};
+    void setActionJ1(Action action){actionJ1=action;};
+    void setActionJ2(Action action){actionJ2=action;};
 
     /* Méthode */
 

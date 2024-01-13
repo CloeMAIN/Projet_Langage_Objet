@@ -1,6 +1,5 @@
 {
     "files.associations": {
-
         "string": "cpp",
         "iostream": "cpp",
         "array": "cpp",
@@ -46,6 +45,7 @@
         "ostream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "sstream": "cpp"
     }
 }
