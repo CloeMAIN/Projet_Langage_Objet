@@ -5,7 +5,7 @@
 #include "ElementJeu.hh"
 
 enum Action {
-    Droite,Gauche,Rien
+    Droite,Gauche,SautGauche,SautDroit,Rien
 };
 class Personnage {
 
@@ -35,6 +35,8 @@ public:
 
     /* Méthode */
     void maj(Action action);
+
+    std::string toString();
 };
 
 

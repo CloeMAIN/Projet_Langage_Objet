@@ -4,7 +4,7 @@
 #include "ElementJeu.hh"
 
 // Taille fenêtre
-const sf::Vector2u TAILLE_FENETRE = sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
+const sf::Vector2f TAILLE_FENETRE = sf::Vector2f(static_cast<float>(sf::VideoMode::getDesktopMode().width), static_cast<float>(sf::VideoMode::getDesktopMode().height));
 
 // Taille du sol
 const int HAUTEUR_SOL = 150;

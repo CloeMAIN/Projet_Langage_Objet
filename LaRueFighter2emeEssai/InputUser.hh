@@ -16,8 +16,6 @@ struct EtatJoueur {
     Action actionJ2;
 };
 
-
-
 class InputUser {
 private:
     Commande CommandeJ1;
@@ -44,7 +42,9 @@ public:
 
     /* Méthode */
 
-    EtatJoueur getOuput(sf::Keyboard::Key key); 
+    Action getOuputJ1(sf::Keyboard::Key key); 
+    Action getOuputJ2(sf::Keyboard::Key key); 
+
     std::string str();
 
 

@@ -17,25 +17,31 @@ InputUser::~InputUser() {
 }
 
 
-EtatJoueur InputUser::getOuput(sf::Keyboard::Key key) {
-    EtatJoueur etat;
-      // Vous pouvez ajuster cela en fonction de votre logique
+Action InputUser::getOuputJ1(sf::Keyboard::Key key) {
 
     // Logique pour déterminer l'action en fonction de la touche (key)
     if (key == CommandeJ1.Droite) {
         actionJ1 = Action::Droite;
     } else if (key == CommandeJ1.Gauche) {
         actionJ1 = Action::Gauche;
-    } else if (key == CommandeJ2.Droite) {
+    } else {
+        actionJ1 = Action::Rien;
+    };
+
+    return actionJ1;
+}
+
+Action InputUser::getOuputJ2(sf::Keyboard::Key key) {
+
+    if (key == CommandeJ2.Droite) {
         actionJ2 = Action::Droite;
     } else if (key == CommandeJ2.Gauche) {
         actionJ2 = Action::Gauche;
-    }
+    }else{
+        actionJ2 = Action::Rien;
+    };
 
-    etat.actionJ1 = actionJ1;
-    etat.actionJ2 = actionJ2;
-
-    return etat;
+    return actionJ2;
 }
 
 std::string InputUser::str() {
