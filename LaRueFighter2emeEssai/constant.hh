@@ -23,7 +23,7 @@ const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_F
 const float VITESSE_JOUEUR1 = 25;
 const float VITESSE_JOUEUR1_SAUT = -12.0f;
 //taille sprite
-const float TAILLE_JOUEUR1_SPRITE = 128*5;
+const float TAILLE_JOUEUR1_SPRITE = 82*2;
 
 
 
@@ -62,7 +62,7 @@ const Point POSITION_BOUTON_QUITTER = {float(TAILLE_FENETRE.x)/2 - 100, float(TA
 
 const Point POSITION_BOUTON_RETOUR = {0, 0};
 const Point POSITION_BOUTON_PAUSE = {float(TAILLE_FENETRE.x) - 300, 0};
-const Point POSITION_SOL = {0, float(TAILLE_FENETRE.y) - 100};
+const Point POSITION_SOL = {0, float(TAILLE_FENETRE.y) - HAUTEUR_SOL};
 
 
 //Taille des boutons:

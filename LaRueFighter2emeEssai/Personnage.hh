@@ -31,16 +31,14 @@ public:
 
     // Méthodes de modification
     void setVie(int vie) { this->vie = vie; }
-    
+    void update(sf::Vector2f velocity);
 
     /* Méthode */
     void maj(Action action);
 
     std::string toString();
 
-    void update(sf::Vector2f velocity){
-        sprite.move(velocity);
-    }
+    
 };
 
 

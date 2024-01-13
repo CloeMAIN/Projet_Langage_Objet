@@ -84,6 +84,12 @@ void Personnage::maj(Action action){
 
 }
 
+void Personnage::update(sf::Vector2f velocity){
+        sprite.move(velocity);
+        position.x += velocity.x;
+        position.y += velocity.y;
+    }
+
 std::string Personnage::toString(){
         std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Chemin de l'image du joueur : " + cheminImage + "\n" + "Direction du joueur : " + std::to_string(direction) + "\n";
         return s;
