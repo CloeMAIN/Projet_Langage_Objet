@@ -11,8 +11,8 @@
 class Jeu
 {
 private:
-    Personnage joueur1{{200, TAILLE_FENETRE.y-HAUTEUR_SOL-128*5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN};
-    Personnage joueur2{{600, TAILLE_FENETRE.y-HAUTEUR_SOL-128*5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN};
+    Personnage joueur1{{200, TAILLE_FENETRE.y-HAUTEUR_SOL-TAILLE_JOUEUR1_SPRITE}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN,{35,82}};
+    Personnage joueur2{{600, TAILLE_FENETRE.y-HAUTEUR_SOL-TAILLE_JOUEUR1_SPRITE}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN,{35,82}};
     std::list<Projectile*> listes_projectiles;
     // Afficheur* afficheur;
 public:

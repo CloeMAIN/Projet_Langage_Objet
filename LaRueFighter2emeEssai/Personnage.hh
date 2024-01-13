@@ -19,7 +19,7 @@ private:
 public:
     // Constructeurs et destructeur
     Personnage();
-    Personnage(Point position, int vie, std::string cheminImage);
+    Personnage(Point position, int vie, std::string cheminImage, sf::Vector2f taille);
     ~Personnage();
 
     // Méthodes d'accès
@@ -37,6 +37,10 @@ public:
     void maj(Action action);
 
     std::string toString();
+
+    void update(sf::Vector2f velocity){
+        sprite.move(velocity);
+    }
 };
 
 

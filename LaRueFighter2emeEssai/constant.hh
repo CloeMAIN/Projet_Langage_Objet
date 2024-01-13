@@ -11,12 +11,18 @@ const int HAUTEUR_SOL = 150;
 
 const double DELTA_TIME = 0.05;
 
+// Environnement
+const float GRAVITE = 0.5f;
+
 // Personnages: Joueur 1
 const float POINTS_DE_VIE_JOUEUR1 = 3500;
 const float DEGAT_ATTAQUE_POING1 = 5;
 const float DEGAT_ATTAQUE_PIED1 = 5;
 const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
 const float VITESSE_JOUEUR1 = 25;
+const float VITESSE_JOUEUR1_SAUT = -12.0f;
+//taille sprite
+const float TAILLE_JOUEUR1_SPRITE = 128*5;
 
 
 
