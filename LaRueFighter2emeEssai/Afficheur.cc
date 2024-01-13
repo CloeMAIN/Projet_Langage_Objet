@@ -20,11 +20,13 @@ void Afficheur::afficher(const Personnage& joueur) {
     joueur.getSprite().setPosition({joueur.getPosition().x, joueur.getPosition().y});
     // Affiche le personnage
     window.draw(joueur.getSprite());
+    if(DEBUGGING_MODE){
     //On affiche le point position du joueur sous la forme d'un cercle
     sf::CircleShape cercle(5);
     cercle.setPosition(joueur.getPosition().x, joueur.getPosition().y);
     cercle.setFillColor(sf::Color::Red);
     window.draw(cercle);
+    }
     
 }
 
