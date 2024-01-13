@@ -56,7 +56,7 @@ void Personnage::maj(Action action){
         sprite.setTextureRect(sf::IntRect(xTexture, 0, 128, 128));
         sprite.move(-VITESSE_JOUEUR1,0);
         position.x = position.x - VITESSE_JOUEUR1;  
-    }else{
+    }else if(action==Action::Rien){
         cheminImage = CHEMIN_IMAGE_JOUEUR1_RIEN;
         if (!texture.loadFromFile(cheminImage)) {
             throw std::runtime_error("Erreur de chargement de l'image : " + cheminImage);
@@ -64,5 +64,10 @@ void Personnage::maj(Action action){
         sprite.setTexture(texture);
         sprite.setTextureRect(sf::IntRect(0, 0, 128, 128));
 
+    }else if(action==Action::SautDroit){
+
+    }else if(action==Action::SautGauche){
+        
     }
+
 }

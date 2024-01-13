@@ -5,7 +5,7 @@
 #include "ElementJeu.hh"
 
 enum Action {
-    Droite,Gauche,Rien
+    Droite,Gauche,SautGauche,SautDroit,Rien
 };
 class Personnage {
 

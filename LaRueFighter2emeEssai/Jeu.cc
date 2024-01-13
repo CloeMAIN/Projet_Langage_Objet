@@ -102,7 +102,8 @@ int Jeu::lancer(Afficheur* afficheur)
                 {
 
                     EtatJoueur etatJoueur;
-                    etatJoueur = inputUser.getOuput(key);
+                    etatJoueur.actionJ1 = inputUser.getOuputJ1(key);
+                    etatJoueur.actionJ2 = inputUser.getOuputJ2(key);
                     // afficher etat joueur en console
                     std::cout << "Changement d'état : \n" << inputUser.str() << std::endl;
 
