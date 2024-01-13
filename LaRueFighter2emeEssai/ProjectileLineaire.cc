@@ -11,7 +11,9 @@ ProjectileLineaire::ProjectileLineaire(Point position, float vitesse, float dega
 
 }
 
-void ProjectileLineaire::deplacement(double deltaTime){
-        setPosition({vitesse*deltaTime + position.x, position.y}); 
-        setTempsDeVie(temps_de_vie + deltaTime);
+void ProjectileLineaire::deplacement(double deltaTime)
+{
+    float newX = static_cast<float>(vitesse * deltaTime) + position.x;
+    setPosition({newX, position.y});
+    setTempsDeVie(temps_de_vie + deltaTime);
 }

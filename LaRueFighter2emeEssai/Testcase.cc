@@ -36,8 +36,8 @@ int main(){
     /*---------------------------------- TEST PERSONNAGE DEPLACEMENT--------------------------------------*/
 
     // Création des personnages
-    Personnage joueur1{sf::Vector2f(200, TAILLE_FENETRE.y-HAUTEUR_SOL-128*5), 100, CHEMIN_IMAGE_JOUEUR1_RIEN};
-    Personnage joueur2{sf::Vector2f(600, TAILLE_FENETRE.y-HAUTEUR_SOL-128*5), 100, CHEMIN_IMAGE_JOUEUR1_RIEN};
+    Personnage joueur1({200.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN);
+    Personnage joueur2({600.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN);
 
     //Déplacement des personnages
     std::cout << "------------ TEST E DEPLACEMENT  -------------" << std::endl;
