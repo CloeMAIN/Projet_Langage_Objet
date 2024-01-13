@@ -23,89 +23,125 @@ Jeu::~Jeu()
 int Jeu::lancer(Afficheur* afficheur)
 {
     bool lancerJeu = true;
-    /* Initialisation des commandes avec le constructeur par defaut*/
+    /* Initialisation des commandes avec le constructeur par défaut */
     InputUser inputUser;
     // sf::RenderWindow* window = afficheur->getWindow();
     // Affichage de texte
     std::cout << "Lancement de la partie jeu.lancer()" << std::endl;
 
-    // sf::Sprite spriteJ1 = joueur1.getSprite();
-    // // vrai sprite de j2 avec un pointeur
-    // sf::Sprite spriteJ2 = joueur2.getSprite();
-    sf::Vector2f velocity(0, 0);
+    sf::Vector2f velocityJoueur1(0, 0);
+    sf::Vector2f velocityJoueur2(0, 0);
     sf::RenderWindow* window = afficheur->getWindow();
 
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
-        sf::Event event;        
-        while(afficheur->getWindow()->pollEvent(event)){
-            /* Gestion des cliques*/
+        sf::Event event;
+        while (afficheur->getWindow()->pollEvent(event)){
+            /* Gestion des cliques */
             if (event.type == sf::Event::KeyPressed){
                 sf::Keyboard::Key key = event.key.code;
                 std::cout << "Touche enfoncée : " << key << std::endl;
 
-                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) // Stop d'urgence avec escape
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) // Stop d'urgence avec escape
                 {
                     afficheur->getWindow()->close();
-
                 }
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::L)){
-                    //Création d'un projectile
-                    Projectile* projectile = new ProjectileZigZag({joueur2.getPosition().x+35, joueur2.getPosition().y + 41}, VITESSE_ZIGZAG, DEGAT_ZIGZAG, RAYON_ZIGZAG, CHEMIN_IMAGE_ZIGZAG, AMPLITUDE_ZIGZAG, ANGLE_TIR_ZIGZAG, FREQUENCE_ZIGZAG, joueur2.getDirection());
+                else if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR1)){
+                    // Création d'un projectile
+                    Projectile* projectile = new ProjectileZigZag({joueur1.getPosition().x+35, joueur1.getPosition().y + 41}, VITESSE_ZIGZAG, DEGAT_ZIGZAG, RAYON_ZIGZAG, CHEMIN_IMAGE_ZIGZAG, AMPLITUDE_ZIGZAG, ANGLE_TIR_ZIGZAG, FREQUENCE_ZIGZAG, joueur2.getDirection());
                     listes_projectiles.push_back(projectile);
                 }
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+                else if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR2)){
                     Projectile* projectile = new ProjectileLineaire({joueur2.getPosition().x+35,joueur2.getPosition().y + 41 }, VITESSE_DIRECT, DEGAT_DIRECT, RAYON_DIRECT, CHEMIN_IMAGE_ZIGZAG, joueur2.getDirection());
                     listes_projectiles.push_back(projectile);
                 }
-                else if (event.key.code == sf::Keyboard::Up) { 
-                // Si la touchehaut est pressée et que le joueur2 est sur le sol
-                    velocity.y = VITESSE_JOUEUR1_SAUT; // Définir la vélocité sur la vitesse de saut 
+                else if (event.key.code == sf::Keyboard::Up && joueur2.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) { 
+                    // Si la touche haut est pressée et que le joueur2 est sur le sol
+                    velocityJoueur2.y = VITESSE_JOUEUR1_SAUT; // Définir la vélocité sur la vitesse de saut 
+                }
+                else if (event.key.code == sf::Keyboard::Z && joueur1.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) { 
+                    // Si la touche Z est pressée et que le joueur1 est sur le sol
+                    velocityJoueur1.y = VITESSE_JOUEUR1_SAUT; // Définir la vélocité sur la vitesse de saut 
+                }
+
+                if(TESTERVIE){
+                    if (sf::Keyboard::isKeyPressed(TOUCHE_DEGAT_J1)){
+                        joueur1.setVie(joueur1.getVie()-5);
+                    }
+                    if (sf::Keyboard::isKeyPressed(TOUCHE_DEGAT_J2)){
+                        joueur2.setVie(joueur2.getVie()-5);
+                    }
                 }
             }
         }
 
-         // Appliquer la gravité
+        // Appliquer la gravité pour les deux joueurs
+        if (joueur1.getPosition().y + TAILLE_JOUEUR1_SPRITE < POSITION_SOL.y) {
+            velocityJoueur1.y += GRAVITE;
+        }
         if (joueur2.getPosition().y + TAILLE_JOUEUR1_SPRITE < POSITION_SOL.y) {
-            velocity.y += GRAVITE;
+            velocityJoueur2.y += GRAVITE;
         }
 
-        // Gérer le déplacement horizontal
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            velocity.x = -5.0f; // Vélocité de déplacement vers la gauche
-        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            velocity.x = 5.0f; // Vélocité de déplacement vers la droite
+        // Gérer le déplacement horizontal pour les deux joueurs
+
+        //Joueur 1
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+            velocityJoueur1.x = -5.0f; // Vélocité de déplacement vers la gauche pour joueur1
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            velocityJoueur1.x = 5.0f; // Vélocité de déplacement vers la droite pour joueur1
         } else {
-            velocity.x = 0.0f; // Arrêter le déplacement horizontal
+            velocityJoueur1.x = 0.0f; // Arrêter le déplacement horizontal pour joueur1
         }
 
-        // Mettre à jour la position du joueur2
-        joueur2.update(velocity);
+        // Joueur 2 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            velocityJoueur2.x = -5.0f; // Vélocité de déplacement vers la gauche pour joueur2
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            velocityJoueur2.x = 5.0f; // Vélocité de déplacement vers la droite pour joueur2
+        } else {
+            velocityJoueur2.x = 0.0f; // Arrêter le déplacement horizontal pour joueur2
+        }
 
-        // Empêcher le spriteJ2 de sortir de l'écran
+        // Mettre à jour la position des joueurs
+        joueur1.update(velocityJoueur1);
+        joueur2.update(velocityJoueur2);
+
+        // Empêcher les joueurs de sortir de l'écran
+        if (joueur1.getPosition().x < 0) {
+            joueur1.setPosition({0, joueur1.getPosition().y}); // Empêcher le joueur1 de sortir par la gauche
+        } else if (joueur1.getPosition().x > TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE) {
+            joueur1.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE, joueur1.getPosition().y}); // Empêcher le joueur1 de sortir par la droite
+        }
+
         if (joueur2.getPosition().x < 0) {
-            joueur2.setPosition({0, joueur2.getPosition().y}); // Empêcher le spriteJ2 de sortir par la gauche
-        } else if (joueur2.getPosition().x >TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE) {
-            joueur2.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE, joueur2.getPosition().y}); // Empêcher le spriteJ2 de sortir par la droite
+            joueur2.setPosition({0, joueur2.getPosition().y}); // Empêcher le joueur2 de sortir par la gauche
+        } else if (joueur2.getPosition().x > TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE) {
+            joueur2.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE, joueur2.getPosition().y}); // Empêcher le joueur2 de sortir par la droite
         }
 
-        // Empêcher le rectangle de passer à travers le sol // NOT WORKING
-        if (joueur2.getPosition().y  >= POSITION_SOL.y + TAILLE_JOUEUR1_SPRITE) {
-            joueur2.setPosition({joueur2.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE}); // Placer le rectangle sur le sol
-            velocity.y = 0; // Arrêter la chute
+        // Empêcher les joueurs de passer à travers le sol
+        if (joueur1.getPosition().y >= POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) {
+            joueur1.setPosition({joueur1.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE}); // Placer le joueur1 sur le sol
+            velocityJoueur1.y = 0; // Arrêter la chute pour joueur1
+        }
+
+        if (joueur2.getPosition().y >= POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) {
+            joueur2.setPosition({joueur2.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE}); // Placer le joueur2 sur le sol
+            velocityJoueur2.y = 0; // Arrêter la chute pour joueur2
         }
 
         // Afficher les positions en console
-        std::cout << "Position X: " << joueur2.getPosition().x << ", Position Y: " << joueur2.getPosition().y << std::endl;
+        std::cout << "Position Joueur1 - X: " << joueur1.getPosition().x << ", Y: " << joueur1.getPosition().y << std::endl;
+        std::cout << "Position Joueur2 - X: " << joueur2.getPosition().x << ", Y: " << joueur2.getPosition().y << std::endl;
 
         majProjectiles(DELTA_TIME);
-        afficheur->afficher(*this); // Affiche le jeu 5PB d'affichage vient de là
-        //afficheur->afficher(joueur1); // Affiche le joueur 1
-       
+        afficheur->afficher(*this); // Affiche le jeu
     }
 
     return 0;
 }
+
 
 void Jeu::majProjectiles(double deltaTime){
     // Utilisez un itérateur pour parcourir la liste

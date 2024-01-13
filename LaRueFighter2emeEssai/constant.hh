@@ -14,16 +14,39 @@ const double DELTA_TIME = 0.05;
 // Environnement
 const float GRAVITE = 0.5f;
 
+// Tests
+const bool TESTERVIE = true;
+const sf::Keyboard::Key TOUCHE_DEGAT_J1 = sf::Keyboard::A;
+const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
+
+
+// Barre de vie
+const Point POSITION_BARRE_J1 = {float(20),float(20)};
+const Point POSITION_BARRE_J2 = {float(TAILLE_FENETRE.x)-1020,float(20)};
+const sf::Color COULEUR_BARRE_J1 = sf::Color::Red;
+const sf::Color COULEUR_BARRE_J2 = sf::Color::Blue;
+
 // Personnages: Joueur 1
 const float POINTS_DE_VIE_JOUEUR1 = 3500;
 const float DEGAT_ATTAQUE_POING1 = 5;
 const float DEGAT_ATTAQUE_PIED1 = 5;
 const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
-
 const float VITESSE_JOUEUR1 = 25;
 const float VITESSE_JOUEUR1_SAUT = -12.0f;
-//taille sprite
 const float TAILLE_JOUEUR1_SPRITE = 82*2;
+
+//Commandes Joueur1
+const sf::Keyboard::Key TOUCHE_SAUT_JOUEUR1 = sf::Keyboard::Z;
+const sf::Keyboard::Key TOUCHE_GAUCHE_JOUEUR1 = sf::Keyboard::Q;
+const sf::Keyboard::Key TOUCHE_DROITE_JOUEUR1 = sf::Keyboard::D;
+const sf::Keyboard::Key TOUCHE_PROJECTILE_JOUEUR1 = sf::Keyboard::LShift;
+
+//Commandes Joueur2
+const sf::Keyboard::Key TOUCHE_SAUT_JOUEUR2 = sf::Keyboard::Up;
+const sf::Keyboard::Key TOUCHE_GAUCHE_JOUEUR2 = sf::Keyboard::Left;
+const sf::Keyboard::Key TOUCHE_DROITE_JOUEUR2 = sf::Keyboard::Right;
+const sf::Keyboard::Key TOUCHE_PROJECTILE_JOUEUR2 = sf::Keyboard::RShift;
+
 
 
 

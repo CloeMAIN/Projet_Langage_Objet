@@ -26,7 +26,6 @@ void Afficheur::afficher(const Personnage& joueur) {
     cercle.setFillColor(sf::Color::Red);
     window.draw(cercle);
     
-
 }
 
 void Afficheur::afficherProjectile(const Projectile& projectile) {
@@ -48,6 +47,8 @@ void Afficheur::afficher(Jeu& jeu) {
     // la barre de vie
     window.clear(sf::Color::Green); // enlever le menu
     afficherSol();
+    afficherBarreVieJ1(jeu.getJoueur1().getVie());
+    afficherBarreVieJ2(jeu.getJoueur2().getVie());
     afficher(jeu.getJoueur1()); // Affiche le joueur 1
     afficher(jeu.getJoueur2()); // Affiche le joueur 2
     for (Projectile* projectile : jeu.getListesProjectiles()) {
@@ -115,7 +116,34 @@ void Afficheur::afficherMenu(){
 }
 
 
-// Afficheur::afficherCommande(){
-    
-//         // affiche les commandes
-// }
+void Afficheur::afficherBarreVieJ1(int vie){
+    sf::RectangleShape barreVie(sf::Vector2f(vie*10, 50));
+    barreVie.setPosition(POSITION_BARRE_J1.x, POSITION_BARRE_J1.y);
+    barreVie.setFillColor(COULEUR_BARRE_J1);
+    sf::RectangleShape barreVieFond(sf::Vector2f(1000, 50));
+    barreVieFond.setPosition(POSITION_BARRE_J1.x, POSITION_BARRE_J1.y);
+    barreVieFond.setFillColor(sf::Color::Black);
+    if(vie<=0){
+        window.draw(barreVieFond); 
+    }else{
+            window.draw(barreVieFond);
+        window.draw(barreVie);
+    }
+
+};
+
+void Afficheur::afficherBarreVieJ2(int vie){
+    sf::RectangleShape barreVie(sf::Vector2f(vie*10, 50));
+    barreVie.setPosition(POSITION_BARRE_J2.x, POSITION_BARRE_J2.y);
+    barreVie.setFillColor(COULEUR_BARRE_J2);
+    sf::RectangleShape barreVieFond(sf::Vector2f(1000, 50));
+    barreVieFond.setPosition(POSITION_BARRE_J2.x, POSITION_BARRE_J2.y);
+    barreVieFond.setFillColor(sf::Color::Black);
+
+    if(vie<=0){
+        window.draw(barreVieFond);
+    }else{
+        window.draw(barreVieFond);
+        window.draw(barreVie);
+    }
+};
