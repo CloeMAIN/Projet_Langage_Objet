@@ -134,18 +134,18 @@ void Afficheur::afficherBarreVieJ1(int vie){
 
 };
 
-void Afficheur::afficherBarreVieJ2(int vie){
-    sf::RectangleShape barreVie(sf::Vector2f(vie*10, 50));
-    barreVie.setPosition(POSITION_BARRE_J2.x, POSITION_BARRE_J2.y);
+void Afficheur::afficherBarreVieJ2(int vie) {
+    sf::RectangleShape barreVie(sf::Vector2f(vie * 10, 50));
+    barreVie.setPosition(POSITION_BARRE_J2.x + (1000 - vie * 10), POSITION_BARRE_J2.y);
     barreVie.setFillColor(COULEUR_BARRE_J2);
     sf::RectangleShape barreVieFond(sf::Vector2f(1000, 50));
     barreVieFond.setPosition(POSITION_BARRE_J2.x, POSITION_BARRE_J2.y);
     barreVieFond.setFillColor(sf::Color::Black);
 
-    if(vie<=0){
+    if (vie <= 0) {
         window.draw(barreVieFond);
-    }else{
+    } else {
         window.draw(barreVieFond);
         window.draw(barreVie);
     }
-};
+}
