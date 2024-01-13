@@ -27,7 +27,9 @@ public:
     
     /* Méthode */
     void majJoueurs(InputUser inputUser);
+    void majProjectiles(double deltaTime);
 };
+
 
 #endif // JEU_HH
 

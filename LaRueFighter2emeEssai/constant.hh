@@ -9,6 +9,8 @@ const sf::Vector2u TAILLE_FENETRE = sf::Vector2u(sf::VideoMode::getDesktopMode()
 // Taille du sol
 const int HAUTEUR_SOL = 150;
 
+const double DELTA_TIME = 0.05;
+
 // Personnages: Joueur 1
 const float POINTS_DE_VIE_JOUEUR1 = 3500;
 const float DEGAT_ATTAQUE_POING1 = 5;

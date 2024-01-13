@@ -147,14 +147,7 @@ int Jeu::lancer(Afficheur* afficheur)
          /* MAJ des attributs des joueurs*/
 
             majJoueurs(inputUser);
-
-            for (Projectile* projectile : listes_projectiles) {
-                projectile->deplacement(0.05);
-                if(projectile->getADetruire() == true){
-                    listes_projectiles.remove(projectile);
-                }
-            }
-
+            majProjectiles(DELTA_TIME);
         afficheur->afficher(*this); // Affiche le jeu 5PB d'affichage vient de là
         //afficheur->afficher(joueur1); // Affiche le joueur 1
        
@@ -166,4 +159,20 @@ int Jeu::lancer(Afficheur* afficheur)
 void Jeu::majJoueurs(InputUser inputUser){
     joueur1.maj(inputUser.getActionJ1());
     joueur2.maj(inputUser.getActionJ2());
+}
+
+void Jeu::majProjectiles(double deltaTime){
+    // Utilisez un itérateur pour parcourir la liste
+    for (auto it = listes_projectiles.begin(); it != listes_projectiles.end(); ) {
+        Projectile* projectile = *it;
+        projectile->deplacement(deltaTime);
+
+        // Si le projectile doit être détruit, supprimez-le de la liste et libérez la mémoire
+        if (projectile->getADetruire()) {
+            it = listes_projectiles.erase(it);  // La fonction erase() retourne le prochain itérateur valide
+            delete projectile;
+        } else {
+            ++it;
+        }
+    }
 }

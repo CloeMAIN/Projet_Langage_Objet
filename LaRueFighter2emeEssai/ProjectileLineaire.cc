@@ -12,6 +12,12 @@ ProjectileLineaire::ProjectileLineaire(Point position, float vitesse, float dega
 }
 
 void ProjectileLineaire::deplacement(double deltaTime){
-        setPosition({vitesse*deltaTime + position.x, position.y}); 
-        setTempsDeVie(temps_de_vie + deltaTime);
+    setPosition({vitesse*deltaTime + position.x, position.y}); 
+    setTempsDeVie(temps_de_vie + deltaTime);
+
+    // Vérifier si le projectile est en dehors des limites de la fenêtre
+    if (position.x < 0 || position.x > TAILLE_FENETRE.x || position.y < 0 || position.y > TAILLE_FENETRE.y - HAUTEUR_SOL) {
+        // Le projectile est en dehors de la fenêtre, détruire le projectile
+        a_detruire = true;
+    }
 }
