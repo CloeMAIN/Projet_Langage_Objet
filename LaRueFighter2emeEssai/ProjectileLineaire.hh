@@ -7,7 +7,7 @@ private:
     /* data */
 public:
     ProjectileLineaire(Point position, float vitesse, float degat, float rayon, std::string chemin_image);
-    ~ProjectileLineaire();
-    void deplacement() override;
+    ~ProjectileLineaire(){};
+    void deplacement(double deltaTime) override;
     bool contact();
 };

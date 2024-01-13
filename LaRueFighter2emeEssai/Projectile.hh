@@ -8,10 +8,19 @@ protected:
     float rayon;
     float vitesse;
     float degat;
+    double temps_de_vie;
 public:
     Projectile(Point position, float vitesse, float degat, float rayon, std::string chemin_image);
     Projectile() = default; 
     ~Projectile();
-    virtual void deplacement() = 0 ;
+    float getRayon() const { return rayon;};
+    float getVitesse() const { return vitesse;};
+    float getDegat() const{ return degat;};
+    double getTempsDeVie() const {return temps_de_vie;};
+    void setRayon(float rayon){this->rayon = rayon;};
+    void setVitesse(float vitesse){this->vitesse = vitesse;};
+    void setDegat(float degat){this->degat = degat;};
+    void setTempsDeVie(double temps_de_vie) {this->temps_de_vie = temps_de_vie;};
+    virtual void deplacement(double deltaTime) = 0 ;
     std::string toString(); 
 };

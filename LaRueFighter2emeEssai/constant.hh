@@ -2,45 +2,50 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "ElementJeu.hh"
-// Window
-
-
-// Personnages: Joueur 1
-const unsigned int POINTS_DE_VIE_JOUEUR1 = 3500;
-const unsigned int DEGAT_ATTAQUE_POING1 = 5;
-const unsigned int DEGAT_ATTAQUE_PIED1 = 5;
-
-// Personnages: Joueur 2
-const unsigned int POINTS_DE_VIE_JOUEUR2 = 3500;
-const unsigned int DEGAT_ATTAQUE_POING2 = 5;
-const unsigned int DEGAT_ATTAQUE_PIED2 = 5;
-
-//Projectiles: Direct
-const float VITESSE_DIRECT = 2;
-const unsigned int DEGAT_DIRECT = 5;
-
-//Projectiles: ZigZag
-const float VITESSE_ZIGZAG = 2;
-const unsigned int DEGAT_ZIGZAG = 5;
 
 // Taille fenêtre
 const sf::Vector2u TAILLE_FENETRE = sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height);
 
 // Taille du sol
-
 const int HAUTEUR_SOL = 150;
+
+// Personnages: Joueur 1
+const float POINTS_DE_VIE_JOUEUR1 = 3500;
+const float DEGAT_ATTAQUE_POING1 = 5;
+const float DEGAT_ATTAQUE_PIED1 = 5;
+const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
+
+
+// Personnages: Joueur 2
+const float POINTS_DE_VIE_JOUEUR2 = 3500;
+const float DEGAT_ATTAQUE_POING2 = 5;
+const float DEGAT_ATTAQUE_PIED2 = 5;
+const Point POSITION_DEPART_JOUEUR2 = {2*float(TAILLE_FENETRE.x)/3,float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
+
+
+//Projectiles: Direct
+const int RAYON_DIRECT = 5;
+const float VITESSE_DIRECT = 2;
+const float DEGAT_DIRECT = 5;
+const Point POSITION_DEPART_DIRECT = {POSITION_DEPART_JOUEUR1.x + 20, POSITION_DEPART_JOUEUR1.y + 75};//20 et 75 c'st en supposant que les personnage font 40*150
+const double VITESSE_DEPLACEMENT_DIRECT = 0.1;
+
+//Projectiles: ZigZag
+const float VITESSE_ZIGZAG = 2;
+const float DEGAT_ZIGZAG = 5;
+
+
+
 //Position des boutons:
-const Point POSITION_BOUTON_JOUER = {int(TAILLE_FENETRE.x)/2 -100 , int(TAILLE_FENETRE.y) - 325};
-const Point POSITION_BOUTON_COMMANDES = { int(TAILLE_FENETRE.x) / 2 - 100 , int(TAILLE_FENETRE.y)- 225};
-const Point POSITION_BOUTON_QUITTER = {int(TAILLE_FENETRE.x)/2 - 100, int(TAILLE_FENETRE.y) - 125};
+const Point POSITION_BOUTON_JOUER = {float(TAILLE_FENETRE.x)/2 -100 , float(TAILLE_FENETRE.y) - 325};
+const Point POSITION_BOUTON_COMMANDES = { float(TAILLE_FENETRE.x) / 2 - 100 , float(TAILLE_FENETRE.y)- 225};
+const Point POSITION_BOUTON_QUITTER = {float(TAILLE_FENETRE.x)/2 - 100, float(TAILLE_FENETRE.y) - 125};
 
 
 
-const Point POSITION_DEPART_JOUEUR1 = {0, 0};
-const Point POSITION_DEPART_JOUEUR2 = {0, 0};
 const Point POSITION_BOUTON_RETOUR = {0, 0};
-const Point POSITION_BOUTON_PAUSE = {int(TAILLE_FENETRE.x) - 300, 0};
-const Point POSITION_SOL = {0, int(TAILLE_FENETRE.y) - 100};
+const Point POSITION_BOUTON_PAUSE = {float(TAILLE_FENETRE.x) - 300, 0};
+const Point POSITION_SOL = {0, float(TAILLE_FENETRE.y) - 100};
 
 
 
@@ -70,4 +75,4 @@ const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 
 
 //Vitesse :
-const int VITESSE_JOUEUR1 = 7;
+const float VITESSE_JOUEUR1 = 7;

@@ -2,6 +2,7 @@
 #include "ProjectileLineaire.hh"
 #include "ElementJeu.hh"
 #include "Projectile.hh"
+#include "ProjectileZigZag.hh"
 
 int main(){
     Point p;
@@ -13,9 +14,18 @@ int main(){
     // ElementJeu e;
     // e.setPosition(p);
     // e.getCheminImage();
-    ProjectileLineaire pl(p, 0, 0, 0, "");
-    // pl.deplacement();
-    std::cout << pl.toString() << std::endl;
+    std::cout << "-------------------------" << std::endl;
+    ProjectileLineaire pl(p, 2, 0, 0, "");
+    while(pl.getTempsDeVie() < 10){
+        pl.deplacement(0.5);
+        std::cout << pl.toString() << std::endl;
+    }
+    std::cout << "-------------------------" << std::endl;
+    ProjectileZigZag pz(p, 2, 0, 0, "", 3, 45, 10);
+    while(pz.getTempsDeVie() < 10){
+        pz.deplacement(0.5);
+        std::cout << pz.toString() << std::endl;
+    }
 
 
     return 0;

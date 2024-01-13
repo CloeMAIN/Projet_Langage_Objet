@@ -6,6 +6,7 @@ Projectile::Projectile(Point position, float vitesse, float degat, float rayon, 
     this->degat = degat;
     this->rayon = rayon;
     this->chemin_image = chemin_image;
+    this->temps_de_vie = 0;
 }
 
 Projectile::~Projectile()
@@ -19,5 +20,6 @@ std::string Projectile::toString(){
     s += "Degat : " + std::to_string(degat) + "\n";
     s += "Rayon : " + std::to_string(rayon) + "\n";
     s += "Chemin image : " + chemin_image + "\n";
+    s += "Temps de vie : " + std::to_string(temps_de_vie) + "\n";
     return s;
 }
