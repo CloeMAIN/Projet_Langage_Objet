@@ -32,6 +32,12 @@ int Jeu::lancer(Afficheur* afficheur)
     sf::Vector2f velocityJoueur1(0, 0);
     sf::Vector2f velocityJoueur2(0, 0);
     sf::RenderWindow* window = afficheur->getWindow();
+    sf::Clock clock1; // Utilisé pour mesurer le temps écoulé
+    sf::Time blockDuration1 = sf::seconds(TEMPS_BLOCAGE_PROJECTILE);
+    bool blockjoueur1 = false;
+    sf::Clock clock2; // Utilisé pour mesurer le temps écoulé
+    sf::Time blockDuration2 = sf::seconds(TEMPS_BLOCAGE_PROJECTILE);
+    bool blockjoueur2 = false;
 
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
@@ -46,14 +52,18 @@ int Jeu::lancer(Afficheur* afficheur)
                 {
                     afficheur->getWindow()->close();
                 }
-                else if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR1)){
+                else if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR1) && !blockjoueur1){
                     // Création d'un projectile
                     Projectile* projectile = new ProjectileZigZag({joueur1.getPosition().x+35, joueur1.getPosition().y + 41}, VITESSE_ZIGZAG, DEGAT_ZIGZAG, RAYON_ZIGZAG, CHEMIN_IMAGE_ZIGZAG, AMPLITUDE_ZIGZAG, ANGLE_TIR_ZIGZAG, FREQUENCE_ZIGZAG, joueur2.getDirection());
                     listes_projectiles.push_back(projectile);
+                    blockjoueur1 = true;
+                    clock1.restart();
                 }
-                else if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR2)){
+                else if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR2) && !blockjoueur2){
                     Projectile* projectile = new ProjectileLineaire({joueur2.getPosition().x+35,joueur2.getPosition().y + 41 }, VITESSE_DIRECT, DEGAT_DIRECT, RAYON_DIRECT, CHEMIN_IMAGE_ZIGZAG, joueur2.getDirection());
                     listes_projectiles.push_back(projectile);
+                    blockjoueur2 = true;
+                    clock2.restart();
                 }
                 else if (event.key.code == sf::Keyboard::Up && joueur2.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) { 
                     // Si la touche haut est pressée et que le joueur2 est sur le sol
@@ -73,6 +83,14 @@ int Jeu::lancer(Afficheur* afficheur)
                     }
                 }
             }
+        }
+
+        // Gestion des blocages de tirs
+        if (blockjoueur1 && clock1.getElapsedTime() > blockDuration1){
+            blockjoueur1 = false;
+        }
+        if (blockjoueur2 && clock2.getElapsedTime() > blockDuration2){
+            blockjoueur2 = false;
         }
 
         // Appliquer la gravité pour les deux joueurs

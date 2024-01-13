@@ -57,6 +57,8 @@ const float DEGAT_ATTAQUE_PIED2 = 5;
 const Point POSITION_DEPART_JOUEUR2 = {2*float(TAILLE_FENETRE.x)/3,float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
 
 
+const float TEMPS_BLOCAGE_PROJECTILE = 2;
+
 //Projectiles: Direct
 const int RAYON_DIRECT = 5;
 const float VITESSE_DIRECT = 45;
