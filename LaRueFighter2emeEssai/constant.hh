@@ -14,6 +14,8 @@ const float POINTS_DE_VIE_JOUEUR1 = 3500;
 const float DEGAT_ATTAQUE_POING1 = 5;
 const float DEGAT_ATTAQUE_PIED1 = 5;
 const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
+const float VITESSE_JOUEUR1 = 25;
+
 
 
 // Personnages: Joueur 2
@@ -44,14 +46,8 @@ const Point POSITION_BOUTON_QUITTER = {float(TAILLE_FENETRE.x)/2 - 100, float(TA
 
 
 const Point POSITION_BOUTON_RETOUR = {0, 0};
-<<<<<<< HEAD
 const Point POSITION_BOUTON_PAUSE = {float(TAILLE_FENETRE.x) - 300, 0};
 const Point POSITION_SOL = {0, float(TAILLE_FENETRE.y) - 100};
-=======
-const Point POSITION_BOUTON_PAUSE = {int(TAILLE_FENETRE.x) - 300, 0};
-const Point POSITION_SOL = {0, int(TAILLE_FENETRE.y) - HAUTEUR_SOL};
->>>>>>> 5c17cd090f653a511d6e3b54694ccde80921d97d
-
 
 
 //Taille des boutons:
@@ -81,9 +77,3 @@ const std::string CHEMIN_BACKGROUND_ROUND1("../images/Round2.jpg");
 const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 
 
-//Vitesse :
-<<<<<<< HEAD
-const float VITESSE_JOUEUR1 = 7;
-=======
-const int VITESSE_JOUEUR1 = 25;
->>>>>>> 5c17cd090f653a511d6e3b54694ccde80921d97d
