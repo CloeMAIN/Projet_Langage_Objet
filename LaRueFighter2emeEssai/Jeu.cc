@@ -7,6 +7,7 @@
 #include <string>
 #include <cmath>
 #include "ProjectileZigZag.hh"
+#include "ProjectileLineaire.hh"
 
 Jeu::Jeu(/* args */)
 {
@@ -91,6 +92,10 @@ int Jeu::lancer(Afficheur* afficheur)
                 else if(sf::Keyboard::isKeyPressed(sf::Keyboard::T)){
                     //Création d'un projectile
                     Projectile* projectile = new ProjectileZigZag(joueur1.getPosition(), VITESSE_ZIGZAG, DEGAT_ZIGZAG, RAYON_ZIGZAG, CHEMIN_IMAGE_ZIGZAG, AMPLITUDE_ZIGZAG, ANGLE_TIR_ZIGZAG, FREQUENCE_ZIGZAG);
+                    listes_projectiles.push_back(projectile);
+                }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+                    Projectile* projectile = new ProjectileLineaire(joueur1.getPosition(), VITESSE_DIRECT, DEGAT_DIRECT, RAYON_DIRECT, CHEMIN_IMAGE_ZIGZAG);
                     listes_projectiles.push_back(projectile);
                 }
                 else

@@ -27,10 +27,9 @@ const Point POSITION_DEPART_JOUEUR2 = {2*float(TAILLE_FENETRE.x)/3,float(TAILLE_
 
 //Projectiles: Direct
 const int RAYON_DIRECT = 5;
-const float VITESSE_DIRECT = 2;
+const float VITESSE_DIRECT = 45;
 const float DEGAT_DIRECT = 5;
 const Point POSITION_DEPART_DIRECT = {POSITION_DEPART_JOUEUR1.x + 20, POSITION_DEPART_JOUEUR1.y + 75};//20 et 75 c'st en supposant que les personnage font 40*150
-const double VITESSE_DEPLACEMENT_DIRECT = 0.1;
 
 //Projectiles: ZigZag
 // const Point POSITION_DEPART_ZIGZAG = {POSITION_DEPART_JOUEUR1.x, POSITION_DEPART_JOUEUR1.y};//20 et 75 c'st en supposant que les personnage font 40*150
