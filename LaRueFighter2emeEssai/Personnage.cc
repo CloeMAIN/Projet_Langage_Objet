@@ -7,7 +7,7 @@ Personnage::Personnage(/* args */)
 }
 
 Personnage::Personnage(Point position, int vie, std::string cheminImage, sf::Vector2f taille, Direction direction)
-    : position(position), vie(vie), cheminImage(cheminImage), taille(taille), direction(direction)
+    : position(position), vie(vie), cheminImage(cheminImage), taille(taille)
 
 {
     if (!texture.loadFromFile(cheminImage)) {
