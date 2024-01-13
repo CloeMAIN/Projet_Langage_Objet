@@ -20,13 +20,13 @@ int main(){
     // e.setPosition(p);
     // e.getCheminImage();
     std::cout << "------------ TEST PROJECTILE -------------" << std::endl;
-    ProjectileLineaire pl(p, 2, 0, 0, "");
+    ProjectileLineaire pl(p, 2, 0, 0, "", Direction::DROITE);
     while(pl.getTempsDeVie() < 10){
         pl.deplacement(0.5);
         std::cout << pl.toString() << std::endl;
     }
     std::cout << "-------------------------" << std::endl;
-    ProjectileZigZag pz(p, 2, 0, 0, "", 3, 45, 10);
+    ProjectileZigZag pz(p, 2, 0, 0, "", 3, 45, 10, Direction::GAUCHE);
     while(pz.getTempsDeVie() < 10){
         pz.deplacement(0.5);
         std::cout << pz.toString() << std::endl;
@@ -36,11 +36,14 @@ int main(){
     /*---------------------------------- TEST PERSONNAGE DEPLACEMENT--------------------------------------*/
 
     // Création des personnages
-    Personnage joueur1({200.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN);
-    Personnage joueur2({600.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN);
+    Personnage joueur1({200.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN, Direction::GAUCHE);
+    Personnage joueur2({600.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN, Direction::DROITE);
+
+    // std::cout << "------------ TEST DISTANCE  -------------" << std::endl;
+    // std::cout << "Distance joueur1 et joueur2 :" << "\n" << joueur1.distance(joueur2) << std::endl;
 
     //Déplacement des personnages
-    std::cout << "------------ TEST E DEPLACEMENT  -------------" << std::endl;
+    std::cout << "------------ TEST DE DEPLACEMENT  -------------" << std::endl;
         
     std::cout << "\n" << std::endl;
     std::cout << "Vitesse joueur2 :" << "\n" << VITESSE_JOUEUR1 << std::endl;
@@ -73,6 +76,8 @@ int main(){
     joueur1.maj(Action::Rien); // test rien
     std::cout << "Apres deplacement Rien:" << "\n";
     std::cout <<  joueur1.toString() << std::endl;
+
+
 
     return 0;
 }

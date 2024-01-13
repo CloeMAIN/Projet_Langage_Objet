@@ -7,7 +7,7 @@
 enum Action {
     Droite,Gauche,SautGauche,SautDroit,Rien
 };
-class Personnage {
+class Personnage : public ElementJeu {
 
 private:
     int vie;
@@ -19,7 +19,7 @@ private:
 public:
     // Constructeurs et destructeur
     Personnage();
-    Personnage(Point position, int vie, std::string cheminImage);
+    Personnage(Point position, int vie, std::string cheminImage, Direction direction);
     ~Personnage();
 
     // Méthodes d'accès

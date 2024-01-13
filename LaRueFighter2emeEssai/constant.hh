@@ -16,7 +16,7 @@ const float POINTS_DE_VIE_JOUEUR1 = 3500;
 const float DEGAT_ATTAQUE_POING1 = 5;
 const float DEGAT_ATTAQUE_PIED1 = 5;
 const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
-const float VITESSE_JOUEUR1 = 25;
+const float VITESSE_JOUEUR1 = 10;
 
 
 
@@ -75,7 +75,8 @@ const std::string CHEMIN_BOUTON_COMMANDES("images/Commandes.jpg");
 const std::string CHEMIN_BACKGROUND_COMMANDES("images/BackgroundCommandes.jpg");
 
 
-const std::string CHEMIN_IMAGE_JOUEUR1_RIEN("images/Fighter/Idle.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_RIEN_GAUCHE("images/Fighter/Idle_Left.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE("images/Fighter/Idle_Right.png");
 const std::string CHEMIN_IMAGE_JOUEUR1_DROITE("images/Fighter/Walk_Right.png");
 const std::string CHEMIN_IMAGE_JOUEUR1_GAUCHE("images/Fighter/Walk_Left.png");
 const std::string CHEMIN_IMAGE_JOUEUR2("../images/Joueur2.jpg");

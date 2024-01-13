@@ -11,7 +11,7 @@ protected:
     double temps_de_vie;
     bool a_detruire = false;
 public:
-    Projectile(Point position, float vitesse, float degat, float rayon, std::string chemin_image);
+    Projectile(Point position, float vitesse, float degat, float rayon, std::string chemin_image, Direction direction);
     Projectile() = default; 
     ~Projectile();
     float getRayon() const { return rayon;};

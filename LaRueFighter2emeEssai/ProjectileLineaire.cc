@@ -1,19 +1,21 @@
 #include "ProjectileLineaire.hh"
 
 
-ProjectileLineaire::ProjectileLineaire(Point position, float vitesse, float degat, float rayon, std::string chemin_image){
+ProjectileLineaire::ProjectileLineaire(Point position, float vitesse, float degat, float rayon, std::string chemin_image, Direction direction){
     this->position = position;
     this->vitesse = vitesse;
     this->degat = degat;
     this->rayon = rayon;
     this->chemin_image = chemin_image;
     this->temps_de_vie = 0;
+    this->direction = direction;
 
 }
 
 void ProjectileLineaire::deplacement(double deltaTime)
 {
-    float newX = static_cast<float>(vitesse * deltaTime) + position.x;
+    float dir = (direction == Direction::DROITE) ? 1 : -1;
+    float newX = static_cast<float>(vitesse * deltaTime * dir) + position.x;
     setPosition({newX, position.y});
     setTempsDeVie(temps_de_vie + deltaTime);
     // Vérifier si le projectile est en dehors des limites de la fenêtre

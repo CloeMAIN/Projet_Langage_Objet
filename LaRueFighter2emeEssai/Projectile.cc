@@ -1,12 +1,13 @@
 #include "Projectile.hh"
 
-Projectile::Projectile(Point position, float vitesse, float degat, float rayon, std::string chemin_image){
+Projectile::Projectile(Point position, float vitesse, float degat, float rayon, std::string chemin_image, Direction direction){
     this->position = position;
     this->vitesse = vitesse;
     this->degat = degat;
     this->rayon = rayon;
     this->chemin_image = chemin_image;
     this->temps_de_vie = 0;
+    this->direction = direction;
 }
 
 Projectile::~Projectile()
