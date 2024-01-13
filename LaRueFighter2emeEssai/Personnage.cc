@@ -45,7 +45,7 @@ void Personnage::maj(Action action){
         sprite.move(VITESSE_JOUEUR1,0);
         position.x = position.x + VITESSE_JOUEUR1; 
 
-    } else if(action==Action::Gauche){
+    }else if(action==Action::Gauche){
         cheminImage = CHEMIN_IMAGE_JOUEUR1_GAUCHE;
         if (!texture.loadFromFile(cheminImage)) {
             throw std::runtime_error("Erreur de chargement de l'image : " + cheminImage);
@@ -55,7 +55,11 @@ void Personnage::maj(Action action){
         xTexture = xTexture * 128;
         sprite.setTextureRect(sf::IntRect(xTexture, 0, 128, 128));
         sprite.move(-VITESSE_JOUEUR1,0);
-        position.x = position.x - VITESSE_JOUEUR1;  
+        //std::cout << "Avant maj Gauche:" << position.x  << "\n" ;
+        position.x = position.x - VITESSE_JOUEUR1;
+        //std::cout << "Apres maj Gauche:" << position.x <<"\n" ;
+
+
     }else if(action==Action::Rien){
         cheminImage = CHEMIN_IMAGE_JOUEUR1_RIEN;
         if (!texture.loadFromFile(cheminImage)) {
@@ -67,7 +71,12 @@ void Personnage::maj(Action action){
     }else if(action==Action::SautDroit){
 
     }else if(action==Action::SautGauche){
-        
+
     }
 
 }
+
+std::string Personnage::toString(){
+        std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Chemin de l'image du joueur : " + cheminImage;
+        return s;
+    };

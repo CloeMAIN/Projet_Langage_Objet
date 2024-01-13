@@ -35,6 +35,8 @@ public:
 
     /* Méthode */
     void maj(Action action);
+
+    std::string toString();
 };
 
 
