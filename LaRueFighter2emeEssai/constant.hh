@@ -15,7 +15,7 @@ const double DELTA_TIME = 0.05;
 const float GRAVITE = 0.5f;
 
 // Tests
-const bool TESTERVIE = true;
+const bool DEBUGGING_MODE = true;
 const sf::Keyboard::Key TOUCHE_DEGAT_J1 = sf::Keyboard::A;
 const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
 

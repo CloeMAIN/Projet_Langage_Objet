@@ -64,7 +64,7 @@ int Jeu::lancer(Afficheur* afficheur)
                     velocityJoueur1.y = VITESSE_JOUEUR1_SAUT; // Définir la vélocité sur la vitesse de saut 
                 }
 
-                if(TESTERVIE){
+                if(DEBUGGING_MODE){
                     if (sf::Keyboard::isKeyPressed(TOUCHE_DEGAT_J1)){
                         joueur1.setVie(joueur1.getVie()-5);
                     }
