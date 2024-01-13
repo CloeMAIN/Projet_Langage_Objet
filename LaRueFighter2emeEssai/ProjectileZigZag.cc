@@ -31,7 +31,7 @@ void ProjectileZigZag::deplacement(double deltaTime)
     setTempsDeVie(temps_de_vie + deltaTime);         // Mettre à jour le temps écoulé
 
     // Vérifier si le projectile est en dehors des limites de la fenêtre
-    if (newX < 0 || newX > TAILLE_FENETRE.x || newY < 0 || newY > TAILLE_FENETRE.y - HAUTEUR_SOL) {
+    if (newX < 0 || newX > TAILLE_FENETRE.x || newY < 0 || newY > TAILLE_FENETRE.y - HAUTEUR_SOL) { // !!! ajouter que si il touche qqun on active la fonction DEGAT
         // Le projectile est en dehors de la fenêtre, détruire le projectile
         a_detruire = true;
     }

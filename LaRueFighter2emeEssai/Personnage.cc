@@ -6,8 +6,9 @@ Personnage::Personnage(/* args */)
 {
 }
 
-Personnage::Personnage(Point position, int vie, std::string cheminImage, Direction direction)
-    : position(position), vie(vie), cheminImage(cheminImage)
+Personnage::Personnage(Point position, int vie, std::string cheminImage, sf::Vector2f taille, Direction direction)
+    : position(position), vie(vie), cheminImage(cheminImage), taille(taille), direction(direction)
+
 {
     if (!texture.loadFromFile(cheminImage)) {
         throw std::runtime_error("Erreur de chargement de l'image : " + cheminImage);
@@ -32,6 +33,7 @@ Personnage::~Personnage()
 }
 
 void Personnage::maj(Action action){
+    
     if(action==Action::Droite){
         cheminImage = CHEMIN_IMAGE_JOUEUR1_DROITE;
         if (!texture.loadFromFile(cheminImage)) {
@@ -74,6 +76,7 @@ void Personnage::maj(Action action){
         sprite.setTextureRect(sf::IntRect(0, 0,35, 81));
 
     }else if(action==Action::SautDroit){
+        //tant que y <500 on augmente 
 
     }else if(action==Action::SautGauche){
 

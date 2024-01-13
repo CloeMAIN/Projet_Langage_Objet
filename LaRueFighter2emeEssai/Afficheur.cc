@@ -6,6 +6,8 @@
 Afficheur::Afficheur(/* args */) : window(sf::VideoMode::getDesktopMode(), "Jeu", sf::Style::Fullscreen)
 {
     // créer une fenêtre SFLM
+    window.setFramerateLimit(60); // Limiter le taux de rafraîchissement à 60 images par seconde
+
 
 }
 

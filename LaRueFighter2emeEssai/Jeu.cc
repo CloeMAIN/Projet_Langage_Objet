@@ -5,7 +5,6 @@
 #include <iostream>
 #include <list>
 #include <string>
-#include <cmath>
 #include "ProjectileZigZag.hh"
 #include "ProjectileLineaire.hh"
 
@@ -23,41 +22,6 @@ Jeu::~Jeu()
 }
 
 
-// void Jeu::lancer(){
-
-//     bool PartieLancee = true;
-//     compteur_round = 1;
-//     while(PartieLancee == true && !(JoueurMort) && ){
-
-//         On prend les inputs (touches claviers, mouse, clic....)
-//         if ( une toute est touchée){
-//         InputUser input;
-//         SI on touche une touche du clavier
-//         actionJ1 = input.getActionJ1();
-//         actionJ2 = input.getActionJ2();
-//         }
-
-//         On met à jour le jeu en fonction des inputs
-//         On met à jour les joueurs
-//         updateStateJoueurs(_joueur1, _joueur2, actionJ1, actionJ2);
-        
-//         On met à jour l'affichage
-//         afficheur.afficher(_joueur1);
-//         afficheur.afficher(_joueur2);
-//         afficheur.afficher(_background);
-//         afficheur.afficher(_sol);
-//         afficheur.afficher(_barreDeVieJ1);
-//         afficheur.afficher(_barreDeVieJ2);
-
-//         On vérifie si la fenêtre de jeu (attribut de afficheur) est toujours ouverte
-//         PartieLancee = afficheur.getwindow().isOpen();
-//     }
-
-//     round++;
-
-// }
-
-
 int Jeu::lancer(Afficheur* afficheur)
 {
     bool lancerJeu = true;
@@ -69,6 +33,12 @@ int Jeu::lancer(Afficheur* afficheur)
 
     // Affichage de texte
     std::cout << "Lancement de la partie jeu.lancer()" << std::endl;
+
+    sf::Sprite spriteJ1 = joueur1.getSprite();
+    // vrai sprite de j2 avec un pointeur
+    sf::Sprite spriteJ2 = joueur2.getSprite();
+    sf::Vector2f velocity(0, 0);
+    sf::RenderWindow* window = afficheur->getWindow();
 
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
@@ -98,68 +68,72 @@ int Jeu::lancer(Afficheur* afficheur)
                     Projectile* projectile = new ProjectileLineaire({joueur2.getPosition().x+35,joueur1.getPosition().y + 41 }, VITESSE_DIRECT, DEGAT_DIRECT, RAYON_DIRECT, CHEMIN_IMAGE_ZIGZAG, joueur2.getDirection());
                     listes_projectiles.push_back(projectile);
                 }
-                else
-                {
+            
 
-                    EtatJoueur etatJoueur;
-                    etatJoueur.actionJ1 = inputUser.getOuputJ1(key);
-                    etatJoueur.actionJ2 = inputUser.getOuputJ2(key);
-                    // afficher etat joueur en console
-                    std::cout << "Changement d'état : \n" << inputUser.str() << std::endl;
 
-                }
-            }else{
+                    if (event.key.code == sf::Keyboard::Up) { 
+                            // Si la touchehaut est pressée et que le joueur2 est sur le sol
+                                velocity.y = VITESSE_JOUEUR1_SAUT; // Définir la vélocité sur la vitesse de saut
+                            
+                        }
 
-                /* si on ne clique pas on réinitialise les états des joueurs*/
-                inputUser.setActionJ1(Action::Rien);
-                inputUser.setActionJ2(Action::Rien);
-
+                   
+                
             }
             
             
-//         On prend les inputs (touches claviers, mouse, clic....)
-//         if ( une toute est touchée){
-//         InputUser input;
-//         SI on touche une touche du clavier
-//         actionJ1 = input.getActionJ1();
-//         actionJ2 = input.getActionJ2();
-//         }
-
-
-
-           
-            
-
-
-//         On met à jour le jeu en fonction des inputs
-//         On met à jour les joueurs
-//         updateStateJoueurs(_joueur1, _joueur2, actionJ1, actionJ2);
-        
-//         On met à jour l'affichage
-//         afficheur.afficher(_joueur1);
-//         afficheur.afficher(_joueur2);
-//         afficheur.afficher(_background);
-//         afficheur.afficher(_sol);
-//         afficheur.afficher(_barreDeVieJ1);
-//         afficheur.afficher(_barreDeVieJ2);
-            
         }
 
-         /* MAJ des attributs des joueurs*/
+         // Appliquer la gravité
+        if (spriteJ2.getPosition().y + TAILLE_JOUEUR1_SPRITE < POSITION_SOL.y) {
+            velocity.y += GRAVITE;
+        }
 
-            majJoueurs(inputUser);
-            majProjectiles(DELTA_TIME);
+
+        // Gérer le déplacement horizontal
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            velocity.x = -5.0f; // Vélocité de déplacement vers la gauche
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            velocity.x = 5.0f; // Vélocité de déplacement vers la droite
+        } else {
+            velocity.x = 0.0f; // Arrêter le déplacement horizontal
+        }
+
+        // Mettre à jour la position du joueur2
+        joueur2.update(velocity);
+
+        // Empêcher le spriteJ2 de sortir de l'écran
+        if (spriteJ2.getPosition().x < 0) {
+            spriteJ2.setPosition(0, spriteJ2.getPosition().y); // Empêcher le spriteJ2 de sortir par la gauche
+        } else if (spriteJ2.getPosition().x > window->getSize().x - TAILLE_JOUEUR1_SPRITE) {
+            spriteJ2.setPosition(window->getSize().x - TAILLE_JOUEUR1_SPRITE, spriteJ2.getPosition().y); // Empêcher le spriteJ2 de sortir par la droite
+        }
+
+        // Empêcher le rectangle de passer à travers le sol // NOT WORKING
+        if (spriteJ2.getPosition().y  == POSITION_SOL.y + TAILLE_JOUEUR1_SPRITE) {
+            spriteJ2.setPosition(spriteJ2.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE); // Placer le rectangle sur le sol
+            velocity.y = 0; // Arrêter la chute
+        }
+
+        // Afficher les positions en console
+        std::cout << "Position X: " << spriteJ2.getPosition().x << ", Position Y: " << spriteJ2.getPosition().y << std::endl;
+
+        
+        for (Projectile* projectile : listes_projectiles) {
+            projectile->deplacement(0.05);
+            if(projectile->getADetruire() == true){
+                listes_projectiles.remove(projectile);
+            }
+        }
+
+
+        majProjectiles(DELTA_TIME);
         afficheur->afficher(*this); // Affiche le jeu 5PB d'affichage vient de là
         //afficheur->afficher(joueur1); // Affiche le joueur 1
        
     }
 
     return 0;
-}
-
-void Jeu::majJoueurs(InputUser inputUser){
-    joueur1.maj(inputUser.getActionJ1());
-    joueur2.maj(inputUser.getActionJ2());
 }
 
 void Jeu::majProjectiles(double deltaTime){
