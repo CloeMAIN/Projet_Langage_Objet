@@ -3,6 +3,11 @@
 #include "InputUser.hh"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <list>
+#include <string>
+#include <cmath>
+#include "ProjectileZigZag.hh"
+
 Jeu::Jeu(/* args */)
 {
     // Créer les joueurs (1 et 2 pour l'instant)
@@ -81,8 +86,14 @@ int Jeu::lancer(Afficheur* afficheur)
                     afficheur->getWindow()->close();
 
                 }else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-
-                }else
+                
+                }
+                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::T)){
+                    //Création d'un projectile
+                    Projectile* projectile = new ProjectileZigZag(joueur1.getPosition(), VITESSE_ZIGZAG, DEGAT_ZIGZAG, RAYON_ZIGZAG, CHEMIN_IMAGE_ZIGZAG, AMPLITUDE_ZIGZAG, ANGLE_TIR_ZIGZAG, FREQUENCE_ZIGZAG);
+                    listes_projectiles.push_back(projectile);
+                }
+                else
                 {
 
                     EtatJoueur etatJoueur;
@@ -110,9 +121,8 @@ int Jeu::lancer(Afficheur* afficheur)
 
 
 
-            /* MAJ des attributs des joueurs*/
-
-            majJoueurs(inputUser);
+           
+            
 
 
 //         On met à jour le jeu en fonction des inputs
@@ -128,6 +138,18 @@ int Jeu::lancer(Afficheur* afficheur)
 //         afficheur.afficher(_barreDeVieJ2);
             
         }
+
+         /* MAJ des attributs des joueurs*/
+
+            majJoueurs(inputUser);
+
+            for (Projectile* projectile : listes_projectiles) {
+                projectile->deplacement(0.05);
+                if(projectile->getADetruire() == true){
+                    listes_projectiles.remove(projectile);
+                }
+            }
+
         afficheur->afficher(*this); // Affiche le jeu 5PB d'affichage vient de là
         //afficheur->afficher(joueur1); // Affiche le joueur 1
        

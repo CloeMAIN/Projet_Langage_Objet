@@ -6,7 +6,7 @@ Personnage::Personnage(/* args */)
 {
 }
 
-Personnage::Personnage(sf::Vector2f position, int vie, std::string cheminImage)
+Personnage::Personnage(Point position, int vie, std::string cheminImage)
     : position(position), vie(vie), cheminImage(cheminImage)
 {
     if (!texture.loadFromFile(cheminImage)) {
@@ -16,10 +16,10 @@ Personnage::Personnage(sf::Vector2f position, int vie, std::string cheminImage)
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect(0, 0, 128, 128));
     sprite.setScale(5.0f, 5.0f);  // Ajuster l'échelle (5.0f signifie 2 fois plus grand)
-    sprite.setPosition(position);
+    sprite.setPosition({position.x, position.y});
     taille = sf::Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height);
 
-    // Affichage de sattribut du joueur
+    // Affichage des attributs du joueur
     std::cout << "Position du joueur : " << position.x << " " << position.y << std::endl;
     std::cout << "Vie du joueur : " << vie << std::endl;
     std::cout << "Chemin de l'image du joueur : " << cheminImage << std::endl;

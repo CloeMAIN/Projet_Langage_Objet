@@ -3,6 +3,15 @@
 #include "Afficheur.hh"
 #include "ElementJeu.hh"
 #include "Personnage.hh"
+#include "Projectile.hh"
+#include "ProjectileZigZag.hh"
+#include "InputUser.hh"
+#include "constant.hh"
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <list>
+#include <string>
+#include <cmath>
 
 int main(int argc, char const *argv[])
 {

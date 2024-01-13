@@ -14,16 +14,16 @@ private:
     std::string cheminImage;  // Ajout du chemin de l'image
     sf::Texture texture;     // Ajout de la texture
     sf::Sprite sprite;       // Ajout du sprite
-    sf::Vector2f position;
+    Point position;
     sf::Vector2f taille;
 public:
     // Constructeurs et destructeur
     Personnage();
-    Personnage(sf::Vector2f position, int vie, std::string cheminImage);
+    Personnage(Point position, int vie, std::string cheminImage);
     ~Personnage();
 
     // Méthodes d'accès
-    sf::Vector2f getPosition() const { return position; }
+    Point getPosition() const { return position; }
     int getVie() const { return vie; }
     std::string getCheminImage() const { return cheminImage; }
     sf::Sprite getSprite() const { return sprite; }

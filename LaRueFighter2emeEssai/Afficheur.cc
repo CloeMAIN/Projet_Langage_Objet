@@ -15,9 +15,22 @@ Afficheur::~Afficheur()
 
 void Afficheur::afficher(const Personnage& joueur) {
     // Met le personnage à sa position dans la window
-    joueur.getSprite().setPosition(joueur.getPosition());
+    joueur.getSprite().setPosition({joueur.getPosition().x, joueur.getPosition().y});
     // Affiche le personnage
     window.draw(joueur.getSprite());
+}
+
+void Afficheur::afficherProjectile(const Projectile& projectile) {
+    //Créer un sprite pour le projectile
+    sf::Sprite spriteProjectile;
+    sf::Texture textureProjectile;
+    textureProjectile.loadFromFile(projectile.getCheminImage());
+    spriteProjectile.setTexture(textureProjectile);
+    // Met le projectile à sa position dans la window
+    spriteProjectile.setPosition({projectile.getPosition().x, projectile.getPosition().y});
+    spriteProjectile.setScale(0.1f, 0.1f); 
+    // Affiche le projectile
+    window.draw(spriteProjectile);
 }
 
 
@@ -28,6 +41,9 @@ void Afficheur::afficher(Jeu& jeu) {
     afficherSol();
     afficher(jeu.getJoueur1()); // Affiche le joueur 1
     afficher(jeu.getJoueur2()); // Affiche le joueur 2
+    for (Projectile* projectile : jeu.getListesProjectiles()) {
+        afficherProjectile(*projectile);
+    }
     // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
     window.display();
 }
@@ -88,6 +104,7 @@ void Afficheur::afficherMenu(){
     afficher(CHEMIN_BOUTON_QUITTER, POSITION_BOUTON_QUITTER, TAILLE_BOUTON_QUITTER);
     window.display();
 }
+
 
 // Afficheur::afficherCommande(){
     

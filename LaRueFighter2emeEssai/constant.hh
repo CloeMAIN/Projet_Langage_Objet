@@ -33,8 +33,15 @@ const Point POSITION_DEPART_DIRECT = {POSITION_DEPART_JOUEUR1.x + 20, POSITION_D
 const double VITESSE_DEPLACEMENT_DIRECT = 0.1;
 
 //Projectiles: ZigZag
-const float VITESSE_ZIGZAG = 2;
+// const Point POSITION_DEPART_ZIGZAG = {POSITION_DEPART_JOUEUR1.x, POSITION_DEPART_JOUEUR1.y};//20 et 75 c'st en supposant que les personnage font 40*150
+const float VITESSE_ZIGZAG = 30;
 const float DEGAT_ZIGZAG = 5;
+const float RAYON_ZIGZAG = 5;
+const std::string CHEMIN_IMAGE_ZIGZAG = "images/projectile.jpg";
+const double AMPLITUDE_ZIGZAG = 100;
+const double ANGLE_TIR_ZIGZAG = 1;
+const double FREQUENCE_ZIGZAG = 3;
+
 
 
 

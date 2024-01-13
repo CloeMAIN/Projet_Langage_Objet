@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Personnage.hh"
 #include "constant.hh"
+#include "Projectile.hh"
 
 // Déclaration anticipée de la classe Jeu pour éviter la dépendance cyclique
 class Jeu;
@@ -27,6 +28,7 @@ class Afficheur
         void afficher(std::string cheminbouton, Point position, HitBox taille);
         void afficher(std::string cheminBackground);
         void afficherSol();
+        void afficherProjectile(const Projectile &projectile);
 
 };
 

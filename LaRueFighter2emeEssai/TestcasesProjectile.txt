@@ -3,6 +3,8 @@
 #include "ElementJeu.hh"
 #include "Projectile.hh"
 #include "ProjectileZigZag.hh"
+#include "constant.hh"
+#include "Afficheur.hh"
 
 int main(){
     Point p;
@@ -26,7 +28,6 @@ int main(){
         pz.deplacement(0.5);
         std::cout << pz.toString() << std::endl;
     }
-
 
     return 0;
 }

@@ -23,9 +23,9 @@ protected:
 public:
     ElementJeu(/* args */);
     ~ElementJeu();
-    Point getPosition(){return position;}
+    Point getPosition() const {return position;}
     void setPosition(Point p){position = p;}
-    std::string getCheminImage(){return chemin_image;}
+    std::string getCheminImage() const {return chemin_image;}
 };
 
 #endif // ELEMENTJEU_HH
