@@ -30,10 +30,11 @@ const sf::Color COULEUR_BARRE_J2 = sf::Color::Blue;
 const float POINTS_DE_VIE_JOUEUR1 = 3500;
 const float DEGAT_ATTAQUE_POING1 = 5;
 const float DEGAT_ATTAQUE_PIED1 = 5;
-const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
+const Taille TAILLE_JOUEUR1_SPRITE = {2*35, 2*82};
+const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL- TAILLE_JOUEUR1_SPRITE.hauteur};
 const float VITESSE_JOUEUR1 = 25;
 const float VITESSE_JOUEUR1_SAUT = -12.0f;
-const float TAILLE_JOUEUR1_SPRITE = 82*2;
+
 
 //Commandes Joueur1
 const sf::Keyboard::Key TOUCHE_SAUT_JOUEUR1 = sf::Keyboard::Z;
@@ -54,7 +55,8 @@ const sf::Keyboard::Key TOUCHE_PROJECTILE_JOUEUR2 = sf::Keyboard::RShift;
 const float POINTS_DE_VIE_JOUEUR2 = 3500;
 const float DEGAT_ATTAQUE_POING2 = 5;
 const float DEGAT_ATTAQUE_PIED2 = 5;
-const Point POSITION_DEPART_JOUEUR2 = {2*float(TAILLE_FENETRE.x)/3,float(TAILLE_FENETRE.y)-HAUTEUR_SOL-150};
+// Taille TAILLE_JOUEUR2_SPRITE = {35, 82};
+const Point POSITION_DEPART_JOUEUR2 = {float(TAILLE_FENETRE.x)/3 * 2,float(TAILLE_FENETRE.y)-HAUTEUR_SOL-TAILLE_JOUEUR1_SPRITE.hauteur};
 
 
 const float TEMPS_BLOCAGE_PROJECTILE = 2;

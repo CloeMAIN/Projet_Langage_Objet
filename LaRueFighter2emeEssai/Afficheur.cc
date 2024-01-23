@@ -1,7 +1,7 @@
 #include "Afficheur.hh"
 #include "Jeu.hh"  // Ajoutez cette ligne pour inclure la définition complète de la classe Jeu
 #include <iostream>
-#include "constant.hh"
+
 
 Afficheur::Afficheur(/* args */) : window(sf::VideoMode::getDesktopMode(), "Jeu", sf::Style::Fullscreen)
 {
@@ -30,7 +30,7 @@ void Afficheur::afficher(const Personnage& joueur) {
     
 }
 
-void Afficheur::afficherProjectile(const Projectile& projectile) {
+void Afficheur::afficher(const Projectile& projectile) {
     //Créer un sprite pour le projectile
     sf::Sprite spriteProjectile;
     sf::Texture textureProjectile;
@@ -54,7 +54,7 @@ void Afficheur::afficher(Jeu& jeu) {
     afficher(jeu.getJoueur1()); // Affiche le joueur 1
     afficher(jeu.getJoueur2()); // Affiche le joueur 2
     for (Projectile* projectile : jeu.getListesProjectiles()) {
-        afficherProjectile(*projectile);
+        afficher(*projectile);
     }
     // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
     window.display();

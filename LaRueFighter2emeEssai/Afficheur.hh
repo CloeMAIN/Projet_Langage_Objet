@@ -1,6 +1,6 @@
 #ifndef AFFICHEUR_HH
 #define AFFICHEUR_HH
-
+#pragma once
 #include <SFML/Graphics.hpp>
 #include "Personnage.hh"
 #include "constant.hh"
@@ -28,7 +28,7 @@ class Afficheur
         void afficher(std::string cheminbouton, Point position, HitBox taille);
         void afficher(std::string cheminBackground);
         void afficherSol();
-        void afficherProjectile(const Projectile &projectile);
+        void afficher(const Projectile &projectile);
         void afficherBarreVieJ1(int vie);
         void afficherBarreVieJ2(int vie);
 

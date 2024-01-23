@@ -36,8 +36,8 @@ int main(){
     /*---------------------------------- TEST PERSONNAGE DEPLACEMENT--------------------------------------*/
 
     // Création des personnages
-    Personnage joueur1({200.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN, Direction::GAUCHE);
-    Personnage joueur2({600.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN, Direction::DROITE);
+    Personnage joueur1({200.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE, Direction::GAUCHE, {50.0,50.0});
+    Personnage joueur2({600.0, TAILLE_FENETRE.y - HAUTEUR_SOL - 128.0f * 5}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE, Direction::DROITE, {50.0,50.0});
 
     // std::cout << "------------ TEST DISTANCE  -------------" << std::endl;
     // std::cout << "Distance joueur1 et joueur2 :" << "\n" << joueur1.distance(joueur2) << std::endl;
@@ -77,7 +77,51 @@ int main(){
     std::cout << "Apres deplacement Rien:" << "\n";
     std::cout <<  joueur1.toString() << std::endl;
 
+    std::cout << "------------ TEST DE CONTACT  -------------" << std::endl;
+    joueur1.setPosition({200.0, 200.0});
+    joueur2.setPosition({300.0, 200.0});
+    joueur1.setTaille({50.0,50.0});
+    joueur2.setTaille({50.0,50.0});
+    std::cout << "Joueur1 :" << "\n" << joueur1.toString() << std::endl;
+    std::cout << "Joueur2 :" << "\n" << joueur2.toString() << std::endl;
+    std::cout << "Contact J1 :" << joueur1.contact(joueur2) << std::endl;
+    std::cout << "Contact J2:" << joueur2.contact(joueur1) << "\n" << std::endl;
 
+    joueur1.setPosition({200.0, 200.0});
+    joueur2.setPosition({250.0, 200.0});
+    joueur1.setTaille({50.0,50.0});
+    joueur2.setTaille({50.0,50.0});
+    std::cout << "Joueur1 :" << "\n" << joueur1.toString() << std::endl;
+    std::cout << "Joueur2 :" << "\n" << joueur2.toString() << std::endl;
+    std::cout << "Contact J1:" << joueur1.contact(joueur2) << std::endl;
+    std::cout << "Contact J2:" << joueur2.contact(joueur1) << "\n"<< std::endl;
+
+    joueur1.setPosition({200.0, 200.0});
+    joueur2.setPosition({250.0, 100.0});
+    joueur1.setTaille({50.0,50.0});
+    joueur2.setTaille({50.0,50.0});
+    std::cout << "Joueur1 :" << "\n" << joueur1.toString() << std::endl;
+    std::cout << "Joueur2 :" << "\n" << joueur2.toString() << std::endl;
+    std::cout << "Contact J1 :" << joueur1.contact(joueur2) << std::endl;
+    std::cout << "Contact J2 :" << joueur2.contact(joueur1) << "\n"<< std::endl;
+
+    joueur1.setPosition({200.0, 200.0});
+    joueur2.setPosition({250.0, 100.0});
+    joueur1.setTaille({50.0,25.0});
+    joueur2.setTaille({50.0,50.0});
+    std::cout << "Joueur1 :" << "\n" << joueur1.toString() << std::endl;
+    std::cout << "Joueur2 :" << "\n" << joueur2.toString() << std::endl;
+    std::cout << "Contact J1 :" << joueur1.contact(joueur2)  << std::endl;
+    std::cout << "Contact J2 :" << joueur2.contact(joueur1) << "\n"<< std::endl;
+
+    joueur1.setPosition({100.0, 100.0});
+    joueur2.setPosition({150.0, 150.0});
+    joueur1.setTaille({50.0,100.0});
+    joueur2.setTaille({25.0,25.0});
+    std::cout << "Joueur1 :" << "\n" << joueur1.toString() << std::endl;
+    std::cout << "Joueur2 :" << "\n" << joueur2.toString() << std::endl;
+    std::cout << "Contact J1 :" << joueur1.contact(joueur2)  << std::endl;
+    std::cout << "Contact J2 :" << joueur2.contact(joueur1) << "\n"<< std::endl;
 
     return 0;
 }

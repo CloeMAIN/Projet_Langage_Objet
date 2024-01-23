@@ -1,8 +1,9 @@
 #ifndef PERSONNAGE_HH
 #define PERSONNAGE_HH
-
+#pragma once
 #include <string>
 #include "ElementJeu.hh"
+#include "constant.hh"
 
 enum Action {
     Droite,Gauche,SautGauche,SautDroit,Rien
@@ -11,21 +12,16 @@ class Personnage : public ElementJeu {
 
 private:
     int vie;
-    std::string cheminImage;  // Ajout du chemin de l'image
     sf::Texture texture;     // Ajout de la texture
     sf::Sprite sprite;       // Ajout du sprite
-    Point position;
-    sf::Vector2f taille;
 public:
     // Constructeurs et destructeur
     Personnage();
-    Personnage(Point position, int vie, std::string cheminImage, sf::Vector2f taille,  Direction direction);
+    Personnage(Point position, int vie, std::string cheminImage,  Direction direction, Taille taille);
     ~Personnage();
 
     // Méthodes d'accès
-    Point getPosition() const { return position; }
     int getVie() const { return vie; }
-    std::string getCheminImage() const { return cheminImage; }
     sf::Sprite getSprite() const { return sprite; }
     sf::Texture getTexture() const { return texture; }
 

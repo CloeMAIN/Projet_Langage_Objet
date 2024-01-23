@@ -1,6 +1,7 @@
 #ifndef JEU_HH
 #define JEU_HH
 
+#pragma once
 #include "Afficheur.hh"
 #include "Personnage.hh"
 #include "InputUser.hh"
@@ -11,8 +12,8 @@
 class Jeu
 {
 private:
-    Personnage joueur1{{200, TAILLE_FENETRE.y-HAUTEUR_SOL-TAILLE_JOUEUR1_SPRITE}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE,{35,82},  Direction::DROITE};
-    Personnage joueur2{{600, TAILLE_FENETRE.y-HAUTEUR_SOL-TAILLE_JOUEUR1_SPRITE}, 100, CHEMIN_IMAGE_JOUEUR1_RIEN_GAUCHE,{35,82}, Direction::GAUCHE};
+    Personnage joueur1{POSITION_DEPART_JOUEUR1, 100, CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE,  Direction::DROITE, {35,82}};
+    Personnage joueur2{POSITION_DEPART_JOUEUR2, 100, CHEMIN_IMAGE_JOUEUR1_RIEN_GAUCHE, Direction::GAUCHE,{35,82}};
     std::list<Projectile*> listes_projectiles;
     // Afficheur* afficheur;
 public:

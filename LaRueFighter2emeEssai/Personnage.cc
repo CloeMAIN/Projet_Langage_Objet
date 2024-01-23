@@ -1,29 +1,29 @@
 #include "Personnage.hh"
-#include "constant.hh"
 #include <iostream>
 
 Personnage::Personnage(/* args */)
 {
 }
 
-Personnage::Personnage(Point position, int vie, std::string cheminImage, sf::Vector2f taille, Direction direction)
-    : position(position), vie(vie), cheminImage(cheminImage), taille(taille)
+Personnage::Personnage(Point position, int vie, std::string chemin_image, Direction direction, Taille taille)
+    : vie(vie)
 
 {
-    if (!texture.loadFromFile(cheminImage)) {
-        throw std::runtime_error("Erreur de chargement de l'image : " + cheminImage);
+    if (!texture.loadFromFile(chemin_image)) {
+        throw std::runtime_error("Erreur de chargement de l'image : " + chemin_image);
     }
 
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect(0, 0, 35, 81)); // Découper l'image en 8 colonnes et 1 ligne
     sprite.setScale(2.f, 2.f); // Ajuster l'échelle (5.0f signifie 2 fois plus grand)
     sprite.setPosition({position.x, position.y});
-    taille = sf::Vector2f(sprite.getGlobalBounds().width, sprite.getGlobalBounds().height);
+    taille.largeur = 35; 
+    taille.hauteur = 81;
 
     // Affichage des attributs du joueur
     std::cout << "Position du joueur : " << position.x << " " << position.y << std::endl;
     std::cout << "Vie du joueur : " << vie << std::endl;
-    std::cout << "Chemin de l'image du joueur : " << cheminImage << std::endl;
+    std::cout << "Chemin de l'image du joueur : " << chemin_image << std::endl;
 
 }
 
@@ -35,9 +35,9 @@ Personnage::~Personnage()
 void Personnage::maj(Action action){
     
     if(action==Action::Droite){
-        cheminImage = CHEMIN_IMAGE_JOUEUR1_DROITE;
-        if (!texture.loadFromFile(cheminImage)) {
-            throw std::runtime_error("Erreur de chargement de l'image : " + cheminImage);
+        chemin_image = CHEMIN_IMAGE_JOUEUR1_DROITE;
+        if (!texture.loadFromFile(chemin_image)) {
+            throw std::runtime_error("Erreur de chargement de l'image : " + chemin_image);
         }
 
         sprite.setTexture(texture);
@@ -49,9 +49,9 @@ void Personnage::maj(Action action){
         setDirection(Direction::DROITE);
 
     }else if(action==Action::Gauche){
-        cheminImage = CHEMIN_IMAGE_JOUEUR1_GAUCHE;
-        if (!texture.loadFromFile(cheminImage)) {
-            throw std::runtime_error("Erreur de chargement de l'image : " + cheminImage);
+        chemin_image = CHEMIN_IMAGE_JOUEUR1_GAUCHE;
+        if (!texture.loadFromFile(chemin_image)) {
+            throw std::runtime_error("Erreur de chargement de l'image : " + chemin_image);
         }
         sprite.setTexture(texture);
         int xTexture = (int)sprite.getPosition().x / 35 % 8;
@@ -66,11 +66,11 @@ void Personnage::maj(Action action){
 
     }else if(action==Action::Rien){
         if(direction == Direction::DROITE)
-            cheminImage = CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE;
+            chemin_image = CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE;
         else
-            cheminImage = CHEMIN_IMAGE_JOUEUR1_RIEN_GAUCHE;
-        if (!texture.loadFromFile(cheminImage)) {
-            throw std::runtime_error("Erreur de chargement de l'image : " + cheminImage);
+            chemin_image = CHEMIN_IMAGE_JOUEUR1_RIEN_GAUCHE;
+        if (!texture.loadFromFile(chemin_image)) {
+            throw std::runtime_error("Erreur de chargement de l'image : " + chemin_image);
         }
         sprite.setTexture(texture);
         sprite.setTextureRect(sf::IntRect(0, 0,35, 81));
@@ -91,6 +91,6 @@ void Personnage::update(sf::Vector2f velocity){
     }
 
 std::string Personnage::toString(){
-        std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Chemin de l'image du joueur : " + cheminImage + "\n" + "Direction du joueur : " + std::to_string(direction) + "\n";
+        std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Chemin de l'image du joueur : " + chemin_image + "\n" + "Direction du joueur : " + std::to_string(direction) + "\n" + "Taille du joueur : " + std::to_string(taille.largeur) + " " + std::to_string(taille.hauteur) + "\n";
         return s;
     };

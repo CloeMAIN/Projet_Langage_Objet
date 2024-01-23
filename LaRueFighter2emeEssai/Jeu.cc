@@ -1,3 +1,4 @@
+#pragma once
 #include "Jeu.hh"
 #include "Personnage.hh"
 #include "InputUser.hh"
@@ -65,11 +66,11 @@ int Jeu::lancer(Afficheur* afficheur)
                     blockjoueur2 = true;
                     clock2.restart();
                 }
-                else if (event.key.code == sf::Keyboard::Up && joueur2.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) { 
+                else if (event.key.code == sf::Keyboard::Up && joueur2.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) { 
                     // Si la touche haut est pressée et que le joueur2 est sur le sol
                     velocityJoueur2.y = VITESSE_JOUEUR1_SAUT; // Définir la vélocité sur la vitesse de saut 
                 }
-                else if (event.key.code == sf::Keyboard::Z && joueur1.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) { 
+                else if (event.key.code == sf::Keyboard::Z && joueur1.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) { 
                     // Si la touche Z est pressée et que le joueur1 est sur le sol
                     velocityJoueur1.y = VITESSE_JOUEUR1_SAUT; // Définir la vélocité sur la vitesse de saut 
                 }
@@ -94,10 +95,10 @@ int Jeu::lancer(Afficheur* afficheur)
         }
 
         // Appliquer la gravité pour les deux joueurs
-        if (joueur1.getPosition().y + TAILLE_JOUEUR1_SPRITE < POSITION_SOL.y) {
+        if (joueur1.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
             velocityJoueur1.y += GRAVITE;
         }
-        if (joueur2.getPosition().y + TAILLE_JOUEUR1_SPRITE < POSITION_SOL.y) {
+        if (joueur2.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
             velocityJoueur2.y += GRAVITE;
         }
 
@@ -128,24 +129,24 @@ int Jeu::lancer(Afficheur* afficheur)
         // Empêcher les joueurs de sortir de l'écran
         if (joueur1.getPosition().x < 0) {
             joueur1.setPosition({0, joueur1.getPosition().y}); // Empêcher le joueur1 de sortir par la gauche
-        } else if (joueur1.getPosition().x > TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE) {
-            joueur1.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE, joueur1.getPosition().y}); // Empêcher le joueur1 de sortir par la droite
+        } else if (joueur1.getPosition().x > TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE.hauteur) {
+            joueur1.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE.hauteur, joueur1.getPosition().y}); // Empêcher le joueur1 de sortir par la droite
         }
 
         if (joueur2.getPosition().x < 0) {
             joueur2.setPosition({0, joueur2.getPosition().y}); // Empêcher le joueur2 de sortir par la gauche
-        } else if (joueur2.getPosition().x > TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE) {
-            joueur2.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE, joueur2.getPosition().y}); // Empêcher le joueur2 de sortir par la droite
+        } else if (joueur2.getPosition().x > TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE.hauteur) {
+            joueur2.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE.hauteur, joueur2.getPosition().y}); // Empêcher le joueur2 de sortir par la droite
         }
 
         // Empêcher les joueurs de passer à travers le sol
-        if (joueur1.getPosition().y >= POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) {
-            joueur1.setPosition({joueur1.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE}); // Placer le joueur1 sur le sol
+        if (joueur1.getPosition().y >= POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) {
+            joueur1.setPosition({joueur1.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur}); // Placer le joueur1 sur le sol
             velocityJoueur1.y = 0; // Arrêter la chute pour joueur1
         }
 
-        if (joueur2.getPosition().y >= POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE) {
-            joueur2.setPosition({joueur2.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE}); // Placer le joueur2 sur le sol
+        if (joueur2.getPosition().y >= POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) {
+            joueur2.setPosition({joueur2.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur}); // Placer le joueur2 sur le sol
             velocityJoueur2.y = 0; // Arrêter la chute pour joueur2
         }
 
