@@ -94,3 +94,33 @@ std::string Personnage::toString(){
         std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Chemin de l'image du joueur : " + chemin_image + "\n" + "Direction du joueur : " + std::to_string(direction) + "\n" + "Taille du joueur : " + std::to_string(taille.largeur) + " " + std::to_string(taille.hauteur) + "\n";
         return s;
     };
+
+ElementJeu Personnage::attaque(Action action){
+    ElementJeu element;
+        if(action == Action::Poing){
+            element.setTaille(TAILLE_COUP_POING);
+            element.setDirection(direction);
+            if (direction == Direction::GAUCHE){
+                element.setPosition({position.x - TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING});
+                element.setCheminImage(CHEMIN_IMAGE_JOUEUR1_POING_GAUCHE);
+            }
+            else{
+                element.setPosition({position.x + TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING} );
+                element.setCheminImage(CHEMIN_IMAGE_JOUEUR1_POING_DROITE);
+            }
+        }
+        else if(action == Action::Pied){
+            element.setTaille(TAILLE_COUP_PIED);
+            element.setDirection(direction);
+            if (direction == Direction::GAUCHE){
+                element.setPosition({position.x - TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
+                element.setCheminImage(CHEMIN_IMAGE_JOUEUR1_PIED_GAUCHE);
+            }
+            else{
+                element.setPosition({position.x + TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED} );
+                element.setCheminImage(CHEMIN_IMAGE_JOUEUR1_PIED_DROITE);
+            }
+        }                           
+        
+        return element;
+    };

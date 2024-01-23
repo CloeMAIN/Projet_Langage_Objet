@@ -6,7 +6,7 @@
 #include "constant.hh"
 
 enum Action {
-    Droite,Gauche,SautGauche,SautDroit,Rien
+    Droite,Gauche,SautGauche,SautDroit,Rien, Poing, Pied
 };
 class Personnage : public ElementJeu {
 
@@ -33,6 +33,7 @@ public:
     void maj(Action action);
 
     std::string toString();
+    ElementJeu attaque(Action action);
 
     
 };

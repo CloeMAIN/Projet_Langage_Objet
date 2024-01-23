@@ -123,5 +123,11 @@ int main(){
     std::cout << "Contact J1 :" << joueur1.contact(joueur2)  << std::endl;
     std::cout << "Contact J2 :" << joueur2.contact(joueur1) << "\n"<< std::endl;
 
-    return 0;
+
+    std::cout << "------------ TEST D'ATTAQUE -------------" << std::endl;
+    joueur1.setPosition({200.0, 200.0});
+    ElementJeu e = joueur1.attaque(Action::Poing);
+    std::cout << "Joueur1 :" << "\n" << joueur1.toString() << std::endl;
+    std::cout << "Element :" << "\nTaille :" << e.getTaille().hauteur << e.getTaille().largeur << "\nPosition :" << e.getPosition().x << e.getPosition().y << "\nDirection :" << e.getDirection() << "\nCheminImage :" << e.getCheminImage() << std::endl;
+
 }

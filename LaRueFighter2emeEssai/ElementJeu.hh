@@ -43,6 +43,7 @@ public:
     Direction getDirection() const {return direction;}
     void setDirection(Direction d){direction = d;}
     void setTaille(Taille t){taille = t;}
+    void setCheminImage(std::string chemin){chemin_image = chemin;}
     float distance(const ElementJeu& b)const;
     bool contact(const ElementJeu& b) const;
 };

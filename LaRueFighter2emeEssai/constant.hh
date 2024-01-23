@@ -34,6 +34,10 @@ const Taille TAILLE_JOUEUR1_SPRITE = {2*35, 2*82};
 const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL- TAILLE_JOUEUR1_SPRITE.hauteur};
 const float VITESSE_JOUEUR1 = 25;
 const float VITESSE_JOUEUR1_SAUT = -12.0f;
+const float DECALAGE_Y_PIED = 20;
+const float DECALAGE_Y_POING = 30;
+const Taille TAILLE_COUP_POING = {20, 20};
+const Taille TAILLE_COUP_PIED = {20, 20};
 
 
 //Commandes Joueur1
@@ -114,6 +118,11 @@ const std::string CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE("images/Fighter/Idle_Right.pn
 const std::string CHEMIN_IMAGE_JOUEUR1_DROITE("images/Fighter/Walk_Right.png");
 const std::string CHEMIN_IMAGE_JOUEUR1_GAUCHE("images/Fighter/Walk_Left.png");
 const std::string CHEMIN_IMAGE_JOUEUR2("../images/Joueur2.jpg");
+const std::string CHEMIN_IMAGE_JOUEUR1_POING_DROITE("images/Fighter/Punch_Right.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_POING_GAUCHE("images/Fighter/Punch_Left.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_PIED_DROITE("images/Fighter/Kick_Right.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_PIED_GAUCHE("images/Fighter/Kick_Left.png");
+
 const std::string CHEMIN_BOUTON_RETOUR("../images/Home.jpg");
 const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");
 const std::string CHEMIN_BACKGROUND_ROUND1("../images/Round2.jpg");
