@@ -84,7 +84,7 @@ void Personnage::maj(Action action){
 
 }
 
-void Personnage::update(sf::Vector2f velocity){
+void Personnage::update(){
         sprite.move(velocity);
         position.x += velocity.x;
         position.y += velocity.y;

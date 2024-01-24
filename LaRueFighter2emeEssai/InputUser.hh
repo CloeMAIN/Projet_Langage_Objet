@@ -17,36 +17,13 @@ struct EtatJoueur {
 };
 
 class InputUser {
-private:
-    Commande CommandeJ1;
-    Action actionJ1;
-    Commande CommandeJ2;
-    Action actionJ2;
-
 public:
+    // ... (autres membres et méthodes)
+    
     InputUser();
     ~InputUser();
 
-    /* Getters */
-
-    Commande getCommandeJ1() const { return CommandeJ1; }
-    Commande getCommandeJ2() const { return CommandeJ2; }
-    Action getActionJ1(){return actionJ1;};
-    Action getActionJ2(){return actionJ2;};
-
-
-    /* Setter */
-
-    void setActionJ1(Action action){actionJ1=action;};
-    void setActionJ2(Action action){actionJ2=action;};
-
-    /* Méthode */
-
-    Action getOuputJ1(sf::Keyboard::Key key); 
-    Action getOuputJ2(sf::Keyboard::Key key); 
-
-    std::string str();
-
+    void gererEvenements(sf::RenderWindow* window, Personnage& joueur1, Personnage& joueur2);
 
 };
 
