@@ -29,6 +29,7 @@ public:
     /* Méthode */
     void majJoueurs(InputUser inputUser);
     void majProjectiles(double deltaTime);
+    void empecherSortie();
 };
 
 

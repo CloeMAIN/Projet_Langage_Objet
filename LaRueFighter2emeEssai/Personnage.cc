@@ -60,7 +60,7 @@ void Personnage::mouvement(){
             throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Droite"].second);
         sprite.setTexture(texture);
         sprite.setScale(i*2.f, 2.f);
-        int xTexture = (int)sprite.getPosition().x / 35 % 8;
+        int xTexture = (int)position.x / 35 % 8;
         xTexture = xTexture * 35;
         sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
         sprite.move(i*VITESSE_JOUEUR1,0);
@@ -72,7 +72,7 @@ void Personnage::mouvement(){
             throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Saut"].second);
         sprite.setTexture(texture);
         sprite.setScale(i*2.f, 2.f);
-        int xTexture = (int)sprite.getPosition().x / 35 % 8;
+        int xTexture = (int)position.x / 35 % 8;
         xTexture = xTexture * 35;
         sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
         update();
@@ -96,7 +96,7 @@ std::string Personnage::toString(){
 
 void Personnage::update_attaque(){
     int i = 1;
-    if(Direction == Direction::GAUCHE)
+    if(direction == Direction::GAUCHE)
         i= -1;
     ElementJeu element;
         if(etatPlusChemin["Attaque1"].first){

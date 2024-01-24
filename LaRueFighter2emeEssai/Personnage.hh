@@ -25,6 +25,7 @@ private:
         {"Attaque2", {false, ""}},
         {"Projectile", {false, ""}}
     };// Etat du personnage
+    sf::Vector2f velocity;
 public:
     // Constructeurs et destructeur
     Personnage();
@@ -35,16 +36,22 @@ public:
     int getVie() const { return vie; }
     sf::Sprite getSprite() const { return sprite; }
     sf::Texture getTexture() const { return texture; }
+    sf::Vector2f getVelocity() const { return velocity; }
     ElementJeu getAttaque() const { return attaque; }
     std::map<std::string , std::pair< bool, std::string>> getEtat() const { return etatPlusChemin; }
 
     // Méthodes de modification
-    void setVie(int vie) { this->vie = vie; }
-    void update(sf::Vector2f velocity);
     void setEtat(std::string cle, bool new_val) { this->etatPlusChemin[cle].first = new_val; }
     void setCheminImage(std::string cle, std::string new_val) { this->etatPlusChemin[cle].second = new_val; }
+
+    // Méthodes de modification
+    void setVie(int vie) { this->vie = vie; }
+    void setVelocityX(float x){ this->velocity.x = x;}
+    void setVelocityY(float y){ this->velocity.y = y;}
+    void update();
+
     /* Méthode */
-    void mouvement(sf::Vector2f velocity);
+    void mouvement();
 
     std::string toString();
     void update_attaque();

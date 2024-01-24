@@ -3,79 +3,96 @@
 #include <sstream>
 
 
-InputUser::InputUser() {
-    CommandeJ1.Droite = sf::Keyboard::D;
-    CommandeJ1.Gauche = sf::Keyboard::Q;
+InputUser::InputUser(){
 
-    CommandeJ2.Droite = sf::Keyboard::Right;
-    CommandeJ2.Gauche = sf::Keyboard::Left;
-    
 }
 
 InputUser::~InputUser() {
     // Aucune allocation dynamique, pas besoin de libérer la mémoire ici
 }
 
+// Dans la classe InputUser (implémentation dans le .cpp)
+void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, Personnage& joueur2) {
+    sf::Event event;
+    while (window->pollEvent(event)) {
+        /* Gestion des cliques */
+        if (event.type == sf::Event::KeyPressed) {
+            sf::Keyboard::Key key = event.key.code;
+            std::cout << "Touche enfoncée : " << key << std::endl;
 
-Action InputUser::getOuputJ1(sf::Keyboard::Key key) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) // Stop d'urgence avec escape
+            {
+                window->close();
+            }
+        
+            //Gestion des sauts pour les deux joueurs
+            
+            if (event.key.code == sf::Keyboard::Z && joueur1.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) { 
+                // Si la touche Z est pressée et que le joueur1 est sur le sol
+                joueur1.setVelocityY(VITESSE_JOUEUR1_SAUT); // Définir la vélocité sur la vitesse de saut
+                joueur1.setEtat("Sauter", true);
+                joueur1.setEtat("Rien", false);
+                
+            }
+            if (event.key.code == sf::Keyboard::Up && joueur2.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) { 
+                // Si la touche haut est pressée et que le joueur2 est sur le sol
+                joueur2.setVelocityY(VITESSE_JOUEUR1_SAUT); // Définir la vélocité sur la vitesse de saut
+                joueur2.setEtat("Sauter", true);
+                joueur2.setEtat("Rien", false);
+                    }
 
-    // Logique pour déterminer l'action en fonction de la touche (key)
-    if (key == CommandeJ1.Droite) {
-        actionJ1 = Action::Droite;
-    } else if (key == CommandeJ1.Gauche) {
-        actionJ1 = Action::Gauche;
-    } else {
-        actionJ1 = Action::Rien;
-    };
+           
+            if (sf::Keyboard::isKeyPressed(TOUCHE_DEGAT_J1)){
+                joueur1.setVie(joueur1.getVie()-5);
+            }
+            if (sf::Keyboard::isKeyPressed(TOUCHE_DEGAT_J2)){
+                joueur2.setVie(joueur2.getVie()-5);
 
-    return actionJ1;
-}
-
-Action InputUser::getOuputJ2(sf::Keyboard::Key key) {
-
-    if (key == CommandeJ2.Droite) {
-        actionJ2 = Action::Droite;
-    } else if (key == CommandeJ2.Gauche) {
-        actionJ2 = Action::Gauche;
-    }else{
-        actionJ2 = Action::Rien;
-    };
-
-    return actionJ2;
-}
-
-std::string InputUser::str() {
-    std::ostringstream output;
-
-    // Écrire l'état du joueur J1 dans l'objet std::ostringstream
-    output << "Action J1: ";
-    switch (actionJ1) {
-        case Droite:
-            output << "Droite";
-            break;
-        case Gauche:
-            output << "Gauche";
-            break;
-        // Ajoutez d'autres cas pour d'autres actions si nécessaire
+            }
+            
+        }
     }
 
-    output << std::endl;
+    // Appliquer la gravité pour les deux joueurs
+        if (joueur1.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
+            joueur1.setVelocityY(joueur1.getVelocity().y + GRAVITE);
+        }
+        if (joueur2.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
+            joueur2.setVelocityY(joueur2.getVelocity().y + GRAVITE);
+        }
 
-    // Écrire l'état du joueur J2 dans l'objet std::ostringstream
-    output << "Action J2: ";
-    switch (actionJ2) {
-        case Droite:
-            output << "Droite";
-            break;
-        case Gauche:
-            output << "Gauche";
-            break;
-        // Ajoutez d'autres cas pour d'autres actions si nécessaire
-    }
+        //Joueur 1 Avancer
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {//Gauche
+            joueur1.setVelocityX(-5.0f);
+            joueur1.setEtat("Avancer", true);
+            joueur1.setEtat("Rien", false);
+            joueur1.setDirection(Direction::GAUCHE);
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {//Droite
+            joueur1.setVelocityX(5.0f);
+            joueur1.setEtat("Avancer", true);
+            joueur1.setEtat("Rien", false);
+            joueur1.setDirection(Direction::DROITE);
+        } else {
+            joueur1.setVelocityX(0.0f);
+            joueur1.setEtat("Avancer", false);
+            joueur1.setEtat("Rien", true);
+        }
 
-    output << std::endl;
+        // Joueur 2 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {//Gauche
+            joueur2.setVelocityX(-5.0f);
+            joueur2.setEtat("Avancer", true);
+            joueur2.setEtat("Rien", false);
+            joueur2.setDirection(Direction::GAUCHE);
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { //Droite
+            joueur2.setVelocityX(5.0f);
+            joueur2.setEtat("Avancer", true);
+            joueur2.setEtat("Rien", false);
+            joueur2.setDirection(Direction::DROITE);
+        } else {
+            joueur2.setVelocityX(0.0f);
+            joueur2.setEtat("Avancer", false);
+            joueur2.setEtat("Rien", true);
+            }
 
-    // Renvoyer la chaîne de caractères construite
-    return output.str();
 }
-
