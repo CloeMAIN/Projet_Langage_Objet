@@ -4,6 +4,7 @@
 #include <string>
 #include "ElementJeu.hh"
 #include "constant.hh"
+#include <map>
 
 enum Action {
     Droite,Gauche,SautGauche,SautDroit,Rien, Poing, Pied
@@ -14,6 +15,14 @@ private:
     int vie;
     sf::Texture texture;     // Ajout de la texture
     sf::Sprite sprite;       // Ajout du sprite
+    std::map<std::string , bool> etat {
+        {"Haut", false},
+        {"Droite", false},
+        {"Gauche", false},
+        {"Attaque1", false},
+        {"Attaque2", false},
+        {"Projectile", false}
+    };// Etat du personnage
 public:
     // Constructeurs et destructeur
     Personnage();
