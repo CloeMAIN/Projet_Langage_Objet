@@ -53,13 +53,6 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
         }
     }
 
-    // Appliquer la gravité pour les deux joueurs
-        if (joueur1.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
-            joueur1.setVelocityY(joueur1.getVelocity().y + GRAVITE);
-        }
-        if (joueur2.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
-            joueur2.setVelocityY(joueur2.getVelocity().y + GRAVITE);
-        }
 
         //Joueur 1 Avancer
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {//Gauche

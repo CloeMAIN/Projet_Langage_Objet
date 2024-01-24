@@ -52,6 +52,7 @@ public:
 
     /* Méthode */
     void mouvement();
+    void appliquerGravite();
 
     std::string toString();
     void update_attaque();

@@ -99,12 +99,21 @@ int Jeu::lancer(Afficheur* afficheur)
         //     blockjoueur2 = false;
         // }
 
+        // Appliquer la gravité pour les deux joueurs
+        if (joueur1.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
+            std::cout <<" GRAVITE APPLIED" << std::endl;
+            joueur1.setVelocityY(joueur1.getVelocity().y + GRAVITE);
+        }
+        if (joueur2.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
+            joueur2.setVelocityY(joueur2.getVelocity().y + GRAVITE);
+        }
 
         // Mettre à jour la position des joueurs
+        empecherSortie();
         joueur1.mouvement();
         joueur2.mouvement();
 
-        empecherSortie();
+        
 
         // Afficher les positions en console
         std::cout << "Position Joueur1 - X: " << joueur1.getPosition().x << ", Y: " << joueur1.getPosition().y << std::endl;

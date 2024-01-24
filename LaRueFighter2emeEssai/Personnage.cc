@@ -43,6 +43,7 @@ Personnage::~Personnage()
 
 void Personnage::mouvement(){
     int i = 1;
+    appliquerGravite();
     if(direction == Direction::GAUCHE){
         i =-1;
     }
@@ -128,3 +129,10 @@ void Personnage::update_attaque(){
         }    
         attaque = element;
     };
+
+void Personnage::appliquerGravite(){
+    if (position.y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
+        velocity.y += GRAVITE;
+        update();
+    }
+}
