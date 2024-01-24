@@ -42,58 +42,69 @@ Personnage::~Personnage()
 }
 
 void Personnage::mouvement(){
-    int i = 1;
-    appliquerGravite();
+    int i = 1; // Variable pour gérer la direction du personnage (1 pour droite, -1 pour gauche)
+    appliquerGravite(); // Appelle la fonction pour appliquer la gravité au personnage
+
+    // Vérifie la direction du personnage
     if(direction == Direction::GAUCHE){
-        i =-1;
+        i =-1; // Si la direction est gauche, la variable i est mise à -1
     }
 
+    // Si l'état du personnage est "Rien"
     if(etatPlusChemin["Rien"].first){
+        // Charge l'image correspondante
         if (!texture.loadFromFile(etatPlusChemin["Rien"].second))
             throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Rien"].second);
         sprite.setTexture(texture);
         sprite.setTextureRect(sf::IntRect(0, 0,35, 81));
-        sprite.setScale(i*2.f, 2.f);
+        sprite.setScale(i*2.f, 2.f); // Ajuste l'échelle en fonction de la direction
     }
-    //FAIRE LES CONSTANTE DE TAILLE ET DE NOMBRE D4IMAGE SELON L'ACTION
+    // Si l'état du personnage est "Avancer"
     else if(etatPlusChemin["Avancer"].first){
+        // Charge l'image correspondante
         if (!texture.loadFromFile(etatPlusChemin["Avancer"].second)) 
             throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Droite"].second);
         sprite.setTexture(texture);
-        sprite.setScale(i*2.f, 2.f);
-        int xTexture = (int)position.x / 35 % 8;
+        sprite.setScale(i*2.f, 2.f); // Ajuste l'échelle en fonction de la direction
+        int xTexture = (int)position.x / 35 % 8; // Calcul de la position X de la texture à afficher
         xTexture = xTexture * 35;
         sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
-        sprite.move(i*VITESSE_JOUEUR1,0);
+        sprite.move(i*VITESSE_JOUEUR1,0); // Déplacement du personnage
         position.x = position.x + i*VITESSE_JOUEUR1; 
     }
 
+    // Si l'état du personnage est "Saut"
     if(etatPlusChemin["Saut"].first){ 
+        // Charge l'image correspondante
         if (!texture.loadFromFile(etatPlusChemin["Saut"].second)) 
             throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Saut"].second);
         sprite.setTexture(texture);
-        sprite.setScale(i*2.f, 2.f);
-        int xTexture = (int)position.x / 35 % 8;
+        sprite.setScale(i*2.f, 2.f); // Ajuste l'échelle en fonction de la direction
+        int xTexture = (int)position.x / 35 % 8; // Calcul de la position X de la texture à afficher
         xTexture = xTexture * 35;
         sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
-        update();
+        update(); // Appelle la fonction de mise à jour du personnage
     }
 }
 
 void Personnage::update(){
-        sprite.move(velocity);
-        position.x += velocity.x;
-        position.y += velocity.y;
-    }
+    sprite.move(velocity); // Déplace le personnage en fonction de sa vélocité
+    position.x += velocity.x; // Met à jour la position X du personnage
+    position.y += velocity.y; // Met à jour la position Y du personnage
+}
 
 std::string Personnage::toString(){
-        std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Direction du joueur : " + std::to_string(direction) + "\n" + "Taille du joueur : " + std::to_string(taille.largeur) + " " + std::to_string(taille.hauteur) + "\n";
-        s += "Etat du joueur : \n";
-        for (auto const& x : etatPlusChemin) {
-            s += x.first + " : " + std::to_string(x.second.first) + x.second.second + "\n";
-        }
-        return s;
-    };
+    // Crée une chaîne de caractères décrivant l'état du personnage
+    std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Direction du joueur : " + std::to_string(direction) + "\n" + "Taille du joueur : " + std::to_string(taille.largeur) + " " + std::to_string(taille.hauteur) + "\n";
+    s += "Etat du joueur : \n";
+    
+    // Ajoute les informations sur chaque état du personnage à la chaîne de caractères
+    for (auto const& x : etatPlusChemin) {
+        s += x.first + " : " + std::to_string(x.second.first) + x.second.second + "\n";
+    }
+    return s; // Renvoie la chaîne de caractères représentant l'état du personnage
+};
+
 
 void Personnage::update_attaque(){
     int i = 1;

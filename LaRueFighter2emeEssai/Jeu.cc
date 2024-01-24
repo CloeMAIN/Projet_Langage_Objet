@@ -151,22 +151,30 @@ void Jeu::empecherSortie(){
             joueur1.setPosition({0, joueur1.getPosition().y}); // Empêcher le joueur1 de sortir par la gauche
         } else if (joueur1.getPosition().x > TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE.hauteur) {
             joueur1.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE.hauteur, joueur1.getPosition().y}); // Empêcher le joueur1 de sortir par la droite
+            joueur1.getSprite().setPosition({joueur1.getPosition().x,joueur1.getPosition().y}); // Placer le joueur1 sur le sol
+
         }
 
         if (joueur2.getPosition().x < 0) {
             joueur2.setPosition({0, joueur2.getPosition().y}); // Empêcher le joueur2 de sortir par la gauche
         } else if (joueur2.getPosition().x > TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE.hauteur) {
             joueur2.setPosition({TAILLE_FENETRE.x - TAILLE_JOUEUR1_SPRITE.hauteur, joueur2.getPosition().y}); // Empêcher le joueur2 de sortir par la droite
+            joueur2.getSprite().setPosition({joueur2.getPosition().x,joueur2.getPosition().y}); // Placer le joueur1 sur le sol
+
         }
 
         // Empêcher les joueurs de passer à travers le sol
         if (joueur1.getPosition().y >= POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) {
             joueur1.setPosition({joueur1.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur}); // Placer le joueur1 sur le sol
             joueur1.setVelocityY(0); // Arrêter la chute pour joueur1
+            joueur1.getSprite().setPosition({joueur1.getPosition().x,joueur1.getPosition().y}); // Placer le joueur1 sur le sol
+
         }
 
         if (joueur2.getPosition().y >= POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) {
             joueur2.setPosition({joueur2.getPosition().x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur}); // Placer le joueur2 sur le sol
+            //placer le sprite pareil
+            joueur2.getSprite().setPosition({joueur2.getPosition().x,joueur2.getPosition().y});
             joueur2.setVelocityY(0); // Arrêter la chute pour joueur2
         }
 

@@ -24,7 +24,11 @@ public:
     ~InputUser();
 
     void gererEvenements(sf::RenderWindow* window, Personnage& joueur1, Personnage& joueur2);
-
+    void checkRien(Personnage& joueur);
+    void checkDegat(Personnage& joueur);
+    void checkGauche(Personnage& joueur);
+    void checkDroite(Personnage& joueur);
+    void checkSaut(Personnage& joueur);
 };
 
 
