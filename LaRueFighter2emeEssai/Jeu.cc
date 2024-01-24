@@ -1,4 +1,3 @@
-#pragma once
 #include "Jeu.hh"
 #include "Personnage.hh"
 #include "InputUser.hh"
@@ -184,3 +183,8 @@ void Jeu::majProjectiles(double deltaTime){
         }
     }
 }
+
+
+// void Jeu::maj(){
+
+// }

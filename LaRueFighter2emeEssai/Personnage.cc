@@ -5,17 +5,28 @@ Personnage::Personnage(/* args */)
 {
 }
 
-Personnage::Personnage(Point position, int vie, std::string chemin_image, Direction direction, Taille taille)
-    : vie(vie)
-
+Personnage::Personnage(Point position, int vie, std::vector<std::string> vecteurChemin, Direction direction, Taille taille)
+                        : vie(vie)
 {
-    if (!texture.loadFromFile(chemin_image)) {
-        throw std::runtime_error("Erreur de chargement de l'image : " + chemin_image);
+    //On enregistre les chemins des images dans map etat
+    int i = 0;
+    for(auto& chemin : etatPlusChemin){
+        chemin.second.second = vecteurChemin[i] ;
+        i++;
+    }
+
+    if (!texture.loadFromFile(etatPlusChemin["Rien"].second)) {
+        throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Rien"].second);
     }
 
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect(0, 0, 35, 81)); // Découper l'image en 8 colonnes et 1 ligne
-    sprite.setScale(2.f, 2.f); // Ajuster l'échelle (5.0f signifie 2 fois plus grand)
+    if (direction == Direction::GAUCHE){
+        sprite.setScale(-2.f, 2.f); // Ajuster l'échelle (5.0f signifie 2 fois plus grand)
+    }
+    else{
+        sprite.setScale(2.f, 2.f); // Ajuster l'échelle (5.0f signifie 2 fois plus grand)
+    }
     sprite.setPosition({position.x, position.y});
     taille.largeur = 35; 
     taille.hauteur = 81;
@@ -23,8 +34,6 @@ Personnage::Personnage(Point position, int vie, std::string chemin_image, Direct
     // Affichage des attributs du joueur
     std::cout << "Position du joueur : " << position.x << " " << position.y << std::endl;
     std::cout << "Vie du joueur : " << vie << std::endl;
-    std::cout << "Chemin de l'image du joueur : " << chemin_image << std::endl;
-
 }
 
 
@@ -32,95 +41,90 @@ Personnage::~Personnage()
 {
 }
 
-void Personnage::maj(Action action){
-    
-    if(action==Action::Droite){
-        chemin_image = CHEMIN_IMAGE_JOUEUR1_DROITE;
-        if (!texture.loadFromFile(chemin_image)) {
-            throw std::runtime_error("Erreur de chargement de l'image : " + chemin_image);
-        }
-
-        sprite.setTexture(texture);
-        int xTexture = (int)sprite.getPosition().x / 35 % 8;
-        xTexture = xTexture * 35;
-        sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
-        sprite.move(VITESSE_JOUEUR1,0);
-        position.x = position.x + VITESSE_JOUEUR1; 
-        setDirection(Direction::DROITE);
-
-    }else if(action==Action::Gauche){
-        chemin_image = CHEMIN_IMAGE_JOUEUR1_GAUCHE;
-        if (!texture.loadFromFile(chemin_image)) {
-            throw std::runtime_error("Erreur de chargement de l'image : " + chemin_image);
-        }
-        sprite.setTexture(texture);
-        int xTexture = (int)sprite.getPosition().x / 35 % 8;
-        xTexture = xTexture * 35;
-        sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
-        sprite.move(-VITESSE_JOUEUR1,0);
-        //std::cout << "Avant maj Gauche:" << position.x  << "\n" ;
-        position.x = position.x - VITESSE_JOUEUR1;
-        //std::cout << "Apres maj Gauche:" << position.x <<"\n" ;
-        setDirection(Direction::GAUCHE);
-
-
-    }else if(action==Action::Rien){
-        if(direction == Direction::DROITE)
-            chemin_image = CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE;
-        else
-            chemin_image = CHEMIN_IMAGE_JOUEUR1_RIEN_GAUCHE;
-        if (!texture.loadFromFile(chemin_image)) {
-            throw std::runtime_error("Erreur de chargement de l'image : " + chemin_image);
-        }
-        sprite.setTexture(texture);
-        sprite.setTextureRect(sf::IntRect(0, 0,35, 81));
-
-    }else if(action==Action::SautDroit){
-        //tant que y <500 on augmente 
-
-    }else if(action==Action::SautGauche){
-
+void Personnage::mouvement(){
+    int i = 1;
+    if(direction == Direction::GAUCHE){
+        i =-1;
     }
 
+    if(etatPlusChemin["Rien"].first){
+        if (!texture.loadFromFile(etatPlusChemin["Rien"].second))
+            throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Rien"].second);
+        sprite.setTexture(texture);
+        sprite.setTextureRect(sf::IntRect(0, 0,35, 81));
+        sprite.setScale(i*2.f, 2.f);
+    }
+    //FAIRE LES CONSTANTE DE TAILLE ET DE NOMBRE D4IMAGE SELON L'ACTION
+    else if(etatPlusChemin["Avancer"].first){
+        if (!texture.loadFromFile(etatPlusChemin["Avancer"].second)) 
+            throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Droite"].second);
+        sprite.setTexture(texture);
+        sprite.setScale(i*2.f, 2.f);
+        int xTexture = (int)sprite.getPosition().x / 35 % 8;
+        xTexture = xTexture * 35;
+        sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
+        sprite.move(i*VITESSE_JOUEUR1,0);
+        position.x = position.x + i*VITESSE_JOUEUR1; 
+    }
+
+    if(etatPlusChemin["Saut"].first){ 
+        if (!texture.loadFromFile(etatPlusChemin["Saut"].second)) 
+            throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Saut"].second);
+        sprite.setTexture(texture);
+        sprite.setScale(i*2.f, 2.f);
+        int xTexture = (int)sprite.getPosition().x / 35 % 8;
+        xTexture = xTexture * 35;
+        sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
+        update();
+    }
 }
 
-void Personnage::update(sf::Vector2f velocity){
+void Personnage::update(){
         sprite.move(velocity);
         position.x += velocity.x;
         position.y += velocity.y;
     }
 
 std::string Personnage::toString(){
-        std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Chemin de l'image du joueur : " + chemin_image + "\n" + "Direction du joueur : " + std::to_string(direction) + "\n" + "Taille du joueur : " + std::to_string(taille.largeur) + " " + std::to_string(taille.hauteur) + "\n";
+        std::string s = "Position du joueur : " + std::to_string(position.x) + " " + std::to_string(position.y) + "\n" + "Vie du joueur : " + std::to_string(vie) + "\n" + "Direction du joueur : " + std::to_string(direction) + "\n" + "Taille du joueur : " + std::to_string(taille.largeur) + " " + std::to_string(taille.hauteur) + "\n";
+        s += "Etat du joueur : \n";
+        for (auto const& x : etatPlusChemin) {
+            s += x.first + " : " + std::to_string(x.second.first) + x.second.second + "\n";
+        }
         return s;
     };
 
-ElementJeu Personnage::attaque(Action action){
+void Personnage::update_attaque(){
+    int i = 1;
+    if(Direction == Direction::GAUCHE)
+        i= -1;
     ElementJeu element;
-        if(action == Action::Poing){
+        if(etatPlusChemin["Attaque1"].first){
             element.setTaille(TAILLE_COUP_POING);
             element.setDirection(direction);
-            if (direction == Direction::GAUCHE){
-                element.setPosition({position.x - TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING});
-                element.setCheminImage(CHEMIN_IMAGE_JOUEUR1_POING_GAUCHE);
-            }
-            else{
-                element.setPosition({position.x + TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING} );
-                element.setCheminImage(CHEMIN_IMAGE_JOUEUR1_POING_DROITE);
-            }
+            if (direction == Direction::GAUCHE)
+                element.setPosition({position.x + i*TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING});
+            sprite.setTexture(texture);
+            sprite.setScale(i*2.f, 2.f);
+            int xTexture = (int)sprite.getPosition().x / 35 % 4; 
+            xTexture = xTexture * 35;
+            sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
+            sprite.move(i*VITESSE_JOUEUR1,0);
         }
-        else if(action == Action::Pied){
+        else if(etatPlusChemin["Attaque2"].first){
             element.setTaille(TAILLE_COUP_PIED);
             element.setDirection(direction);
-            if (direction == Direction::GAUCHE){
-                element.setPosition({position.x - TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
-                element.setCheminImage(CHEMIN_IMAGE_JOUEUR1_PIED_GAUCHE);
-            }
-            else{
-                element.setPosition({position.x + TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED} );
-                element.setCheminImage(CHEMIN_IMAGE_JOUEUR1_PIED_DROITE);
-            }
+            if (direction == Direction::GAUCHE)
+                element.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
+            sprite.setTexture(texture);
+            sprite.setScale(i*2.f, 2.f);
+            int xTexture = (int)sprite.getPosition().x / 35 % 4; 
+            xTexture = xTexture * 35;
+            sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
+            sprite.move(i*VITESSE_JOUEUR1,0);
         }                           
-        
-        return element;
+        else if(etatPlusChemin["Rien"].first){
+            element = nullptr;
+        }    
+        attaque = element;
     };

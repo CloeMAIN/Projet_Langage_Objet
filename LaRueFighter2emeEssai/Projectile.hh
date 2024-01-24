@@ -10,6 +10,8 @@ protected:
     float degat;
     double temps_de_vie;
     bool a_detruire = false;
+    std::string chemin_image;
+
 public:
     Projectile(Point position, float vitesse, float degat, float rayon, std::string chemin_image, Direction direction);
     Projectile() = default; 
@@ -24,6 +26,9 @@ public:
     void setTempsDeVie(double temps_de_vie) {this->temps_de_vie = temps_de_vie;};
     bool getADetruire() const {return a_detruire;};
     void setADetruire(bool a_detruire) {this->a_detruire = a_detruire;};
+    void setCheminImage(std::string chemin){chemin_image = chemin;}
+    std::string getCheminImage() const {return chemin_image;}
+
     virtual void deplacement(double deltaTime) = 0 ;
     std::string toString(); 
 };

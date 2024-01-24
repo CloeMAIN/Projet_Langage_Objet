@@ -1,12 +1,37 @@
 #include "ElementJeu.hh"
 #include <iostream>
 
-ElementJeu::ElementJeu(/* args */)
+ElementJeu::ElementJeu()
 {
+    position.x = 0;
+    position.y = 0;
+    taille.largeur = 0;
+    taille.hauteur = 0;
+    direction = Direction::DROITE;
 }
 
 ElementJeu::~ElementJeu()
 {
+}
+
+ElementJeu& ElementJeu::operator=(std::nullptr_t){
+    if (this != nullptr) {
+    position.x = 0;
+    position.y = 0;
+    taille.largeur = 0;
+    taille.hauteur = 0;
+    direction = Direction::DROITE;
+    }
+    return *this;
+}
+
+ElementJeu& ElementJeu::operator=(const ElementJeu& b){
+    position.x = b.getPosition().x;
+    position.y = b.getPosition().y;
+    taille.largeur = b.getTaille().largeur;
+    taille.hauteur = b.getTaille().hauteur;
+    direction = b.getDirection();
+    return *this;
 }
 
 float ElementJeu::distance(const ElementJeu& b)const

@@ -76,7 +76,7 @@ const Point POSITION_DEPART_DIRECT = {POSITION_DEPART_JOUEUR1.x + 20, POSITION_D
 const float VITESSE_ZIGZAG = 30;
 const float DEGAT_ZIGZAG = 5;
 const float RAYON_ZIGZAG = 5;
-const std::string CHEMIN_IMAGE_ZIGZAG = "images/projectile.jpg";
+const std::string CHEMIN_IMAGE_ZIGZAG =  "images/projectile.jpg";
 const double AMPLITUDE_ZIGZAG = 100;
 const double ANGLE_TIR_ZIGZAG = 1;
 const double FREQUENCE_ZIGZAG = 3;
@@ -113,15 +113,11 @@ const std::string CHEMIN_BOUTON_COMMANDES("images/Commandes.jpg");
 const std::string CHEMIN_BACKGROUND_COMMANDES("images/BackgroundCommandes.jpg");
 
 
-const std::string CHEMIN_IMAGE_JOUEUR1_RIEN_GAUCHE("images/Fighter/Idle_Left.png");
-const std::string CHEMIN_IMAGE_JOUEUR1_RIEN_DROITE("images/Fighter/Idle_Right.png");
-const std::string CHEMIN_IMAGE_JOUEUR1_DROITE("images/Fighter/Walk_Right.png");
-const std::string CHEMIN_IMAGE_JOUEUR1_GAUCHE("images/Fighter/Walk_Left.png");
-const std::string CHEMIN_IMAGE_JOUEUR2("../images/Joueur2.jpg");
-const std::string CHEMIN_IMAGE_JOUEUR1_POING_DROITE("images/Fighter/Punch_Right.png");
-const std::string CHEMIN_IMAGE_JOUEUR1_POING_GAUCHE("images/Fighter/Punch_Left.png");
-const std::string CHEMIN_IMAGE_JOUEUR1_PIED_DROITE("images/Fighter/Kick_Right.png");
-const std::string CHEMIN_IMAGE_JOUEUR1_PIED_GAUCHE("images/Fighter/Kick_Left.png");
+const std::string CHEMIN_IMAGE_JOUEUR1_RIEN ="images/Fighter/Idle_Left.png";
+const std::string CHEMIN_IMAGE_JOUEUR1_DROITE = "images/Fighter/Walk_Right.png";
+const std::string CHEMIN_IMAGE_JOUEUR1_SAUT = "images/Fighter/Saut.png";
+const std::string CHEMIN_IMAGE_JOUEUR1_POING_DROITE = "images/Fighter/Fist.png";
+const std::string CHEMIN_IMAGE_JOUEUR1_PIED_DROITE = "images/Fighter/Foot.png";
 
 const std::string CHEMIN_BOUTON_RETOUR("../images/Home.jpg");
 const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");

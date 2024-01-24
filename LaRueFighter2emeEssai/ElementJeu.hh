@@ -29,7 +29,7 @@ class ElementJeu
 {
 protected:
     Point position; 
-    std::string chemin_image;
+    
     Direction direction;
     Taille taille; 
 
@@ -39,13 +39,13 @@ public:
     Point getPosition() const {return position;}
     Taille getTaille() const {return taille;}
     void setPosition(Point p){position = p;}
-    std::string getCheminImage() const {return chemin_image;}
     Direction getDirection() const {return direction;}
     void setDirection(Direction d){direction = d;}
     void setTaille(Taille t){taille = t;}
-    void setCheminImage(std::string chemin){chemin_image = chemin;}
     float distance(const ElementJeu& b)const;
     bool contact(const ElementJeu& b) const;
+    ElementJeu& operator=(std::nullptr_t);
+    ElementJeu& operator=(const ElementJeu& b);
 };
 
 #endif // ELEMENTJEU_HH
