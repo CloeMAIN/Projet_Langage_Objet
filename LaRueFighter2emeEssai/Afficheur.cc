@@ -16,22 +16,19 @@ Afficheur::~Afficheur()
 }
 
 void Afficheur::afficher(const Personnage& joueur) {
-    // Met le personnage à sa position dans la window
-    // joueur.getSprite().setPosition({joueur.getPosition().x, joueur.getPosition().y});
-    // // Affiche le personnage
-    // window.draw(joueur.getSprite());
 
-    sf::RectangleShape pers(sf::Vector2f(joueur.getTaille().largeur, joueur.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
-    pers.setPosition(joueur.getPosition().x, joueur.getPosition().y); // Positionné au bas au milieu
-    pers.setFillColor(sf::Color::Blue);
-    window.draw(pers);
-    if(DEBUGGING_MODE){
-    //On affiche le point position du joueur sous la forme d'un cercle
-    sf::CircleShape cercle(10);
-    cercle.setPosition(joueur.getPosition().x, joueur.getPosition().y);
-    cercle.setFillColor(sf::Color::Red);
-    window.draw(cercle);
-    }
+    
+    // if(DEBUGGING_MODE){
+    // sf::RectangleShape pers(sf::Vector2f(joueur.getTaille().largeur, joueur.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
+    // pers.setPosition(joueur.getPosition().x, joueur.getPosition().y); // Positionné au bas au milieu
+    // pers.setFillColor(sf::Color::Blue);
+    // window.draw(pers);
+    // //On affiche le point position du joueur sous la forme d'un cercle
+    // sf::CircleShape cercle(10);
+    // cercle.setPosition(joueur.getPosition().x, joueur.getPosition().y);
+    // cercle.setFillColor(sf::Color::Red);
+    // window.draw(cercle);
+    // }
     for (Projectile* projectile : joueur.getListeProjectiles()) {
         afficher(*projectile);
     }
@@ -42,6 +39,33 @@ void Afficheur::afficher(const Personnage& joueur) {
     else if(joueur.getEtat()["Attaque2"].first){
         afficher(joueur.getAttaque());
     }
+
+    sf::Texture texture;
+
+    // Charge l'image correspondante
+    if (!texture.loadFromFile(joueur.getCheminImageActuelle())) 
+        throw std::runtime_error("Erreur de chargement de l'image : " + joueur.getCheminImageActuelle());
+
+    // log
+    //std::cout << "Chargement de l'image : " << joueur.getCheminImageActuelle() << std::endl;
+
+    sf::Sprite sprite = joueur.getSprite();
+    sprite.setTexture(texture);
+    sprite.setScale(2.f, 2.f); // Ajuste l'échelle en fonction de la direction
+
+    // Calcul de la position X de la texture à afficher
+    
+    int largeurImage = texture.getSize().x / joueur.getNbImageSprite(); //8
+    int xTexture = static_cast<int>(joueur.getPosition().x) / largeurImage % joueur.getNbImageSprite();
+    xTexture = xTexture * largeurImage;
+
+    sprite.setTextureRect(sf::IntRect(xTexture, 0, largeurImage, texture.getSize().y)); //82
+
+    // Met le personnage à sa position dans la window
+    sprite.setPosition({joueur.getPosition().x, joueur.getPosition().y});
+    // Affiche le personnage
+    window.draw(sprite);
+
     
 }
 

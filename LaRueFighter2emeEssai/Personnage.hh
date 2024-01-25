@@ -20,16 +20,18 @@ private:
     int vie;
     sf::Texture texture;     // Ajout de la texture
     sf::Sprite sprite;       // Ajout du sprite
+    int nbImageSprite;
     ElementJeu attaque ;
     std::list<Projectile*> listeProjectiles;
-    std::map<std::string , std::pair<bool, std::string>> etatPlusChemin {
-        {"Rien", {true, ""}},
-        {"Saut", {false, ""}},
-        {"Avancer", {false, ""}},
-        {"Attaque1", {false, ""}},
-        {"Attaque2", {false, ""}},
-        {"Projectile", {false, ""}}
-    };// Etat du personnage
+    std::string cheminImageActuelle;
+    std::map<std::string, std::pair<bool, std::pair<std::string, std::string>>> etatPlusChemin {
+        {"Rien", {true, {"", ""}}},
+        {"Avancer", {false, {"", ""}}},
+        {"Saut", {false, {"", ""}}},
+        {"Attaque1", {false, {"", ""}}},
+        {"Attaque2", {false, {"", ""}}},
+        {"Projectile", {false, {"", ""}}}
+    };
     sf::Vector2f velocity;
     bool block = false;
     sf::Clock clockProj ;
@@ -38,7 +40,7 @@ private:
 public:
     // Constructeurs et destructeur
     Personnage();
-    Personnage(Point position, int vie, std::vector<std::string> cheminsImages,  Direction direction, Taille taille);
+    Personnage(Point position, int vie, std::vector<std::pair<std::string,std::string>> vecteurChemin, Direction direction, Taille taille, std::string cheminActuel);
     ~Personnage();
 
     // Méthodes d'accès
@@ -47,16 +49,18 @@ public:
     sf::Texture getTexture() const { return texture; }
     sf::Vector2f getVelocity() const { return velocity; }
     ElementJeu getAttaque() const { return attaque; }
-    std::map<std::string , std::pair< bool, std::string>> getEtat() const { return etatPlusChemin; }
+    std::map<std::string , std::pair< bool, std::pair<std::string,std::string>>> getEtat() const { return etatPlusChemin; }
     bool getBlock() const { return block; }
     bool getBlockAtt() const { return blockAtt; }
     sf::Clock getClockProj(){return clockProj;}
     sf::Clock getClockAtt(){return clockAtt;}
     std::list<Projectile*> getListeProjectiles() const {return listeProjectiles;}
-
+    std::string getCheminImageActuelle()const { return cheminImageActuelle; }
+    int getNbImageSprite() const { return nbImageSprite; }
     // Méthodes de modification
     void setEtat(std::string cle, bool new_val) { this->etatPlusChemin[cle].first = new_val; }
-    void setCheminImage(std::string cle, std::string new_val) { this->etatPlusChemin[cle].second = new_val; }
+    //void setCheminImage(std::string cle, std::string new_val) { this->etatPlusChemin[cle].second = new_val; }
+
 
     // Méthodes de modification
     void setVie(int vie) { this->vie = vie; }
