@@ -76,25 +76,36 @@ void Personnage::mouvement(){
         sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
         sprite.move(i*VITESSE_JOUEUR1,0); // Déplacement du personnage
         position.x = position.x + i*VITESSE_JOUEUR1; 
+        //update();
     }
 
     // Si l'état du personnage est "Saut"
     if(etatPlusChemin["Saut"].first){ 
-        // std::cout<<"Saut" << std::endl;
-        // // Charge l'image correspondante
-        // if (!texture.loadFromFile(etatPlusChemin["Saut"].second)) 
-        //     throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Saut"].second);
-        // sprite.setTexture(texture);
-        // sprite.setScale(i*2.f, 2.f); // Ajuste l'échelle en fonction de la direction
-        // int xTexture = (int)position.x / 35 % 8; // Calcul de la position X de la texture à afficher
-        // xTexture = xTexture * 35;
-        // sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
+        std::cout<<"Saut" << std::endl;
+        // Charge l'image correspondante
+        if (!texture.loadFromFile(etatPlusChemin["Saut"].second)) 
+            throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Saut"].second);
+        sprite.setTexture(texture);
+        sprite.setScale(i*2.f, 2.f); // Ajuste l'échelle en fonction de la direction
+        int xTexture = (int)position.x / 35 % 8; // Calcul de la position X de la texture à afficher
+        xTexture = xTexture * 35;
+        sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
         sprite.move(0,VITESSE_JOUEUR1_SAUT);
-        update(); // Appelle la fonction de mise à jour du personnage
+        position = {sprite.getPosition().x,sprite.getPosition().y}; 
+        // mettre saut à false;
+        //update();
+        //appliquerGravite();
+        //update(); // Appelle la fonction de mise à jour du personnage
+        // à la fin du saut, remettre sau tà false
+        if(position.y + TAILLE_JOUEUR1_SPRITE.hauteur >= POSITION_SOL.y){
+            etatPlusChemin["Saut"].first = false;
+        }
+        
     }
 }
 
 void Personnage::update(){
+    std::cout << " Velocity " << " x: "<< velocity.x <<" y: "<<velocity.y << std::endl;
     sprite.move(velocity); // Déplace le personnage en fonction de sa vélocité
     position.x += velocity.x; // Met à jour la position X du personnage
     position.y += velocity.y; // Met à jour la position Y du personnage
@@ -166,6 +177,7 @@ void Personnage::appliquerGravite(){
         velocity.y += GRAVITE;
         update();
     }
+
 }
 
 void Personnage::GestionProjectileZigZag(){
