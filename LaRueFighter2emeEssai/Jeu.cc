@@ -110,12 +110,9 @@ int Jeu::lancer(Afficheur* afficheur)
 
         // Mettre à jour la position des joueurs
         empecherSortie();
-        // joueur1.mouvement();
-        // joueur2.mouvement();
-        joueur1.GestionProjectileLineaire();
-        joueur2.GestionProjectileZigZag();
-        joueur1.majProjectiles(DELTA_TIME);
-        joueur2.majProjectiles(DELTA_TIME);
+        joueur1.mouvement();
+        joueur2.mouvement();
+
 
         // Afficher les positions en console
         std::cout << "Position Joueur1 - X: " << joueur1.getPosition().x << ", Y: " << joueur1.getPosition().y << std::endl;

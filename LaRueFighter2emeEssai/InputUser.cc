@@ -30,6 +30,7 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
             
             if (event.key.code == sf::Keyboard::Z && joueur1.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) { 
                 checkSaut(joueur1);
+
                 
             }
             if (event.key.code == sf::Keyboard::Up && joueur2.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.hauteur) { 
@@ -43,40 +44,11 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
                 checkDegat(joueur2);
 
             }
-
-            //Gestion des projectiles pour les deux joueurs
-
-            if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR1) && !joueur1.getBlock()){
-                checkProjectile(joueur1);
-                joueur2.setBlock(true);
-                joueur1.setClockProj(joueur1.getClockProj().restart());
-            }
-
-            if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR2) && !joueur2.getBlock()){
-                checkProjectile(joueur2);
-                joueur2.setBlock(true);
-                joueur2.setClockProj(joueur2.getClockProj().restart());
-            }
-
-            //Gestion des attaques pour les deux joueurs
-            if (sf::Keyboard::isKeyPressed(TOUCHE_ATTAQUE1_JOUEUR1)){
-                checkAttaque1(joueur1);
-                joueur1.setClockAtt(joueur1.getClockAtt().restart());
-            }
-            if (sf::Keyboard::isKeyPressed(TOUCHE_ATTAQUE2_JOUEUR1)){
-                checkAttaque2(joueur1);
-                joueur1.setClockAtt(joueur1.getClockAtt().restart());
-
-            }
-            if (sf::Keyboard::isKeyPressed(TOUCHE_ATTAQUE1_JOUEUR2)){
-                checkAttaque1(joueur2);
-                joueur2.setClockAtt(joueur2.getClockAtt().restart());
-            }
-            if (sf::Keyboard::isKeyPressed(TOUCHE_ATTAQUE2_JOUEUR2)){
-                checkAttaque2(joueur2);
-                joueur2.setClockAtt(joueur2.getClockAtt().restart());
-                }
+            
+        }
     }
+
+
         //Joueur 1 Avancer
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {//Gauche
             checkGauche(joueur1);
@@ -87,7 +59,7 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
             checkRien(joueur1);
         }
 
-        // Joueur 2 Avancer
+        // Joueur 2 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {//Gauche
             checkGauche(joueur2);
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) { //Droite
@@ -96,11 +68,11 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
             checkRien(joueur2);
             }
 
-    }
 }
 
 void InputUser::checkSaut(Personnage& joueur){
         joueur.setVelocityY(VITESSE_JOUEUR1_SAUT); // Définir la vélocité sur la vitesse de saut
+        std::cout << "Check Saut" << std::endl;
         joueur.setEtat("Saut", true);
         joueur.setEtat("Rien", false);
 }
@@ -124,34 +96,10 @@ void InputUser::checkDroite(Personnage& joueur){
 }
 
 void InputUser::checkRien(Personnage& joueur){
-    joueur.setVelocityX(0.0f);
-    joueur.setEtat("Avancer", false);
-    joueur.setEtat("Rien", true);
-}
-
-void InputUser::checkAttaque1(Personnage& joueur){
-    joueur.setVelocityX(0.0f);
-    std::cout << "Attaque1" << std::endl;
-    joueur.setEtat("Avancer", false);
-    joueur.setEtat("Rien", false);
-    joueur.setEtat("Attaque1", true);
-}
-
-void InputUser::checkAttaque2(Personnage& joueur){
-    joueur.setVelocityX(0.0f);
-    std::cout << "Attaque2" << std::endl;
-    joueur.setEtat("Avancer", false);
-    joueur.setEtat("Rien", false);
-    joueur.setEtat("Attaque2", true);
-}
-
-void InputUser::checkProjectile(Personnage& joueur){
-    if(not(joueur.getBlock())){
+    if(!joueur.getEtat().at("Saut").first){
         joueur.setVelocityX(0.0f);
-        std::cout << "Projectile" << std::endl;
-        joueur.setEtat("Rien", false);
-        joueur.setEtat("Projectile", true);
-        joueur.setBlock(true);
-    
+        joueur.setEtat("Avancer", false);
+        joueur.setEtat("Saut", false);
+        joueur.setEtat("Rien", true);
     }
 }
