@@ -4,8 +4,13 @@
 #include <SFML/Graphics.hpp>
 #include "Personnage.hh"
 #include "constant.hh"
+#include "ElementJeu.hh"
+#include "Menu.hh"
+#include "Jeu.hh"
+#include <iostream>
 #include "Projectile.hh"
 
+class Menu;
 // Déclaration anticipée de la classe Jeu pour éviter la dépendance cyclique
 class Jeu;
 
@@ -24,8 +29,8 @@ class Afficheur
         /* Méthode */
         void afficher(const Personnage &joueur);
         void afficher(Jeu &jeu);
-        void afficherMenu();
-        void afficher(std::string cheminbouton, Point position, HitBox taille);
+        void afficher(Menu menu);
+        void afficher(std::string cheminbouton,HitBox taille, Point position);
         void afficher(std::string cheminBackground);
         void afficherSol();
         void afficher(const Projectile &projectile);

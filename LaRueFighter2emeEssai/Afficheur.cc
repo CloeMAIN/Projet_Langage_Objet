@@ -1,6 +1,4 @@
 #include "Afficheur.hh"
-#include "Jeu.hh"  // Ajoutez cette ligne pour inclure la définition complète de la classe Jeu
-#include <iostream>
 
 
 Afficheur::Afficheur(/* args */) : window(sf::VideoMode::getDesktopMode(), "Jeu", sf::Style::Fullscreen)
@@ -86,7 +84,7 @@ void Afficheur::afficher(Jeu& jeu) {
 }
 
 
-void Afficheur:: afficher(std::string cheminbouton, Point position, HitBox taille){
+void Afficheur:: afficher(std::string cheminbouton, HitBox taille, Point position){
 sf::Texture texture;
     texture.loadFromFile(cheminbouton);
     sf::Sprite bouton;
@@ -119,14 +117,14 @@ void Afficheur::afficherSol() {
 // }
 
 
-void Afficheur::afficherMenu(){
+void Afficheur::afficher(Menu menu){
     /* Affichage du background */
-    afficher(CHEMIN_BACKGROUND_MENU);
+    afficher(menu.getCheminBackgroundMenu()[0]);
     
     /*Affichage des différents boutons*/
-    afficher(CHEMIN_BOUTON_JOUER, POSITION_BOUTON_JOUER, TAILLE_BOUTON_JOUER);
-    afficher(CHEMIN_BOUTON_COMMANDES, POSITION_BOUTON_COMMANDES, TAILLE_BOUTON_COMMANDES);
-    afficher(CHEMIN_BOUTON_QUITTER, POSITION_BOUTON_QUITTER, TAILLE_BOUTON_QUITTER);
+    afficher(menu.getListeBoutons()[0].first, menu.getListeBoutons()[0].second.first, menu.getListeBoutons()[0].second.second);
+    afficher(menu.getListeBoutons()[1].first, menu.getListeBoutons()[1].second.first, menu.getListeBoutons()[1].second.second);
+    afficher(menu.getListeBoutons()[2].first, menu.getListeBoutons()[2].second.first, menu.getListeBoutons()[2].second.second);
     window.display();
 }
 

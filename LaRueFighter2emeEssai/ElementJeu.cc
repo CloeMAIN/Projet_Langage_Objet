@@ -17,10 +17,6 @@ ElementJeu::ElementJeu(Point position, Direction direction, Taille taille)
     this->taille = taille;
 }
 
-ElementJeu::~ElementJeu()
-{
-}
-
 ElementJeu& ElementJeu::operator=(std::nullptr_t){
     if (this != nullptr) {
     position.x = -100;
@@ -56,8 +52,6 @@ float ElementJeu::distance(const ElementJeu& b)const
     float centrexB;
     centrexA = position.x + taille.largeur/2;
     centrexB = b.getPosition().x + b.getTaille().largeur/2;
-    // std::cout << "Centre x A : " << centrexA << std::endl;
-    // std::cout << "Centre x B : " << centrexB << std::endl;
 
     //On calcul la distance entre les 2 centres
     float distance = abs(centrexA - centrexB);
@@ -65,7 +59,7 @@ float ElementJeu::distance(const ElementJeu& b)const
 }
 
 bool ElementJeu::contact(const ElementJeu& b) const{
-    // ON détermine l'élément le + petit : 
+    // On détermine l'élément le + petit : 
     ElementJeu petit = b;
     ElementJeu grand = *this;
     if(taille.hauteur < b.getTaille().hauteur){

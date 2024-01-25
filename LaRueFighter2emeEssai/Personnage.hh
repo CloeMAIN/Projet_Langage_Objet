@@ -18,8 +18,8 @@ class Personnage : public ElementJeu {
 
 private:
     float vie;
-    sf::Texture texture;     // Ajout de la texture
-    sf::Sprite sprite;       // Ajout du sprite
+    sf::Texture texture;
+    sf::Sprite sprite;       
     int nbImageSprite;
     ElementJeu attaque ;
     std::list<Projectile*> listeProjectiles;
@@ -40,7 +40,7 @@ private:
 public:
     // Constructeurs et destructeur
     Personnage(){};
-    Personnage(Point position, int vie, std::vector<std::pair<std::string,std::string>> vecteurChemin, Direction direction, Taille taille, std::string cheminActuel);
+    Personnage(Point position, float vie, std::vector<std::pair<std::string,std::string>> vecteurChemin, Direction direction, Taille taille, std::string cheminActuel);
     ~Personnage(){};
 
     // Méthodes d'accès

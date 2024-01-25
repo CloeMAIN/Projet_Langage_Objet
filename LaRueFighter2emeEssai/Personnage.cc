@@ -1,7 +1,7 @@
 #include "Personnage.hh"
 #include <iostream>
 
-Personnage::Personnage(Point position, int vie, std::vector<std::pair<std::string, std::string>> vecteurChemin, Direction direction, Taille taille, std::string cheminActuel)
+Personnage::Personnage(Point position, float vie, std::vector<std::pair<std::string, std::string>> vecteurChemin, Direction direction, Taille taille, std::string cheminActuel)
                         : ElementJeu(position, direction, taille), vie(vie), cheminImageActuelle(cheminActuel)
 {
     // Mettre les vecteurs de chemin dans etatPlusChemin
@@ -226,7 +226,6 @@ void Personnage::majProjectiles(double deltaTime){
 
 
 void Personnage::update_contact(Personnage& personnage){
-    std::cout << "Entrée contact" << std::endl;
     contact_projectile(personnage);
     contact_projectile();
     contact_attaque(personnage);
@@ -240,13 +239,11 @@ void Personnage::update_contact(Personnage& personnage){
 
 //On vérifie que les projectiles du joueur this ont touché le joueur personnage
 void Personnage::contact_projectile(Personnage& personnage){
-    std::cout << "Entrée contact_projectile" << std::endl;
     //On test que this n'est pas en contact avec un projectile de personnage en utilisant la fonction contact de ElementJeu
     for (auto it = listeProjectiles.begin(); it != listeProjectiles.end(); ) {
         Projectile* projectile = *it;
         //Si le projectile touche le personnage, on le supprime de la liste et on libère la mémoire
         if (projectile->contact(personnage)){
-            std::cout << "Contact" << std::endl;
             personnage.setVie(personnage.getVie() - projectile->getDegat());
             it = listeProjectiles.erase(it);  // La fonction erase() retourne le prochain itérateur valide
             delete projectile;
@@ -260,13 +257,11 @@ void Personnage::contact_projectile(Personnage& personnage){
 
 //On vérifie que les projectiles du joueur this ont touché le joueur this
 void Personnage::contact_projectile(){
-    std::cout << "Entrée contact_projectile" << std::endl;
     //On test que this n'est pas en contact avec un projectile de personnage en utilisant la fonction contact de ElementJeu
     for (auto it = listeProjectiles.begin(); it != listeProjectiles.end(); ) {
         Projectile* projectile = *it;
         //Si le projectile touche le personnage, on le supprime de la liste et on libère la mémoire
         if (projectile->contact(*this)){
-            std::cout << "Contact" << std::endl;
             vie = vie - projectile->getDegat();
             it = listeProjectiles.erase(it);  // La fonction erase() retourne le prochain itérateur valide
             delete projectile;

@@ -9,6 +9,8 @@
 #include "Projectile.hh"
 #include <list>
 
+class Afficheur;
+
 class Jeu
 {
     private:

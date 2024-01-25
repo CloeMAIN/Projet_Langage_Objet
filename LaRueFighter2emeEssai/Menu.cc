@@ -1,8 +1,5 @@
 
 #include "Menu.hh"
-#include "Afficheur.hh"
-#include <iostream>
-
 
 int Menu::lancer(Afficheur* afficheur){
 
@@ -29,22 +26,22 @@ int Menu::lancer(Afficheur* afficheur){
                 //si je clique sur le bouton jouer
                 if(event.mouseButton.button == sf::Mouse::Left){
                     //si le bouton jouer est cliqué, on return
-                    if (event.mouseButton.x >= TAILLE_BOUTON_JOUER.GaucheHaut.x && event.mouseButton.x <= TAILLE_BOUTON_JOUER.DroiteBas.x && event.mouseButton.y >= TAILLE_BOUTON_JOUER.GaucheHaut.y && event.mouseButton.y <= TAILLE_BOUTON_JOUER.DroiteBas.y){
-                        std::cout << "Jouer" << std::endl;
+                    if (event.mouseButton.x >= listeBoutons[0].second.first.GaucheHaut.x && event.mouseButton.x <= listeBoutons[0].second.first.DroiteBas.x && event.mouseButton.y >= listeBoutons[0].second.first.GaucheHaut.y && event.mouseButton.y <= listeBoutons[0].second.first.DroiteBas.y){
+                        // std::cout << "Jouer" << std::endl;
                         return 0;}
 
                     //else si je clique sur le bouton commandes
-                    else if (event.mouseButton.x >= TAILLE_BOUTON_COMMANDES.GaucheHaut.x && event.mouseButton.x <= TAILLE_BOUTON_COMMANDES.DroiteBas.x && event.mouseButton.y >= TAILLE_BOUTON_COMMANDES.GaucheHaut.y && event.mouseButton.y <= TAILLE_BOUTON_COMMANDES.DroiteBas.y){
-                        std::cout << "Commandes" << std::endl;
-                        afficheur->afficher(CHEMIN_BACKGROUND_COMMANDES);
+                    else if (event.mouseButton.x >= listeBoutons[1].second.first.GaucheHaut.x && event.mouseButton.x <= listeBoutons[1].second.first.DroiteBas.x && event.mouseButton.y >= listeBoutons[1].second.first.GaucheHaut.y && event.mouseButton.y <= listeBoutons[1].second.first.DroiteBas.y){
+                        // std::cout << "Commandes" << std::endl;
+                        afficheur->afficher(cheminBackgroundMenu[1]);
                         afficheur->getWindow()->display();
                         //On attend que l'utilisateur appuie sur la touche B pour revenir au menu
                         while(!sf::Keyboard::isKeyPressed(sf::Keyboard::B)){}
                         }
 
                     //else si je clique sur le bouton quitter
-                    else if (event.mouseButton.x >= TAILLE_BOUTON_QUITTER.GaucheHaut.x && event.mouseButton.x <= TAILLE_BOUTON_QUITTER.DroiteBas.x && event.mouseButton.y >= TAILLE_BOUTON_QUITTER.GaucheHaut.y && event.mouseButton.y <= TAILLE_BOUTON_QUITTER.DroiteBas.y){
-                        std::cout << "Quitter" << std::endl;
+                    else if (event.mouseButton.x >= listeBoutons[2].second.first.GaucheHaut.x && event.mouseButton.x <= listeBoutons[2].second.first.DroiteBas.x && event.mouseButton.y >= listeBoutons[2].second.first.GaucheHaut.y && event.mouseButton.y <= listeBoutons[2].second.first.DroiteBas.y){
+                        // std::cout << "Quitter" << std::endl;
                         afficheur->getWindow()->close();
                         return 2;}
 
@@ -52,16 +49,19 @@ int Menu::lancer(Afficheur* afficheur){
             }
         }
 
-        afficheur->afficherMenu();
+        afficheur->afficher(*this);
     }
     return 0;
 }
 
 
-Menu::Menu(/* args */)
+Menu::Menu(std::vector<std::string> cheminBackgroundMenu, std::vector<std::pair<std::string, std::pair<HitBox, Point>>> listeBoutons)
 {
     // Constructeur
-}
+    this->cheminBackgroundMenu = cheminBackgroundMenu;
+    this->listeBoutons = listeBoutons;
+    
+    }
 
 Menu::~Menu()
 {
