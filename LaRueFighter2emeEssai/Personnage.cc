@@ -105,7 +105,7 @@ void Personnage::mouvement(){
 }
 
 void Personnage::update(){
-    std::cout << " Velocity " << " x: "<< velocity.x <<" y: "<<velocity.y << std::endl;
+    // std::cout << " Velocity " << " x: "<< velocity.x <<" y: "<<velocity.y << std::endl;
     sprite.move(velocity); // Déplace le personnage en fonction de sa vélocité
     position.x += velocity.x; // Met à jour la position X du personnage
     position.y += velocity.y; // Met à jour la position Y du personnage
@@ -133,9 +133,9 @@ void Personnage::update_attaque(){
     if (!blockAtt){
         if(etatPlusChemin["Attaque1"].first){
             // std::cout << "Attaque 1 début" << std::endl;
-            element.setTaille(TAILLE_COUP_POING);
+            element.setTaille(TAILLE_ATTAQUE1);
             element.setDirection(direction);
-            element.setPosition({position.x + i*TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING});
+            element.setPosition({position.x + i*TAILLE_ATTAQUE1.largeur, position.y + DECALAGE_Y_POING});
             clockAtt.restart();
             blockAtt = true;
             // etatPlusChemin["Attaque1"].first = false;
@@ -143,9 +143,9 @@ void Personnage::update_attaque(){
         }
         else if(etatPlusChemin["Attaque2"].first){
             // std::cout << "Attaque2 début" << std::endl;
-            element.setTaille(TAILLE_COUP_PIED);
+            element.setTaille(TAILLE_ATTAQUE2);
             element.setDirection(direction);
-            element.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
+            element.setPosition({position.x + i*TAILLE_ATTAQUE2.largeur, position.y + DECALAGE_Y_PIED});
             // etatPlusChemin["Attaque2"].first = false;
             clockAtt.restart();
             blockAtt = true;
@@ -164,7 +164,7 @@ void Personnage::update_attaque(){
             }
         else{
             // std::cout << "Attaque : " << position.x << " " << position.y << std::endl;
-            attaque.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
+            attaque.setPosition({position.x + i*TAILLE_ATTAQUE2.largeur, position.y + DECALAGE_Y_PIED});
         }
     }
     
@@ -182,7 +182,9 @@ void Personnage::appliquerGravite(){
 
 void Personnage::GestionProjectileZigZag(){
     if(etatPlusChemin["Projectile"].first){
-        Projectile* projectile = new ProjectileZigZag({position.x+35, position.y + 41}, VITESSE_ZIGZAG, DEGAT_ZIGZAG, RAYON_ZIGZAG, CHEMIN_IMAGE_ZIGZAG, AMPLITUDE_ZIGZAG, ANGLE_TIR_ZIGZAG, FREQUENCE_ZIGZAG, direction);
+        int i =1 ;
+        if(direction == Direction::GAUCHE)i=-1;
+        Projectile* projectile = new ProjectileZigZag({position.x+taille.largeur/2 * (i+1) + i*3, position.y + taille.hauteur/2}, VITESSE_ZIGZAG, DEGAT_ZIGZAG, RAYON_ZIGZAG, CHEMIN_IMAGE_ZIGZAG, AMPLITUDE_ZIGZAG, ANGLE_TIR_ZIGZAG, FREQUENCE_ZIGZAG, direction);
         listeProjectiles.push_back(projectile);
         block = true;
         clockProj.restart();
@@ -196,7 +198,9 @@ void Personnage::GestionProjectileZigZag(){
 
 void Personnage::GestionProjectileLineaire(){
     if (etatPlusChemin["Projectile"].first){
-        Projectile* projectile = new ProjectileLineaire({position.x+35, position.y + 41}, VITESSE_DIRECT, DEGAT_DIRECT, RAYON_DIRECT, CHEMIN_IMAGE_ZIGZAG, direction);
+        int i =1 ;
+        if(direction == Direction::GAUCHE)i=-1;
+        Projectile* projectile = new ProjectileLineaire({position.x+taille.largeur/2 * (i+1) + i*3, position.y + taille.hauteur/2}, VITESSE_DIRECT, DEGAT_DIRECT, RAYON_DIRECT, CHEMIN_IMAGE_ZIGZAG, direction);
         listeProjectiles.push_back(projectile);
         block = true;
         clockProj.restart();
@@ -215,12 +219,90 @@ void Personnage::majProjectiles(double deltaTime){
         Projectile* projectile = *it;
         projectile->deplacement(deltaTime);
 
-        // Si le projectile doit être détruit, supprimez-le de la liste et libérez la mémoire
-        if (projectile->getADetruire()) {
+    // Si le projectile doit être détruit, supprimez-le de la liste et libérez la mémoire
+    if (projectile->getADetruire()) {
             it = listeProjectiles.erase(it);  // La fonction erase() retourne le prochain itérateur valide
             delete projectile;
-        } else {
+        } 
+    else {
+        ++it;
+        }
+    }
+}
+
+
+
+
+void Personnage::update_contact(Personnage& personnage){
+    std::cout << "Entrée contact" << std::endl;
+    contact_projectile(personnage);
+    contact_projectile();
+    contact_attaque(personnage);
+
+    if(vie <= 0){
+        position = {position.x, POSITION_SOL.y - TAILLE_JOUEUR1_SPRITE.largeur};
+        taille = {TAILLE_JOUEUR1_SPRITE.hauteur, TAILLE_JOUEUR1_SPRITE.largeur};
+    }
+    
+}
+
+//On vérifie que les projectiles du joueur this ont touché le joueur personnage
+void Personnage::contact_projectile(Personnage& personnage){
+    std::cout << "Entrée contact_projectile" << std::endl;
+    //On test que this n'est pas en contact avec un projectile de personnage en utilisant la fonction contact de ElementJeu
+    for (auto it = listeProjectiles.begin(); it != listeProjectiles.end(); ) {
+        Projectile* projectile = *it;
+        //Si le projectile touche le personnage, on le supprime de la liste et on libère la mémoire
+        if (projectile->contact(personnage)){
+            std::cout << "Contact" << std::endl;
+            personnage.setVie(personnage.getVie() - projectile->getDegat());
+            it = listeProjectiles.erase(it);  // La fonction erase() retourne le prochain itérateur valide
+            delete projectile;
+        } 
+        else {
             ++it;
         }
+    }
+   
+}
+
+//On vérifie que les projectiles du joueur this ont touché le joueur this
+void Personnage::contact_projectile(){
+    std::cout << "Entrée contact_projectile" << std::endl;
+    //On test que this n'est pas en contact avec un projectile de personnage en utilisant la fonction contact de ElementJeu
+    for (auto it = listeProjectiles.begin(); it != listeProjectiles.end(); ) {
+        Projectile* projectile = *it;
+        //Si le projectile touche le personnage, on le supprime de la liste et on libère la mémoire
+        if (projectile->contact(*this)){
+            std::cout << "Contact" << std::endl;
+            vie = vie - projectile->getDegat();
+            it = listeProjectiles.erase(it);  // La fonction erase() retourne le prochain itérateur valide
+            delete projectile;
+        } 
+        else {
+            ++it;
+        }
+    }
+   
+}
+
+void Personnage::contact_attaque(Personnage& personnage){
+    if (attaque.contact(personnage)){
+        int i = 1;
+        if(direction == Direction::GAUCHE)i=-1;
+        if(etatPlusChemin["Attaque1"].first){
+            personnage.setVie(personnage.getVie() - DEGAT_ATTAQUE1);
+            etatPlusChemin["Attaque1"].first = false;
+            personnage.setPosition({personnage.getPosition().x + i*TAILLE_ATTAQUE1.largeur, personnage.getPosition().y});
+        }
+        else if(etatPlusChemin["Attaque2"].first){
+            personnage.setVie(personnage.getVie() - DEGAT_ATTAQUE2);
+            etatPlusChemin["Attaque2"].first = false;
+            personnage.setPosition({personnage.getPosition().x + i*TAILLE_ATTAQUE2.largeur, personnage.getPosition().y});
+        }
+        
+            
+    attaque = nullptr;
+
     }
 }

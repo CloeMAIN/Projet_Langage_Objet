@@ -67,6 +67,7 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
             if (sf::Keyboard::isKeyPressed(TOUCHE_ATTAQUE1_JOUEUR1)){
                 checkAttaque1(joueur1);
                 joueur1.setClockAtt(joueur1.getClockAtt().restart());
+
             }
             if (sf::Keyboard::isKeyPressed(TOUCHE_ATTAQUE2_JOUEUR1)){
                 checkAttaque2(joueur1);
@@ -76,10 +77,12 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
             if (sf::Keyboard::isKeyPressed(TOUCHE_ATTAQUE1_JOUEUR2)){
                 checkAttaque1(joueur2);
                 joueur2.setClockAtt(joueur2.getClockAtt().restart());
+
             }
             if (sf::Keyboard::isKeyPressed(TOUCHE_ATTAQUE2_JOUEUR2)){
                 checkAttaque2(joueur2);
                 joueur2.setClockAtt(joueur2.getClockAtt().restart());
+
             }
 
         //Joueur 1 Avancer
@@ -119,6 +122,8 @@ void InputUser::checkGauche(Personnage& joueur){
     joueur.setEtat("Avancer", true);
     joueur.setEtat("Rien", false);
     joueur.setDirection(Direction::GAUCHE);
+    joueur.setEtat("Attaque1", false);
+    joueur.setEtat("Attaque2", false);
 }
 
 void InputUser::checkDroite(Personnage& joueur){
@@ -126,6 +131,8 @@ void InputUser::checkDroite(Personnage& joueur){
     joueur.setEtat("Avancer", true);
     joueur.setEtat("Rien", false);
     joueur.setDirection(Direction::DROITE);
+    joueur.setEtat("Attaque1", false);
+    joueur.setEtat("Attaque2", false);
 }
 
 void InputUser::checkRien(Personnage& joueur){

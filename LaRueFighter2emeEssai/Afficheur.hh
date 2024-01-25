@@ -22,7 +22,7 @@ class Afficheur
 
 
         /* Méthode */
-        void afficher(const Personnage &joueur);
+        void afficher(const Personnage &joueur, const sf::Color& couleur);
         void afficher(Jeu &jeu);
         void afficherMenu();
         void afficher(std::string cheminbouton, Point position, HitBox taille);
@@ -31,7 +31,7 @@ class Afficheur
         void afficher(const Projectile &projectile);
         void afficherBarreVieJ1(int vie);
         void afficherBarreVieJ2(int vie);
-        void afficher(const ElementJeu& element);
+        void afficher(const ElementJeu& element, const sf::Color& couleur);
 
 };
 

@@ -121,6 +121,10 @@ int Jeu::lancer(Afficheur* afficheur)
         joueur2.majProjectiles(DELTA_TIME);
         joueur1.update_attaque();
         joueur2.update_attaque();
+        std::cout << "Vie joueur 1 : " << joueur1.getVie() << std::endl;
+        joueur1.update_contact(joueur2);
+        std::cout << "Vie joueur 2 : " << joueur2.getVie() << std::endl;
+        joueur2.update_contact(joueur1);
 
         // Afficher les positions en console
         // std::cout << "Position Joueur1 - X: " << joueur1.getPosition().x << ", Y: " << joueur1.getPosition().y << std::endl;

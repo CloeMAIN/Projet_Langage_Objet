@@ -15,7 +15,7 @@ Afficheur::~Afficheur()
 {
 }
 
-void Afficheur::afficher(const Personnage& joueur) {
+void Afficheur::afficher(const Personnage& joueur, const sf::Color& couleur) {
     // Met le personnage à sa position dans la window
     // joueur.getSprite().setPosition({joueur.getPosition().x, joueur.getPosition().y});
     // // Affiche le personnage
@@ -23,7 +23,7 @@ void Afficheur::afficher(const Personnage& joueur) {
 
     sf::RectangleShape pers(sf::Vector2f(joueur.getTaille().largeur, joueur.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
     pers.setPosition(joueur.getPosition().x, joueur.getPosition().y); // Positionné au bas au milieu
-    pers.setFillColor(sf::Color::Blue);
+    pers.setFillColor(couleur);
     window.draw(pers);
     if(DEBUGGING_MODE){
     //On affiche le point position du joueur sous la forme d'un cercle
@@ -37,15 +37,15 @@ void Afficheur::afficher(const Personnage& joueur) {
     }
 
     if(joueur.getEtat()["Attaque1"].first){
-        afficher(joueur.getAttaque());
+        afficher(joueur.getAttaque(), couleur);
     }
     else if(joueur.getEtat()["Attaque2"].first){
-        afficher(joueur.getAttaque());
+        afficher(joueur.getAttaque(), couleur);
     }
     
 }
 
-void Afficheur::afficher(const ElementJeu& element) {
+void Afficheur::afficher(const ElementJeu& element, const sf::Color& couleur) {
     // Je fais un rectangle
     // sf::RectangleShape rectangle(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
     // rectangle.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
@@ -58,7 +58,7 @@ void Afficheur::afficher(const ElementJeu& element) {
 
     sf::RectangleShape test(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
     test.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
-    test.setFillColor(sf::Color::Blue);
+    test.setFillColor(couleur);
     window.draw(test);
 }
 
@@ -83,8 +83,8 @@ void Afficheur::afficher(Jeu& jeu) {
     afficherSol();
     afficherBarreVieJ1(jeu.getJoueur1().getVie());
     afficherBarreVieJ2(jeu.getJoueur2().getVie());
-    afficher(jeu.getJoueur1()); // Affiche le joueur 1
-    afficher(jeu.getJoueur2()); // Affiche le joueur 2
+    afficher(jeu.getJoueur1(), COULEUR_BARRE_J1); // Affiche le joueur 1
+    afficher(jeu.getJoueur2(), COULEUR_BARRE_J2); // Affiche le joueur 2
     // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
     window.display();
 }

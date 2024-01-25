@@ -76,6 +76,10 @@ public:
     void GestionProjectileZigZag();
     void GestionProjectileLineaire();
     void majProjectiles(double deltaTime);
+    void update_contact(Personnage& personnage);
+    void contact_projectile(Personnage& personnage);
+    void contact_attaque(Personnage& personnage);
+    void contact_projectile(); 
 
     std::string toString();
     void update_attaque();
