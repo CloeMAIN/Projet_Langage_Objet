@@ -43,6 +43,7 @@ class Jeu
         /* Méthode */
         void majJoueurs();
         void empecherSortie();
+        void reinitialiser();
 };
 
 

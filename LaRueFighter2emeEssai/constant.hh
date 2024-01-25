@@ -172,3 +172,15 @@ const std::string CHEMIN_BACKGROUND_ROUND1("../images/Round2.jpg");
 const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 
 
+/*-----------------------------------MENU DE VICTOIRE-----------------------------------------*/
+// Chemins des images:
+const std::string CHEMIN_BACKGROUND_VICTOIRE_J1("images/Victoire_J1.png");
+const std::string CHEMIN_BACKGROUND_VICTOIRE_J2("images/Victoire_J1.png");
+
+const std::string CHEMIN_BOUTON_REJOUER("images/Rejouer.png");
+
+//Position des boutons:
+const Point POSITION_BOUTON_REJOUER = {float(TAILLE_FENETRE.x)/2 -100 , float(TAILLE_FENETRE.y) - 325};
+
+//Taille des boutons:
+const HitBox TAILLE_BOUTON_REJOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JOUER.y , POSITION_BOUTON_JOUER.x+200 , POSITION_BOUTON_JOUER.y+100};

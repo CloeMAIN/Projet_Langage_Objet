@@ -43,7 +43,7 @@ int Menu::lancer(Afficheur* afficheur){
                     else if (event.mouseButton.x >= listeBoutons[2].second.first.GaucheHaut.x && event.mouseButton.x <= listeBoutons[2].second.first.DroiteBas.x && event.mouseButton.y >= listeBoutons[2].second.first.GaucheHaut.y && event.mouseButton.y <= listeBoutons[2].second.first.DroiteBas.y){
                         // std::cout << "Quitter" << std::endl;
                         afficheur->getWindow()->close();
-                        return 2;}
+                        return 3;}
 
                 }
             }

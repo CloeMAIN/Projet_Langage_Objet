@@ -8,6 +8,24 @@
 #include "ProjectileZigZag.hh"
 #include "ProjectileLineaire.hh"
 
+
+void Jeu::reinitialiser(){
+    joueur1 = Personnage(POSITION_DEPART_JOUEUR1,
+                            POINTS_DE_VIE_JOUEUR, 
+                            {CHEMIN_IMAGE_JOUEUR1_RIEN, CHEMIN_IMAGE_JOUEUR1_AVANCER, CHEMIN_IMAGE_JOUEUR1_SAUT,CHEMIN_IMAGE_JOUEUR1_ATTAQUE1, CHEMIN_IMAGE_JOUEUR1_ATTAQUE2, CHEMIN_IMAGE_JOUEUR1_ATTAQUE1}, 
+                            Direction::DROITE, 
+                            TAILLE_JOUEUR_SPRITE,
+                            CHEMIN_IMAGE_JOUEUR1_RIEN.first);
+    joueur2 = Personnage(POSITION_DEPART_JOUEUR2,
+                            POINTS_DE_VIE_JOUEUR,
+                            {CHEMIN_IMAGE_JOUEUR2_RIEN, CHEMIN_IMAGE_JOUEUR2_AVANCER,
+                             CHEMIN_IMAGE_JOUEUR2_SAUT,CHEMIN_IMAGE_JOUEUR2_ATTAQUE1,
+                             CHEMIN_IMAGE_JOUEUR2_ATTAQUE2, CHEMIN_IMAGE_JOUEUR2_ATTAQUE1}, 
+                            Direction::GAUCHE,
+                            TAILLE_JOUEUR_SPRITE, 
+                            CHEMIN_IMAGE_JOUEUR1_RIEN.first);
+}
+
 int Jeu::lancer(Afficheur* afficheur)
 {
     bool lancerJeu = true;
@@ -30,7 +48,7 @@ int Jeu::lancer(Afficheur* afficheur)
             return 1;
         }
 
-        if(joueur1.getVie() <= 0 ){
+        if(joueur2.getVie() <= 0 ){
             lancerJeu = false;
             return 2;
         }
