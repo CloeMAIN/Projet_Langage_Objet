@@ -10,14 +10,21 @@ ElementJeu::ElementJeu()
     direction = Direction::DROITE;
 }
 
+ElementJeu::ElementJeu(Point position, Direction direction, Taille taille)
+{
+    this->position = position;
+    this->direction = direction;
+    this->taille = taille;
+}
+
 ElementJeu::~ElementJeu()
 {
 }
 
 ElementJeu& ElementJeu::operator=(std::nullptr_t){
     if (this != nullptr) {
-    position.x = 0;
-    position.y = 0;
+    position.x = -100;
+    position.y = -100;
     taille.largeur = 0;
     taille.hauteur = 0;
     direction = Direction::DROITE;
@@ -35,7 +42,7 @@ ElementJeu& ElementJeu::operator=(const ElementJeu& b){
 }
 
 bool ElementJeu::operator!=(std::nullptr_t){
-    if(position.x != 0 or position.y != 0 or taille.largeur != 0 or taille.hauteur != 0 or direction != Direction::DROITE){
+    if(position.x != -100 or position.y != -100 or taille.largeur != 0 or taille.hauteur != 0 or direction != Direction::DROITE){
         return true;
     }
     return false;

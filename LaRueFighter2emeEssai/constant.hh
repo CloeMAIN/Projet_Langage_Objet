@@ -30,14 +30,14 @@ const sf::Color COULEUR_BARRE_J2 = sf::Color::Blue;
 const float POINTS_DE_VIE_JOUEUR1 = 3500;
 const float DEGAT_ATTAQUE_POING1 = 5;
 const float DEGAT_ATTAQUE_PIED1 = 5;
-const Taille TAILLE_JOUEUR1_SPRITE = {2*35, 2*82};
+const Taille TAILLE_JOUEUR1_SPRITE = {70, 164};
 const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL- TAILLE_JOUEUR1_SPRITE.hauteur};
 const float VITESSE_JOUEUR1 = 5;
 const float VITESSE_JOUEUR1_SAUT = -12.0f;
 const float DECALAGE_Y_PIED = 20;
 const float DECALAGE_Y_POING = 30;
-const Taille TAILLE_COUP_POING = {20, 20};
-const Taille TAILLE_COUP_PIED = {20, 20};
+const Taille TAILLE_COUP_POING = {50, 20};
+const Taille TAILLE_COUP_PIED = {70, 30};
 
 
 //Commandes Joueur1
@@ -68,7 +68,7 @@ const Point POSITION_DEPART_JOUEUR2 = {float(TAILLE_FENETRE.x)/3 * 2,float(TAILL
 
 
 const float TEMPS_BLOCAGE_PROJECTILE = 2;
-const float TEMPS_BLOCAGE_ATTAQUE = 0.5;
+const float TEMPS_BLOCAGE_ATTAQUE = 1;
 
 //Projectiles: Direct
 const int RAYON_DIRECT = 5;

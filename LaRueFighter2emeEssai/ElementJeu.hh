@@ -34,7 +34,8 @@ protected:
     Taille taille; 
 
 public:
-    ElementJeu(/* args */);
+    ElementJeu();
+    ElementJeu(Point position, Direction direction, Taille taille);
     ~ElementJeu();
     Point getPosition() const {return position;}
     Taille getTaille() const {return taille;}

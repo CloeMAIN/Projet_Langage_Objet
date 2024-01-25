@@ -39,6 +39,9 @@ int Jeu::lancer(Afficheur* afficheur)
     sf::Time blockDuration2 = sf::seconds(TEMPS_BLOCAGE_PROJECTILE);
     bool blockjoueur2 = false;
 
+    std::cout << joueur1.toString() << std::endl;
+    std::cout << joueur2.toString() << std::endl;
+
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
         inputUser.gererEvenements(afficheur->getWindow(), joueur1, joueur2);
@@ -101,7 +104,7 @@ int Jeu::lancer(Afficheur* afficheur)
 
         // Appliquer la gravité pour les deux joueurs
         if (joueur1.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
-            std::cout <<" GRAVITE APPLIED" << std::endl;
+            // std::cout <<" GRAVITE APPLIED" << std::endl;
             joueur1.setVelocityY(joueur1.getVelocity().y + GRAVITE);
         }
         if (joueur2.getPosition().y + TAILLE_JOUEUR1_SPRITE.hauteur < POSITION_SOL.y) {
@@ -116,10 +119,12 @@ int Jeu::lancer(Afficheur* afficheur)
         joueur2.GestionProjectileZigZag();
         joueur1.majProjectiles(DELTA_TIME);
         joueur2.majProjectiles(DELTA_TIME);
+        joueur1.update_attaque();
+        joueur2.update_attaque();
 
         // Afficher les positions en console
-        std::cout << "Position Joueur1 - X: " << joueur1.getPosition().x << ", Y: " << joueur1.getPosition().y << std::endl;
-        std::cout << "Position Joueur2 - X: " << joueur2.getPosition().x << ", Y: " << joueur2.getPosition().y << std::endl;
+        // std::cout << "Position Joueur1 - X: " << joueur1.getPosition().x << ", Y: " << joueur1.getPosition().y << std::endl;
+        // std::cout << "Position Joueur2 - X: " << joueur2.getPosition().x << ", Y: " << joueur2.getPosition().y << std::endl;
 
         
         afficheur->afficher(*this); // Affiche le jeu

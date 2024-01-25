@@ -6,7 +6,7 @@ Personnage::Personnage(/* args */)
 }
 
 Personnage::Personnage(Point position, int vie, std::vector<std::string> vecteurChemin, Direction direction, Taille taille)
-                        : vie(vie)
+                        : ElementJeu(position, direction, taille),  vie(vie)
 {
     //On enregistre les chemins des images dans map etat
     int i = 0;
@@ -46,9 +46,9 @@ void Personnage::mouvement(){
     appliquerGravite(); // Appelle la fonction pour appliquer la gravité au personnage
 
     // affiches tous les etat du joueur
-    for (auto const& x : etatPlusChemin) {
-        std::cout << x.first << " : " << x.second.first << x.second.second << std::endl;
-    }
+    // for (auto const& x : etatPlusChemin) {
+    //     std::cout << x.first << " : " << x.second.first << x.second.second << std::endl;
+    // }
     
     // Vérifie la direction du personnage
     if(direction == Direction::GAUCHE){
@@ -80,7 +80,7 @@ void Personnage::mouvement(){
 
     // Si l'état du personnage est "Saut"
     if(etatPlusChemin["Saut"].first){ 
-        std::cout<<"Saut" << std::endl;
+        // std::cout<<"Saut" << std::endl;
         // // Charge l'image correspondante
         // if (!texture.loadFromFile(etatPlusChemin["Saut"].second)) 
         //     throw std::runtime_error("Erreur de chargement de l'image : " + etatPlusChemin["Saut"].second);
@@ -118,34 +118,46 @@ void Personnage::update_attaque(){
     if(direction == Direction::GAUCHE)
         i= -1;
     ElementJeu element;
+    // std::cout << "Attaque 1:" << etatPlusChemin["Attaque1"].first << " Attaque 2: " << etatPlusChemin["Attaque2"].first << std::endl;
+    if (!blockAtt){
+        if(etatPlusChemin["Attaque1"].first){
+            // std::cout << "Attaque 1 début" << std::endl;
+            element.setTaille(TAILLE_COUP_POING);
+            element.setDirection(direction);
+            element.setPosition({position.x + i*TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING});
+            clockAtt.restart();
+            blockAtt = true;
+            // etatPlusChemin["Attaque1"].first = false;
+            // std::cout << "Fin attaque 1" << std::endl;
+        }
+        else if(etatPlusChemin["Attaque2"].first){
+            // std::cout << "Attaque2 début" << std::endl;
+            element.setTaille(TAILLE_COUP_PIED);
+            element.setDirection(direction);
+            element.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
+            // etatPlusChemin["Attaque2"].first = false;
+            clockAtt.restart();
+            blockAtt = true;
+            // std::cout << "Fin attaque 2" << std::endl;
+        }
+        attaque = element;
+    }
+        // std::cout << "Attaque 1:" << etatPlusChemin["Attaque1"].first << " Attaque 2: " << etatPlusChemin["Attaque2"].first << std::endl;
 
-    if(etatPlusChemin["Attaque1"].first){
-        element.setTaille(TAILLE_COUP_POING);
-        element.setDirection(direction);
-        element.setPosition({position.x + i*TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING});
-        clockAtt.restart();
-        etatPlusChemin["Attaque1"].first = false;
-    }
-    else if(etatPlusChemin["Attaque2"].first){
-        element.setTaille(TAILLE_COUP_PIED);
-        element.setDirection(direction);
-        element.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
-        etatPlusChemin["Attaque2"].first = false;
-        clockAtt.restart();
-        std::cout << "Fin attaque 2" << std::endl;
-    }
-    std::cout << "Attaque 1:" << etatPlusChemin["Attaque1"].first << " Attaque 2: " << etatPlusChemin["Attaque2"].first << std::endl;
-    if((etatPlusChemin["Attaque1"].first == false or etatPlusChemin["Attaque2"].first == false) and attaque != nullptr){
-        std::cout << "Attaque : " << position.x << " " << position.y << std::endl;
-        attaque.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
-        if(clockAtt.getElapsedTime() > sf::seconds(TEMPS_BLOCAGE_ATTAQUE)){
-            attaque = nullptr;
+    else{
+        if((clockAtt.getElapsedTime() > sf::seconds(TEMPS_BLOCAGE_ATTAQUE)) or (etatPlusChemin["Rien"].first)){
+                attaque = nullptr;
+                blockAtt = false;
+                etatPlusChemin["Attaque1"].first = false;
+                etatPlusChemin["Attaque2"].first = false;
+            }
+        else{
+            // std::cout << "Attaque : " << position.x << " " << position.y << std::endl;
+            attaque.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
         }
     }
-    else if(etatPlusChemin["Rien"].first){
-        attaque = nullptr;
-    }  
-    attaque = element;
+    
+    
      
     };
 

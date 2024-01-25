@@ -34,6 +34,7 @@ private:
     bool block = false;
     sf::Clock clockProj ;
     sf::Clock clockAtt;
+    bool blockAtt = false;
 public:
     // Constructeurs et destructeur
     Personnage();
@@ -48,6 +49,7 @@ public:
     ElementJeu getAttaque() const { return attaque; }
     std::map<std::string , std::pair< bool, std::string>> getEtat() const { return etatPlusChemin; }
     bool getBlock() const { return block; }
+    bool getBlockAtt() const { return blockAtt; }
     sf::Clock getClockProj(){return clockProj;}
     sf::Clock getClockAtt(){return clockAtt;}
     std::list<Projectile*> getListeProjectiles() const {return listeProjectiles;}
@@ -63,6 +65,7 @@ public:
     void setBlock(bool b){ this->block = b;}
     void setClockProj(sf::Time c){this->clockProj.restart();}
     void setClockAtt(sf::Time c){this->clockAtt.restart();}
+    void setBlockAtt(bool b){this->blockAtt = b;}
     void update();
 
     /* Méthode */

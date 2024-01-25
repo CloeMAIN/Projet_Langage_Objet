@@ -17,9 +17,14 @@ Afficheur::~Afficheur()
 
 void Afficheur::afficher(const Personnage& joueur) {
     // Met le personnage à sa position dans la window
-    joueur.getSprite().setPosition({joueur.getPosition().x, joueur.getPosition().y});
-    // Affiche le personnage
-    window.draw(joueur.getSprite());
+    // joueur.getSprite().setPosition({joueur.getPosition().x, joueur.getPosition().y});
+    // // Affiche le personnage
+    // window.draw(joueur.getSprite());
+
+    sf::RectangleShape pers(sf::Vector2f(joueur.getTaille().largeur, joueur.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
+    pers.setPosition(joueur.getPosition().x, joueur.getPosition().y); // Positionné au bas au milieu
+    pers.setFillColor(sf::Color::Blue);
+    window.draw(pers);
     if(DEBUGGING_MODE){
     //On affiche le point position du joueur sous la forme d'un cercle
     sf::CircleShape cercle(10);
@@ -46,10 +51,15 @@ void Afficheur::afficher(const ElementJeu& element) {
     // rectangle.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
     // rectangle.setFillColor(sf::Color::Black);
     // window.draw(rectangle);
-    sf::CircleShape cercle(10);
-    cercle.setPosition(element.getPosition().x, element.getPosition().y);
-    cercle.setFillColor(sf::Color::Black);
-    window.draw(cercle);
+    // sf::CircleShape cercle(10);
+    // cercle.setPosition(element.getPosition().x, element.getPosition().y);
+    // cercle.setFillColor(sf::Color::Black);
+    // window.draw(cercle);
+
+    sf::RectangleShape test(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
+    test.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
+    test.setFillColor(sf::Color::Blue);
+    window.draw(test);
 }
 
 void Afficheur::afficher(const Projectile& projectile) {

@@ -18,7 +18,7 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
         /* Gestion des cliques */
         if (event.type == sf::Event::KeyPressed) {
             sf::Keyboard::Key key = event.key.code;
-            std::cout << "Touche enfoncée : " << key << std::endl;
+            // std::cout << "Touche enfoncée : " << key << std::endl;
 
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) // Stop d'urgence avec escape
@@ -103,7 +103,7 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
 
 void InputUser::checkSaut(Personnage& joueur){
         joueur.setVelocityY(VITESSE_JOUEUR1_SAUT); // Définir la vélocité sur la vitesse de saut
-        std::cout << "Check Saut" << std::endl;
+        // std::cout << "Check Saut" << std::endl;
         joueur.setEtat("Saut", true);
         joueur.setEtat("Rien", false);
 }
