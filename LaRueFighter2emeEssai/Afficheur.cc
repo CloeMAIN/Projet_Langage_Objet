@@ -22,12 +22,34 @@ void Afficheur::afficher(const Personnage& joueur) {
     window.draw(joueur.getSprite());
     if(DEBUGGING_MODE){
     //On affiche le point position du joueur sous la forme d'un cercle
-    sf::CircleShape cercle(5);
+    sf::CircleShape cercle(10);
     cercle.setPosition(joueur.getPosition().x, joueur.getPosition().y);
     cercle.setFillColor(sf::Color::Red);
     window.draw(cercle);
     }
+    for (Projectile* projectile : joueur.getListeProjectiles()) {
+        afficher(*projectile);
+    }
+
+    if(joueur.getEtat()["Attaque1"].first){
+        afficher(joueur.getAttaque());
+    }
+    else if(joueur.getEtat()["Attaque2"].first){
+        afficher(joueur.getAttaque());
+    }
     
+}
+
+void Afficheur::afficher(const ElementJeu& element) {
+    // Je fais un rectangle
+    // sf::RectangleShape rectangle(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
+    // rectangle.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
+    // rectangle.setFillColor(sf::Color::Black);
+    // window.draw(rectangle);
+    sf::CircleShape cercle(10);
+    cercle.setPosition(element.getPosition().x, element.getPosition().y);
+    cercle.setFillColor(sf::Color::Black);
+    window.draw(cercle);
 }
 
 void Afficheur::afficher(const Projectile& projectile) {
@@ -53,9 +75,6 @@ void Afficheur::afficher(Jeu& jeu) {
     afficherBarreVieJ2(jeu.getJoueur2().getVie());
     afficher(jeu.getJoueur1()); // Affiche le joueur 1
     afficher(jeu.getJoueur2()); // Affiche le joueur 2
-    for (Projectile* projectile : jeu.getListesProjectiles()) {
-        afficher(*projectile);
-    }
     // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
     window.display();
 }

@@ -34,6 +34,13 @@ ElementJeu& ElementJeu::operator=(const ElementJeu& b){
     return *this;
 }
 
+bool ElementJeu::operator!=(std::nullptr_t){
+    if (this != nullptr) {
+        return true;
+    }
+    return false;
+}
+
 float ElementJeu::distance(const ElementJeu& b)const
 {
 

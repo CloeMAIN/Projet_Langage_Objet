@@ -110,37 +110,22 @@ int Jeu::lancer(Afficheur* afficheur)
 
         // Mettre à jour la position des joueurs
         empecherSortie();
-        joueur1.mouvement();
-        joueur2.mouvement();
-
-        
+        // joueur1.mouvement();
+        // joueur2.mouvement();
+        joueur1.GestionProjectileLineaire();
+        joueur2.GestionProjectileZigZag();
+        joueur1.majProjectiles(DELTA_TIME);
+        joueur2.majProjectiles(DELTA_TIME);
 
         // Afficher les positions en console
         std::cout << "Position Joueur1 - X: " << joueur1.getPosition().x << ", Y: " << joueur1.getPosition().y << std::endl;
         std::cout << "Position Joueur2 - X: " << joueur2.getPosition().x << ", Y: " << joueur2.getPosition().y << std::endl;
 
-        majProjectiles(DELTA_TIME);
+        
         afficheur->afficher(*this); // Affiche le jeu
     }
 
     return 0;
-}
-
-
-void Jeu::majProjectiles(double deltaTime){
-    // Utilisez un itérateur pour parcourir la liste
-    for (auto it = listes_projectiles.begin(); it != listes_projectiles.end(); ) {
-        Projectile* projectile = *it;
-        projectile->deplacement(deltaTime);
-
-        // Si le projectile doit être détruit, supprimez-le de la liste et libérez la mémoire
-        if (projectile->getADetruire()) {
-            it = listes_projectiles.erase(it);  // La fonction erase() retourne le prochain itérateur valide
-            delete projectile;
-        } else {
-            ++it;
-        }
-    }
 }
 
 

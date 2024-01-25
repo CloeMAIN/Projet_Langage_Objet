@@ -31,6 +31,7 @@ class Afficheur
         void afficher(const Projectile &projectile);
         void afficherBarreVieJ1(int vie);
         void afficherBarreVieJ2(int vie);
+        void afficher(const ElementJeu& element);
 
 };
 

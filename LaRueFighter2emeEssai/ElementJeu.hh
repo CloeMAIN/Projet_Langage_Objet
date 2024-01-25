@@ -45,6 +45,7 @@ public:
     float distance(const ElementJeu& b)const;
     bool contact(const ElementJeu& b) const;
     ElementJeu& operator=(std::nullptr_t);
+    bool operator!=(std::nullptr_t);
     ElementJeu& operator=(const ElementJeu& b);
 };
 

@@ -29,6 +29,9 @@ public:
     void checkGauche(Personnage& joueur);
     void checkDroite(Personnage& joueur);
     void checkSaut(Personnage& joueur);
+    void checkAttaque1(Personnage& joueur);
+    void checkAttaque2(Personnage& joueur);
+    void checkProjectile(Personnage& joueur);
 };
 
 

@@ -14,7 +14,6 @@ class Jeu
 private:
     Personnage joueur1{{0,0}, 100, {CHEMIN_IMAGE_JOUEUR1_RIEN, CHEMIN_IMAGE_JOUEUR1_SAUT, CHEMIN_IMAGE_JOUEUR1_DROITE, CHEMIN_IMAGE_JOUEUR1_PIED_DROITE, CHEMIN_IMAGE_JOUEUR1_POING_DROITE, CHEMIN_IMAGE_ZIGZAG},  Direction::DROITE, {35,82}};
     Personnage joueur2{{0,0}, 100, {CHEMIN_IMAGE_JOUEUR1_RIEN, CHEMIN_IMAGE_JOUEUR1_SAUT, CHEMIN_IMAGE_JOUEUR1_DROITE, CHEMIN_IMAGE_JOUEUR1_PIED_DROITE, CHEMIN_IMAGE_JOUEUR1_POING_DROITE, CHEMIN_IMAGE_ZIGZAG}, Direction::GAUCHE,{35,82}};
-    std::list<Projectile*> listes_projectiles;
     // Afficheur* afficheur;
 public:
     Jeu(/* args */);
@@ -24,11 +23,11 @@ public:
     /* Getter */
     Personnage getJoueur1(){return joueur1;}
     Personnage getJoueur2(){return joueur2;}
-    std::list<Projectile*> getListesProjectiles(){return listes_projectiles;}
+    // std::list<Projectile*> getListesProjectiles(){return listes_projectiles;}
     
     /* Méthode */
     void majJoueurs(InputUser inputUser);
-    void majProjectiles(double deltaTime);
+    // void majProjectiles(double deltaTime);
     void empecherSortie();
 };
 
