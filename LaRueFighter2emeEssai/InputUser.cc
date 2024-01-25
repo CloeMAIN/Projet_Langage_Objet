@@ -48,6 +48,7 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
         }
     }
 
+
      //Gestion des projectiles pour les deux joueurs
 
             if (sf::Keyboard::isKeyPressed(TOUCHE_PROJECTILE_JOUEUR1) && !joueur1.getBlock()){
@@ -80,6 +81,7 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
                 checkAttaque2(joueur2);
                 joueur2.setClockAtt(joueur2.getClockAtt().restart());
             }
+
         //Joueur 1 Avancer
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {//Gauche
             checkGauche(joueur1);
