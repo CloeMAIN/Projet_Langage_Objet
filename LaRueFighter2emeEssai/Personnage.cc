@@ -165,44 +165,33 @@ void Personnage::update_attaque(){
     if(direction == Direction::GAUCHE)
         i= -1;
     ElementJeu element;
-        if(etatPlusChemin["Attaque1"].first){
-            element.setTaille(TAILLE_COUP_POING);
-            element.setDirection(direction);
-            if (direction == Direction::GAUCHE)
-                element.setPosition({position.x + i*TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING});
-            // sprite.setTexture(texture);
-            // sprite.setScale(i*2.f, 2.f);
-            // int xTexture = (int)sprite.getPosition().x / 35 % 4; 
-            // xTexture = xTexture * 35;
-            // sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
-            // sprite.move(i*VITESSE_JOUEUR1,0);
-            clockAtt.restart();
-            etatPlusChemin["Attaque2"].first = false;
+    if(etatPlusChemin["Attaque1"].first){
+        element.setTaille(TAILLE_COUP_POING);
+        element.setDirection(direction);
+        element.setPosition({position.x + i*TAILLE_COUP_POING.largeur, position.y + DECALAGE_Y_POING});
+        clockAtt.restart();
+        etatPlusChemin["Attaque1"].first = false;
+    }
+    else if(etatPlusChemin["Attaque2"].first){
+        element.setTaille(TAILLE_COUP_PIED);
+        element.setDirection(direction);
+        element.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
+        etatPlusChemin["Attaque2"].first = false;
+        clockAtt.restart();
+        std::cout << "Fin attaque 2" << std::endl;
+    }
+    std::cout << "Attaque 1:" << etatPlusChemin["Attaque1"].first << " Attaque 2: " << etatPlusChemin["Attaque2"].first << std::endl;
+    if((etatPlusChemin["Attaque1"].first == false or etatPlusChemin["Attaque2"].first == false) and attaque != nullptr){
+        std::cout << "Attaque : " << position.x << " " << position.y << std::endl;
+        attaque.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
+        if(clockAtt.getElapsedTime() > sf::seconds(TEMPS_BLOCAGE_ATTAQUE)){
+            attaque = nullptr;
         }
-        else if(etatPlusChemin["Attaque2"].first){
-            element.setTaille(TAILLE_COUP_PIED);
-            element.setDirection(direction);
-            if (direction == Direction::GAUCHE)
-                element.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
-            // sprite.setTexture(texture);
-            // sprite.setScale(i*2.f, 2.f);
-            // int xTexture = (int)sprite.getPosition().x / 35 % 4; 
-            // xTexture = xTexture * 35;
-            // sprite.setTextureRect(sf::IntRect(xTexture, 0, 35, 82));
-            // sprite.move(i*VITESSE_JOUEUR1,0);
-            etatPlusChemin["Attaque2"].first = false;
-            clockAtt.restart();
-        }
-        else if((etatPlusChemin["Attaque1"].first == false or etatPlusChemin["Attaque2"].first == false) and attaque != nullptr){
-            attaque.setPosition({position.x + i*TAILLE_COUP_PIED.largeur, position.y + DECALAGE_Y_PIED});
-            if(clockAtt.getElapsedTime() > sf::seconds(TEMPS_BLOCAGE_ATTAQUE)){
-                element = nullptr;
-            }
-        }
-        else if(etatPlusChemin["Rien"].first){
-            element = nullptr;
-        }  
-        attaque = element;
+    }
+    else if(etatPlusChemin["Rien"].first){
+        attaque = nullptr;
+    }  
+    attaque = element;
     };
 
 void Personnage::appliquerGravite(){

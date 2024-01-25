@@ -35,7 +35,7 @@ ElementJeu& ElementJeu::operator=(const ElementJeu& b){
 }
 
 bool ElementJeu::operator!=(std::nullptr_t){
-    if (this != nullptr) {
+    if(position.x != 0 or position.y != 0 or taille.largeur != 0 or taille.hauteur != 0 or direction != Direction::DROITE){
         return true;
     }
     return false;

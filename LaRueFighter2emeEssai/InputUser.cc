@@ -131,7 +131,6 @@ void InputUser::checkRien(Personnage& joueur){
 
 void InputUser::checkAttaque1(Personnage& joueur){
     joueur.setVelocityX(0.0f);
-    std::cout << "Attaque1" << std::endl;
     joueur.setEtat("Avancer", false);
     joueur.setEtat("Rien", false);
     joueur.setEtat("Attaque1", true);
@@ -139,7 +138,6 @@ void InputUser::checkAttaque1(Personnage& joueur){
 
 void InputUser::checkAttaque2(Personnage& joueur){
     joueur.setVelocityX(0.0f);
-    std::cout << "Attaque2" << std::endl;
     joueur.setEtat("Avancer", false);
     joueur.setEtat("Rien", false);
     joueur.setEtat("Attaque2", true);
@@ -148,7 +146,6 @@ void InputUser::checkAttaque2(Personnage& joueur){
 void InputUser::checkProjectile(Personnage& joueur){
     if(not(joueur.getBlock())){
         joueur.setVelocityX(0.0f);
-        std::cout << "Projectile" << std::endl;
         joueur.setEtat("Rien", false);
         joueur.setEtat("Projectile", true);
         joueur.setBlock(true);
