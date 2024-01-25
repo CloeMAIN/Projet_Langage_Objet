@@ -15,37 +15,62 @@ Afficheur::~Afficheur()
 {
 }
 
-void Afficheur::afficher(const Personnage& joueur, const sf::Color& couleur) {
-    // Met le personnage à sa position dans la window
-    // joueur.getSprite().setPosition({joueur.getPosition().x, joueur.getPosition().y});
-    // // Affiche le personnage
-    // window.draw(joueur.getSprite());
+void Afficheur::afficher(const Personnage& joueur) {
 
-    sf::RectangleShape pers(sf::Vector2f(joueur.getTaille().largeur, joueur.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
-    pers.setPosition(joueur.getPosition().x, joueur.getPosition().y); // Positionné au bas au milieu
-    pers.setFillColor(couleur);
-    window.draw(pers);
-    if(DEBUGGING_MODE){
-    //On affiche le point position du joueur sous la forme d'un cercle
-    sf::CircleShape cercle(10);
-    cercle.setPosition(joueur.getPosition().x, joueur.getPosition().y);
-    cercle.setFillColor(sf::Color::Red);
-    window.draw(cercle);
-    }
+    
+    // if(DEBUGGING_MODE){
+    // sf::RectangleShape pers(sf::Vector2f(joueur.getTaille().largeur, joueur.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
+    // pers.setPosition(joueur.getPosition().x, joueur.getPosition().y); // Positionné au bas au milieu
+    // pers.setFillColor(sf::Color::Blue);
+    // window.draw(pers);
+    // //On affiche le point position du joueur sous la forme d'un cercle
+    // sf::CircleShape cercle(10);
+    // cercle.setPosition(joueur.getPosition().x, joueur.getPosition().y);
+    // cercle.setFillColor(sf::Color::Red);
+    // window.draw(cercle);
+    // }
+
     for (Projectile* projectile : joueur.getListeProjectiles()) {
         afficher(*projectile);
     }
 
     if(joueur.getEtat()["Attaque1"].first){
-        afficher(joueur.getAttaque(), couleur);
+        afficher(joueur.getAttaque());
     }
     else if(joueur.getEtat()["Attaque2"].first){
-        afficher(joueur.getAttaque(), couleur);
+        afficher(joueur.getAttaque());
     }
+
+    sf::Texture texture;
+
+    // Charge l'image correspondante
+    if (!texture.loadFromFile(joueur.getCheminImageActuelle())) 
+        throw std::runtime_error("Erreur de chargement de l'image : " + joueur.getCheminImageActuelle());
+
+    // log
+    //std::cout << "Chargement de l'image : " << joueur.getCheminImageActuelle() << std::endl;
+
+    sf::Sprite sprite = joueur.getSprite();
+    sprite.setTexture(texture);
+    sprite.setScale(2.f, 2.f); // Ajuste l'échelle en fonction de la direction
+
+    // Calcul de la position X de la texture à afficher
+    
+    int largeurImage = texture.getSize().x / joueur.getNbImageSprite(); //8
+    int xTexture = static_cast<int>(joueur.getPosition().x) / largeurImage % joueur.getNbImageSprite();
+    xTexture = xTexture * largeurImage;
+
+    sprite.setTextureRect(sf::IntRect(xTexture, 0, largeurImage, texture.getSize().y)); //82
+
+    // Met le personnage à sa position dans la window
+    sprite.setPosition({joueur.getPosition().x, joueur.getPosition().y});
+    // Affiche le personnage
+    window.draw(sprite);
+
     
 }
 
-void Afficheur::afficher(const ElementJeu& element, const sf::Color& couleur) {
+void Afficheur::afficher(const ElementJeu& element) {
     // Je fais un rectangle
     // sf::RectangleShape rectangle(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
     // rectangle.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
@@ -58,7 +83,7 @@ void Afficheur::afficher(const ElementJeu& element, const sf::Color& couleur) {
 
     sf::RectangleShape test(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
     test.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
-    test.setFillColor(couleur);
+    test.setFillColor(sf::Color::Black);
     window.draw(test);
 }
 
@@ -83,8 +108,8 @@ void Afficheur::afficher(Jeu& jeu) {
     afficherSol();
     afficherBarreVieJ1(jeu.getJoueur1().getVie());
     afficherBarreVieJ2(jeu.getJoueur2().getVie());
-    afficher(jeu.getJoueur1(), COULEUR_BARRE_J1); // Affiche le joueur 1
-    afficher(jeu.getJoueur2(), COULEUR_BARRE_J2); // Affiche le joueur 2
+    afficher(jeu.getJoueur1()); // Affiche le joueur 1
+    afficher(jeu.getJoueur2()); // Affiche le joueur 2
     // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
     window.display();
 }

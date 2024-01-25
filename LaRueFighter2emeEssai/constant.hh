@@ -32,7 +32,7 @@ const float DEGAT_ATTAQUE1 = 10;
 const float DEGAT_ATTAQUE2 = 1;
 const Taille TAILLE_JOUEUR1_SPRITE = {70, 164};
 const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, float(TAILLE_FENETRE.y)-HAUTEUR_SOL- TAILLE_JOUEUR1_SPRITE.hauteur};
-const float VITESSE_JOUEUR1 = 5;
+const float VITESSE_JOUEUR1 = 10;
 const float VITESSE_JOUEUR1_SAUT = -32.0f;
 const float DECALAGE_Y_PIED = 20;
 const float DECALAGE_Y_POING = 30;
@@ -57,8 +57,6 @@ const sf::Keyboard::Key TOUCHE_ATTAQUE1_JOUEUR2 = sf::Keyboard::P;
 const sf::Keyboard::Key TOUCHE_ATTAQUE2_JOUEUR2 = sf::Keyboard::M;
 
 
-
-
 // Personnages: Joueur 2
 const float POINTS_DE_VIE_JOUEUR2 = 3500;
 const float DEGAT_ATTAQUE_POING2 = 5;
@@ -72,13 +70,13 @@ const float TEMPS_BLOCAGE_ATTAQUE = 2;
 
 //Projectiles: Direct
 const int RAYON_DIRECT = 5;
-const float VITESSE_DIRECT = 45;
+const float VITESSE_DIRECT = 400;
 const float DEGAT_DIRECT = 5;
 const Point POSITION_DEPART_DIRECT = {POSITION_DEPART_JOUEUR1.x + 20, POSITION_DEPART_JOUEUR1.y + 75};//20 et 75 c'st en supposant que les personnage font 40*150
 
 //Projectiles: ZigZag
 // const Point POSITION_DEPART_ZIGZAG = {POSITION_DEPART_JOUEUR1.x, POSITION_DEPART_JOUEUR1.y};//20 et 75 c'st en supposant que les personnage font 40*150
-const float VITESSE_ZIGZAG = 30;
+const float VITESSE_ZIGZAG = 200;
 const float DEGAT_ZIGZAG = 5;
 const float RAYON_ZIGZAG = 5;
 const std::string CHEMIN_IMAGE_ZIGZAG =  "images/projectile.jpg";
@@ -118,11 +116,17 @@ const std::string CHEMIN_BOUTON_COMMANDES("images/Commandes.jpg");
 const std::string CHEMIN_BACKGROUND_COMMANDES("images/BackgroundCommandes.jpg");
 
 
-const std::string CHEMIN_IMAGE_JOUEUR1_RIEN ="images/Fighter/Idle_Left.png";
-const std::string CHEMIN_IMAGE_JOUEUR1_DROITE = "images/Fighter/Walk_Right.png";
-const std::string CHEMIN_IMAGE_JOUEUR1_SAUT = "images/Fighter/Saut.png";
-const std::string CHEMIN_IMAGE_JOUEUR1_POING_DROITE = "images/Fighter/Fist.png";
-const std::string CHEMIN_IMAGE_JOUEUR1_PIED_DROITE = "images/Fighter/Foot.png";
+const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_RIEN ={"images/Fighter/Idle_Right.png","images/Fighter/Idle_Left.png"};
+const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_AVANCER = {"images/Fighter/Walk_Right.png","images/Fighter/Walk_Left.png"};
+const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_SAUT = {"images/Fighter/Saut_Right.png","images/Fighter/Saut_Left.png"};
+const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_ATTAQUE1= {"images/Fighter/Fist_Right.png","images/Fighter/Fist_Left.png"};
+const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_ATTAQUE2 = {"images/Fighter/Foot_Right.png","images/Fighter/Foot_Left.png"};
+
+const int NB_IMAGE_SPRITE_SAUT = 1;
+const int NB_IMAGE_SPRITE_RIEN = 6;
+const int NB_IMAGE_SPRITE_AVANCER = 8;
+const int NB_IMAGE_ATTAQUE1 = 1;
+const int  NB_IMAGE_ATTAQUE2 = 1;
 
 const std::string CHEMIN_BOUTON_RETOUR("../images/Home.jpg");
 const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");
