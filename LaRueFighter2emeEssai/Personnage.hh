@@ -39,9 +39,9 @@ private:
     bool blockAtt = false;
 public:
     // Constructeurs et destructeur
-    Personnage();
+    Personnage(){};
     Personnage(Point position, int vie, std::vector<std::pair<std::string,std::string>> vecteurChemin, Direction direction, Taille taille, std::string cheminActuel);
-    ~Personnage();
+    ~Personnage(){};
 
     // Méthodes d'accès
     int getVie() const { return vie; }
@@ -57,12 +57,10 @@ public:
     std::list<Projectile*> getListeProjectiles() const {return listeProjectiles;}
     std::string getCheminImageActuelle()const { return cheminImageActuelle; }
     int getNbImageSprite() const { return nbImageSprite; }
+
+
     // Méthodes de modification
     void setEtat(std::string cle, bool new_val) { this->etatPlusChemin[cle].first = new_val; }
-    //void setCheminImage(std::string cle, std::string new_val) { this->etatPlusChemin[cle].second = new_val; }
-
-
-    // Méthodes de modification
     void setVie(int vie) { this->vie = vie; }
     void setVelocityX(float x){ this->velocity.x = x;}
     void setVelocityY(float y){ this->velocity.y = y;}
@@ -84,7 +82,6 @@ public:
     void contact_projectile(Personnage& personnage);
     void contact_attaque(Personnage& personnage);
     void contact_projectile(); 
-
     std::string toString();
     void update_attaque();
 

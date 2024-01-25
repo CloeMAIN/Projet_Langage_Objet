@@ -25,10 +25,20 @@ int main(int argc, char const *argv[])
     
     if (test == 0){
     //Le jeu lance la partie
-    jeu.lancer(&afficheur);
+    test = jeu.lancer(&afficheur);
     }
 
-   
+    //On affiche le menu dans le cas où le joueur 1 a perdu
+//    if (test == 1){
+//     Menu menu;
+//     menu.lancer(&afficheur);
+//    }
+
+   //On affiche le menu dans le cas où le joueur 2 a perdu
+    // if (test == 2){
+    // Menu menu;
+    // menu.lancer(&afficheur);
+    // }
 
     return 0;
 }

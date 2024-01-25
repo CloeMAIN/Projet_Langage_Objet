@@ -5,16 +5,16 @@ SOURCES= $(wildcard *.cc)
 OBJECTS=$(SOURCES:.cc=.o)
 EXECUTABLE=mon_programme
 
-all: $(SOURCES) $(EXECUTABLE)
-
-main:
+all: run
 
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
-	./$(EXECUTABLE)
 
 .cpp.o:
 	$(CC) $(CFLAGS) $< -o $@
+
+run : $(EXECUTABLE)
+	./$(EXECUTABLE)
 
 clean:
 	rm -f *.o $(EXECUTABLE)
