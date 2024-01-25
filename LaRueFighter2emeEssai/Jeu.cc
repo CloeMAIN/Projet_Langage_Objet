@@ -110,8 +110,8 @@ int Jeu::lancer(Afficheur* afficheur)
 
         // Mettre à jour la position des joueurs
         empecherSortie();
-        // joueur1.mouvement();
-        // joueur2.mouvement();
+        joueur1.mouvement();
+        joueur2.mouvement();
         joueur1.GestionProjectileLineaire();
         joueur2.GestionProjectileZigZag();
         joueur1.majProjectiles(DELTA_TIME);
