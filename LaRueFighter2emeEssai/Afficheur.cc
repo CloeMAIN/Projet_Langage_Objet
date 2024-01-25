@@ -16,24 +16,9 @@ Afficheur::~Afficheur()
 }
 
 void Afficheur::afficher(const Personnage& joueur) {
-
-    
-    // if(DEBUGGING_MODE){
-    // sf::RectangleShape pers(sf::Vector2f(joueur.getTaille().largeur, joueur.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
-    // pers.setPosition(joueur.getPosition().x, joueur.getPosition().y); // Positionné au bas au milieu
-    // pers.setFillColor(sf::Color::Blue);
-    // window.draw(pers);
-    // //On affiche le point position du joueur sous la forme d'un cercle
-    // sf::CircleShape cercle(10);
-    // cercle.setPosition(joueur.getPosition().x, joueur.getPosition().y);
-    // cercle.setFillColor(sf::Color::Red);
-    // window.draw(cercle);
-    // }
-
     for (Projectile* projectile : joueur.getListeProjectiles()) {
         afficher(*projectile);
     }
-
     if(joueur.getEtat()["Attaque1"].first){
         afficher(joueur.getAttaque());
     }
@@ -47,15 +32,11 @@ void Afficheur::afficher(const Personnage& joueur) {
     if (!texture.loadFromFile(joueur.getCheminImageActuelle())) 
         throw std::runtime_error("Erreur de chargement de l'image : " + joueur.getCheminImageActuelle());
 
-    // log
-    //std::cout << "Chargement de l'image : " << joueur.getCheminImageActuelle() << std::endl;
-
     sf::Sprite sprite = joueur.getSprite();
     sprite.setTexture(texture);
     sprite.setScale(2.f, 2.f); // Ajuste l'échelle en fonction de la direction
 
     // Calcul de la position X de la texture à afficher
-    
     int largeurImage = texture.getSize().x / joueur.getNbImageSprite(); //8
     int xTexture = static_cast<int>(joueur.getPosition().x) / largeurImage % joueur.getNbImageSprite();
     xTexture = xTexture * largeurImage;
@@ -71,16 +52,6 @@ void Afficheur::afficher(const Personnage& joueur) {
 }
 
 void Afficheur::afficher(const ElementJeu& element) {
-    // Je fais un rectangle
-    // sf::RectangleShape rectangle(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
-    // rectangle.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
-    // rectangle.setFillColor(sf::Color::Black);
-    // window.draw(rectangle);
-    // sf::CircleShape cercle(10);
-    // cercle.setPosition(element.getPosition().x, element.getPosition().y);
-    // cercle.setFillColor(sf::Color::Black);
-    // window.draw(cercle);
-
     sf::RectangleShape test(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
     test.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
     test.setFillColor(sf::Color::Black);
@@ -125,11 +96,6 @@ sf::Texture texture;
     window.draw(bouton);
 }
 
-
-// Afficheur:: afficher(Bouton){
-//     en fonction image
-// }
-
 void Afficheur:: afficher(std::string cheminBackground){
     sf::Texture texture;
     texture.loadFromFile(cheminBackground);
@@ -147,18 +113,11 @@ void Afficheur::afficherSol() {
     window.draw(sol);
 }
 
-
+//Je laisse pour quand on affichera le nom des joueurs
 // Afficheur:: afficher(Texte){
 
 // }
 
-// Afficher:: afficher(Barre de vie){
-
-//     // inclue le nom du personnage au dessus et une pdp du perso
-
-//     // la barre de vie
-
-// }    
 
 void Afficheur::afficherMenu(){
     /* Affichage du background */
@@ -172,7 +131,7 @@ void Afficheur::afficherMenu(){
 }
 
 
-void Afficheur::afficherBarreVieJ1(int vie){
+void Afficheur::afficherBarreVieJ1(float vie){
     sf::RectangleShape barreVie(sf::Vector2f(vie*10, 50));
     barreVie.setPosition(POSITION_BARRE_J1.x, POSITION_BARRE_J1.y);
     barreVie.setFillColor(COULEUR_BARRE_J1);
@@ -188,7 +147,7 @@ void Afficheur::afficherBarreVieJ1(int vie){
 
 };
 
-void Afficheur::afficherBarreVieJ2(int vie) {
+void Afficheur::afficherBarreVieJ2(float vie) {
     sf::RectangleShape barreVie(sf::Vector2f(vie * 10, 50));
     barreVie.setPosition(POSITION_BARRE_J2.x + (1000 - vie * 10), POSITION_BARRE_J2.y);
     barreVie.setFillColor(COULEUR_BARRE_J2);

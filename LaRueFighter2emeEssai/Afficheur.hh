@@ -29,8 +29,8 @@ class Afficheur
         void afficher(std::string cheminBackground);
         void afficherSol();
         void afficher(const Projectile &projectile);
-        void afficherBarreVieJ1(int vie);
-        void afficherBarreVieJ2(int vie);
+        void afficherBarreVieJ1(float vie);
+        void afficherBarreVieJ2(float vie);
         void afficher(const ElementJeu& element);
 
 };

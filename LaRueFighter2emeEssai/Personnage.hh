@@ -17,7 +17,7 @@ enum Action {
 class Personnage : public ElementJeu {
 
 private:
-    int vie;
+    float vie;
     sf::Texture texture;     // Ajout de la texture
     sf::Sprite sprite;       // Ajout du sprite
     int nbImageSprite;
@@ -44,7 +44,7 @@ public:
     ~Personnage(){};
 
     // Méthodes d'accès
-    int getVie() const { return vie; }
+    float getVie() const { return vie; }
     sf::Sprite getSprite() const { return sprite; }
     sf::Texture getTexture() const { return texture; }
     sf::Vector2f getVelocity() const { return velocity; }
@@ -61,7 +61,7 @@ public:
 
     // Méthodes de modification
     void setEtat(std::string cle, bool new_val) { this->etatPlusChemin[cle].first = new_val; }
-    void setVie(int vie) { this->vie = vie; }
+    void setVie(float vie) { this->vie = vie; }
     void setVelocityX(float x){ this->velocity.x = x;}
     void setVelocityY(float y){ this->velocity.y = y;}
     void setBlock(bool b){ this->block = b;}
