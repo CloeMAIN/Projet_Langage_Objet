@@ -97,8 +97,9 @@ void Jeu::empecherSortie(){
 
 void Jeu::majJoueurs(){
     // Appliquer la gravité pour les deux joueurs
-        if (joueur1.getPosition().y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y) {
-            // std::cout <<" GRAVITE APPLIED" << std::endl;
+        joueur1.surPlateforme(plateformes);
+        joueur2.surPlateforme(plateformes);
+        if (joueur1.getPosition().y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y ) {
             joueur1.setVelocityY(joueur1.getVelocity().y + GRAVITE);
         }
         if (joueur2.getPosition().y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y) {
@@ -107,8 +108,8 @@ void Jeu::majJoueurs(){
 
         // Mettre à jour la position des joueurs
         empecherSortie();
-        joueur1.mouvement();
-        joueur2.mouvement();
+        joueur1.mouvement(plateformes);
+        joueur2.mouvement(plateformes);
 
         //Gerer les projectiles des joueurs
         joueur1.GestionProjectileLineaire();
@@ -125,3 +126,4 @@ void Jeu::majJoueurs(){
         joueur2.update_contact(joueur1);
 
 }
+

@@ -30,6 +30,10 @@ class Jeu
                             TAILLE_JOUEUR_SPRITE, 
                             CHEMIN_IMAGE_JOUEUR1_RIEN.first};
 
+        std::vector<ElementJeu> plateformes = {ElementJeu(POSITION_PLATEFORME1, Direction::GAUCHE, TAILLE_PLATEFORME),
+                                                ElementJeu(POSITION_PLATEFORME2, Direction::GAUCHE, TAILLE_PLATEFORME), 
+                                                ElementJeu(POSITION_PLATEFORME3, Direction::GAUCHE, TAILLE_PLATEFORME),};
+
     public:
         Jeu(){};
         ~Jeu(){};
@@ -38,12 +42,14 @@ class Jeu
         /* Getter */
         Personnage getJoueur1(){return joueur1;}
         Personnage getJoueur2(){return joueur2;}
+        ElementJeu getPlateforme(int i){return plateformes[i];}
         // std::list<Projectile*> getListesProjectiles(){return listes_projectiles;}
         
         /* Méthode */
         void majJoueurs();
         void empecherSortie();
         void reinitialiser();
+        
 };
 
 

@@ -137,4 +137,6 @@ int main(){
     // std::cout << "Joueur1 Après :" << "\n" << joueur1.toString() << std::endl;
     // std::cout << "Element Après  :" << "\nTaille :" << joueur1.getAttaque().getTaille().hauteur << " " << joueur1.getAttaque().getTaille().largeur << "\nPosition :" << joueur1.getAttaque().getPosition().x << " " << joueur1.getAttaque().getPosition().y << "\nCheminImage :" << joueur1.getAttaque().getCheminImage() << "\nDirection :" << joueur1.getAttaque().getDirection() << "\n" << std::endl;
 
+    // std::cout << "------------------TEST PLATEFORME------------" << std::endl;
+
 }

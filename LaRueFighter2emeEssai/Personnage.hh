@@ -71,7 +71,7 @@ public:
     void update();
 
     /* Méthode */
-    void mouvement();
+    void mouvement(std::vector<ElementJeu> plateformes);
     void appliquerGravite();
     void chargerEtAfficherImage(const std::string& etat, int largeur, int hauteur, int directionMultiplier);
     void deplacerPersonnage(float deplacementX, float deplacementY);
@@ -84,6 +84,7 @@ public:
     void contact_projectile(); 
     std::string toString();
     void update_attaque();
+    bool surPlateforme(std::vector<ElementJeu> plateformes);
 
     
 };

@@ -38,7 +38,7 @@ Personnage::Personnage(Point position, float vie, std::vector<std::pair<std::str
     
 }
 
-void Personnage::mouvement(){
+void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
     int i = 1; // Variable pour gérer la direction du personnage (1 pour droite, -1 pour gauche)
     appliquerGravite(); // Appelle la fonction pour appliquer la gravité au personnage
     
@@ -81,7 +81,7 @@ void Personnage::mouvement(){
         sprite.move(0,VITESSE_JOUEUR_SAUT);
         position = {sprite.getPosition().x,sprite.getPosition().y}; 
 
-        if(position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y){ // tant qu'il n'a pas touché le sol
+        if(position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y ){ // tant qu'il n'a pas touché le sol
             etatPlusChemin["Saut"].first = false;
         }
         
@@ -292,4 +292,20 @@ void Personnage::contact_attaque(Personnage& personnage){
     attaque = nullptr;
 
     }
+}
+
+
+bool Personnage::surPlateforme(std::vector<ElementJeu> plateformes){
+    for (int i = 0; i < NB_PLATEFORMES;){
+        if(position.x >= plateformes[i].getPosition().x && position.x <= plateformes[i].getPosition().x + plateformes[i].getTaille().largeur){
+            if(position.y + TAILLE_JOUEUR_SPRITE.hauteur >= plateformes[i].getPosition().y && position.y + TAILLE_JOUEUR_SPRITE.hauteur <= plateformes[i].getPosition().y + plateformes[i].getTaille().hauteur){
+                position = {position.x, plateformes[i].getPosition().y - TAILLE_JOUEUR_SPRITE.hauteur};
+                setEtat("Saut", false);
+                setVelocityY(0);
+                return true;
+            }
+        }
+        i++;
+    }
+    return false;
 }

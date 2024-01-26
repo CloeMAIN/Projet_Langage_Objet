@@ -79,6 +79,9 @@ void Afficheur::afficher(Jeu& jeu) {
     afficherBarreVieJ2(jeu.getJoueur2().getVie());
     afficher(jeu.getJoueur1()); // Affiche le joueur 1
     afficher(jeu.getJoueur2()); // Affiche le joueur 2
+    for (int i = 0; i < NB_PLATEFORMES; i++) {
+        afficher(CHEMIN_PLATEFORME, PLATEFORME, jeu.getPlateforme(i).getPosition());
+    }
     // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
     window.display();
 }

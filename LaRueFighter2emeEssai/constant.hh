@@ -159,7 +159,12 @@ const Point POSITION_BOUTON_RETOUR = {0, 0};
 const Point POSITION_BOUTON_PAUSE = {float(TAILLE_FENETRE.x) - 300, 0};
 const Point POSITION_SOL = {0, float(TAILLE_FENETRE.y) - HAUTEUR_SOL};
 
-
+const int NB_PLATEFORMES = 3;
+const Point POSITION_PLATEFORME1 = {float(TAILLE_FENETRE.x)/2 + 250, float(TAILLE_FENETRE.y) - 500};
+const Point POSITION_PLATEFORME2 = {float(TAILLE_FENETRE.x)/2 - 200 , float(TAILLE_FENETRE.y) - 700};
+const Point POSITION_PLATEFORME3 = {float(TAILLE_FENETRE.x)/2 - 500 , float(TAILLE_FENETRE.y) - 450};
+const Taille TAILLE_PLATEFORME = {float(TAILLE_FENETRE.x)/8, 25};
+const HitBox PLATEFORME = {POSITION_PLATEFORME1.x, POSITION_PLATEFORME1.y, POSITION_PLATEFORME1.x + TAILLE_PLATEFORME.largeur, POSITION_PLATEFORME1.y + TAILLE_PLATEFORME.hauteur};
 //Taille des boutons:
 // const HitBox TAILLE_BOUTON_RETOUR = { 80 , 80 };
 // const HitBox TAILLE_BOUTON_PAUSE = { 80 , 80 };
@@ -170,7 +175,7 @@ const std::string CHEMIN_BOUTON_RETOUR("../images/Home.jpg");
 const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");
 const std::string CHEMIN_BACKGROUND_ROUND1("../images/Round2.jpg");
 const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
-
+const std::string CHEMIN_PLATEFORME("images/plateformes.png");
 
 /*-----------------------------------MENU DE VICTOIRE-----------------------------------------*/
 // Chemins des images:
