@@ -27,7 +27,7 @@ const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
 const float VITESSE_JOUEUR = 10;
 const float VITESSE_JOUEUR_SAUT = -32.0f;
 const Taille TAILLE_JOUEUR_SPRITE = {70, 164};
-const float POINTS_DE_VIE_JOUEUR = 3500;
+const float POINTS_DE_VIE_JOUEUR = 40;
 
 
 /*----------------------------------------JOUEUR 1-----------------------------------------------*/
@@ -78,7 +78,7 @@ const sf::Keyboard::Key TOUCHE_ATTAQUE2_JOUEUR2 = sf::Keyboard::M;
 
 
 // Personnages: Joueur 2
-const float POINTS_DE_VIE_JOUEUR2 = 3500;
+const float POINTS_DE_VIE_JOUEUR2 = 100;
 const Point POSITION_DEPART_JOUEUR2 = {float(TAILLE_FENETRE.x)/3 * 2,0};
 
 // Barre de vie
@@ -176,6 +176,9 @@ const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");
 const std::string CHEMIN_BACKGROUND_ROUND1("../images/Round2.jpg");
 const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 const std::string CHEMIN_PLATEFORME("images/plateformes.png");
+
+/* Background aléatoire*/
+const std::vector<std::string> CHEMIN_BACKGROUNDS_RANDOM = {"images/background_jeu/louvre.png", "images/background_jeu/triomphe.png"};
 
 /*-----------------------------------MENU DE VICTOIRE-----------------------------------------*/
 // Chemins des images:

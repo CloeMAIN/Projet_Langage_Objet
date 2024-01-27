@@ -73,7 +73,10 @@ void Afficheur::afficher(const Projectile& projectile) {
 void Afficheur::afficher(Jeu& jeu) {
     // inclut le nom du personnage au-dessus et une pdp du perso
     // la barre de vie
-    window.clear(sf::Color::Green); // enlever le menu
+    window.clear(sf::Color::Black); // enlever le menu
+    /* afficher un des backgrounds dans la*/
+    //afficher(CHEMIN_BACKGROUNDS_RANDOM);
+    afficherFondJeu();
     afficherSol();
     afficherBarreVieJ1(jeu.getJoueur1().getVie());
     afficherBarreVieJ2(jeu.getJoueur2().getVie());
@@ -107,6 +110,8 @@ void Afficheur:: afficher(std::string cheminBackground){
     window.draw(sprite);
 }
 
+
+
 void Afficheur::afficherSol() {
     sf::RectangleShape sol(sf::Vector2f(TAILLE_FENETRE.x, HAUTEUR_SOL)); // Utilisation de Vector2f pour la taille
     sol.setPosition(0, TAILLE_FENETRE.y-HAUTEUR_SOL); // Positionné au bas au milieu
@@ -131,31 +136,23 @@ void Afficheur::afficher(Menu menu){
     window.display();
 }
 
+void Afficheur::afficherBarreVieJ1(float vie) {
+    const float tailleInitiale = 1000.0f;
 
-void Afficheur::afficherBarreVieJ1(float vie){
-    sf::RectangleShape barreVie(sf::Vector2f(vie*10, 50));
+    // Calcul de la largeur de la barre de vie en fonction de la valeur de "vie"
+    float largeurBarre = (vie > 0) ? (vie * tailleInitiale) / POINTS_DE_VIE_JOUEUR1 : 0;
+
+    // Barre de vie
+    sf::RectangleShape barreVie(sf::Vector2f(largeurBarre, 50));
     barreVie.setPosition(POSITION_BARRE_J1.x, POSITION_BARRE_J1.y);
     barreVie.setFillColor(COULEUR_BARRE_J1);
-    sf::RectangleShape barreVieFond(sf::Vector2f(1000, 50));
+
+    // Fond de la barre de vie
+    sf::RectangleShape barreVieFond(sf::Vector2f(tailleInitiale, 50));
     barreVieFond.setPosition(POSITION_BARRE_J1.x, POSITION_BARRE_J1.y);
     barreVieFond.setFillColor(sf::Color::Black);
-    if(vie<=0){
-        window.draw(barreVieFond); 
-    }else{
-            window.draw(barreVieFond);
-        window.draw(barreVie);
-    }
 
-};
-
-void Afficheur::afficherBarreVieJ2(float vie) {
-    sf::RectangleShape barreVie(sf::Vector2f(vie * 10, 50));
-    barreVie.setPosition(POSITION_BARRE_J2.x + (1000 - vie * 10), POSITION_BARRE_J2.y);
-    barreVie.setFillColor(COULEUR_BARRE_J2);
-    sf::RectangleShape barreVieFond(sf::Vector2f(1000, 50));
-    barreVieFond.setPosition(POSITION_BARRE_J2.x, POSITION_BARRE_J2.y);
-    barreVieFond.setFillColor(sf::Color::Black);
-
+    // Affichage en fonction de la vie
     if (vie <= 0) {
         window.draw(barreVieFond);
     } else {
@@ -163,3 +160,50 @@ void Afficheur::afficherBarreVieJ2(float vie) {
         window.draw(barreVie);
     }
 }
+
+
+
+void Afficheur::afficherBarreVieJ2(float vie) {
+    const float tailleInitiale = 1000.0f; // Taille initiale de la barre de vie
+
+    // Calcul de la largeur de la barre de vie en fonction de la valeur de "vie"
+    float largeurBarre = (vie > 0) ? (vie * tailleInitiale) / POINTS_DE_VIE_JOUEUR1 : 0;
+
+    // Barre de vie
+    sf::RectangleShape barreVie(sf::Vector2f(largeurBarre, 50));
+    barreVie.setPosition(POSITION_BARRE_J2.x + (tailleInitiale - largeurBarre), POSITION_BARRE_J2.y);
+    barreVie.setFillColor(COULEUR_BARRE_J2);
+
+    // Fond de la barre de vie
+    sf::RectangleShape barreVieFond(sf::Vector2f(tailleInitiale, 50));
+    barreVieFond.setPosition(POSITION_BARRE_J2.x, POSITION_BARRE_J2.y);
+    barreVieFond.setFillColor(sf::Color::Black);
+
+    // Affichage en fonction de la vie
+    if (vie <= 0) {
+        window.draw(barreVieFond);
+    } else {
+        window.draw(barreVieFond);
+        window.draw(barreVie);
+    }
+}
+
+void Afficheur::afficherFondJeu() {
+            sf::Sprite sprite;
+            sprite.setTexture(fondTexture);
+            sprite.setPosition(0, 0);
+            sprite.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sprite.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sprite.getLocalBounds().height));
+            window.draw(sprite);
+            // ca affiche par dessus un ecran noir transparent
+            sf::RectangleShape rectangle(sf::Vector2f(TAILLE_FENETRE.x, TAILLE_FENETRE.y));
+            rectangle.setFillColor(sf::Color(0, 0, 0, 200));
+            window.draw(rectangle);
+        }
+
+void Afficheur::loadFondJeu() {
+            // genere un nombre aleatoire entre 0 et la taille de CHEMIN_BACKGROUNDS_RANDOM
+            srand(static_cast<unsigned int>(time(nullptr)));
+            int nombreAleatoire = rand() % CHEMIN_BACKGROUNDS_RANDOM.size();
+            fondTexture.loadFromFile(CHEMIN_BACKGROUNDS_RANDOM[nombreAleatoire]);
+        // Charger d'autres textures au besoin
+        }   

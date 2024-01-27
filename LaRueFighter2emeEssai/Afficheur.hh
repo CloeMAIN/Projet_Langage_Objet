@@ -18,6 +18,7 @@ class Afficheur
 {
     private:
         sf::RenderWindow window;
+        sf::Texture fondTexture;
     public:
         Afficheur(/* args */);
         ~Afficheur();
@@ -37,6 +38,12 @@ class Afficheur
         void afficherBarreVieJ1(float vie);
         void afficherBarreVieJ2(float vie);
         void afficher(const ElementJeu& element);
+        void afficher(std::vector<std::string> cheminBackground);
+        // Initialise dès le départ un fond pour la partie
+        void loadFondJeu();
+        // Fonction pour afficher le fond lors des parties qui load pas
+        void afficherFondJeu();
+
 
 };
 

@@ -31,6 +31,8 @@ int Jeu::lancer(Afficheur* afficheur)
     bool lancerJeu = true;
     InputUser inputUser;
     sf::RenderWindow* window = afficheur->getWindow();
+    
+    
 
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
@@ -42,6 +44,7 @@ int Jeu::lancer(Afficheur* afficheur)
         
         //Gérer tous les affichages
         afficheur->afficher(*this); 
+        
 
         if(joueur1.getVie() <= 0 ){
             lancerJeu = false;
