@@ -15,11 +15,13 @@
 
 int main(int argc, char const *argv[])
 {
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
     Jeu jeu;
     Afficheur afficheur;
     Menu menu ({CHEMIN_BACKGROUND_MENU, CHEMIN_BACKGROUND_COMMANDES}, {{CHEMIN_BOUTON_JOUER,{TAILLE_BOUTON_JOUER, POSITION_BOUTON_JOUER}},
                                                                     {CHEMIN_BOUTON_COMMANDES,{TAILLE_BOUTON_COMMANDES, POSITION_BOUTON_COMMANDES}}, 
-                                                                    {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}}); // Remove the parentheses here
+                                                                    {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}, 
+                                                                    {CHEMIN_BOUTON_QUESTIONNAIRE, {TAILLE_BOUTON_QUESTIONNAIRE, POSITION_BOUTON_QUESTIONNAIRE}}}); // Remove the parentheses here
     int test = 0;
     test  = menu.lancer(&afficheur);
     int Partie = 0;
@@ -33,8 +35,9 @@ int main(int argc, char const *argv[])
             //On affiche le menu dans le cas où le joueur 1 a perdu
         if (test == 1){
             Menu menu ({CHEMIN_BACKGROUND_VICTOIRE_J2,  ""}, {{CHEMIN_BOUTON_REJOUER,{TAILLE_BOUTON_REJOUER, POSITION_BOUTON_REJOUER}},
-                                                                            {CHEMIN_BOUTON_COMMANDES,{TAILLE_BOUTON_COMMANDES, {-200, -200}}}, 
-                                                                            {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}});
+                                                                {CHEMIN_BOUTON_COMMANDES,{TAILLE_BOUTON_COMMANDES, {-200, -200}}}, 
+                                                                {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}, 
+                                                                {CHEMIN_BOUTON_QUESTIONNAIRE, {TAILLE_BOUTON_QUESTIONNAIRE, POSITION_BOUTON_QUESTIONNAIRE}}});
             test = menu.lancer(&afficheur);
         }
         //On affiche le menu dans le cas où le joueur 2 a perdu
@@ -48,7 +51,23 @@ int main(int argc, char const *argv[])
         if (test == 3){
             Partie = 1;
         }
-}
 
+        if (test == 4){
+            // Crée une instance de la classe Formulaire en utilisant les variables QUESTIONS et NB_QUESTIONS
+            Formulaire formulaire(QUESTIONS, NB_QUESTIONS);
+
+            // Lance la fonction membre lancer() de la classe Formulaire
+            test = formulaire.lancer(); 
+        }
+
+        if (test == 5){
+            //On affichera le menu de victoire du questionnaire
+            std::cout << "Victoire du questionnaire" << std::endl;
+            Menu menu({CHEMIN_BACKGROUND_VICTOIRE_J2,  ""}, {{CHEMIN_BOUTON_REJOUER,{TAILLE_BOUTON_REJOUER, POSITION_BOUTON_REJOUER}},
+                                                            {CHEMIN_BOUTON_COMMANDES,{TAILLE_BOUTON_COMMANDES, {-200, -200}}}, 
+                                                            {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}});
+        }
+
+    }
     return 0;
 }

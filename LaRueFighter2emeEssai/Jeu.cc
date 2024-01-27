@@ -8,6 +8,13 @@
 #include "ProjectileZigZag.hh"
 #include "ProjectileLineaire.hh"
 
+Jeu::Jeu(){
+    chemin_image_fond = CHEMIN_IMAGE_PARTIE[rand() % NB_BACKGROUND ];
+    texture.loadFromFile(chemin_image_fond);
+    sprite.setTexture(texture);
+    sprite.setPosition(0, 0);
+    sprite.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sprite.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sprite.getLocalBounds().height));
+}
 
 void Jeu::reinitialiser(){
     joueur1 = Personnage(POSITION_DEPART_JOUEUR1,
@@ -24,6 +31,8 @@ void Jeu::reinitialiser(){
                             Direction::GAUCHE,
                             TAILLE_JOUEUR_SPRITE, 
                             CHEMIN_IMAGE_JOUEUR1_RIEN.first);
+
+    Jeu();
 }
 
 int Jeu::lancer(Afficheur* afficheur)
@@ -35,7 +44,7 @@ int Jeu::lancer(Afficheur* afficheur)
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
         // Gestion des événements
-        inputUser.gererEvenements(afficheur->getWindow(), joueur1, joueur2);
+        inputUser.gererEvenements(afficheur->getWindow(), joueur1, joueur2, plateformes);
 
         //Mise à jour des joueurs
         majJoueurs();

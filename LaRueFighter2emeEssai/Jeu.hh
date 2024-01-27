@@ -8,6 +8,8 @@
 #include "constant.hh"
 #include "Projectile.hh"
 #include <list>
+#include <cstdlib>
+#include <ctime>
 
 class Afficheur;
 
@@ -32,10 +34,15 @@ class Jeu
 
         std::vector<ElementJeu> plateformes = {ElementJeu(POSITION_PLATEFORME1, Direction::GAUCHE, TAILLE_PLATEFORME),
                                                 ElementJeu(POSITION_PLATEFORME2, Direction::GAUCHE, TAILLE_PLATEFORME), 
-                                                ElementJeu(POSITION_PLATEFORME3, Direction::GAUCHE, TAILLE_PLATEFORME),};
+                                                ElementJeu(POSITION_PLATEFORME3, Direction::GAUCHE, TAILLE_PLATEFORME),
+                                                ElementJeu(POSITION_PLATEFORME4, Direction::GAUCHE, TAILLE_PLATEFORME),};
+
+        std::string chemin_image_fond; 
+        sf::Texture texture;
+        sf::Sprite sprite;
 
     public:
-        Jeu(){};
+        Jeu();
         ~Jeu(){};
         int lancer(Afficheur* afficheur);
 
@@ -43,7 +50,9 @@ class Jeu
         Personnage getJoueur1(){return joueur1;}
         Personnage getJoueur2(){return joueur2;}
         ElementJeu getPlateforme(int i){return plateformes[i];}
-        // std::list<Projectile*> getListesProjectiles(){return listes_projectiles;}
+        std::string getCheminImageFond(){return chemin_image_fond;}
+        sf::Sprite getSprite(){return sprite;}
+        sf::Texture getTexture(){return texture;}
         
         /* Méthode */
         void majJoueurs();

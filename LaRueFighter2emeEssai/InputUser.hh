@@ -23,7 +23,7 @@ public:
     InputUser();
     ~InputUser();
 
-    void gererEvenements(sf::RenderWindow* window, Personnage& joueur1, Personnage& joueur2);
+    void gererEvenements(sf::RenderWindow* window, Personnage& joueur1, Personnage& joueur2, std::vector<ElementJeu> Plateformes);
     void checkRien(Personnage& joueur);
     void checkDegat(Personnage& joueur);
     void checkGauche(Personnage& joueur);
@@ -32,6 +32,7 @@ public:
     void checkAttaque1(Personnage& joueur);
     void checkAttaque2(Personnage& joueur);
     void checkProjectile(Personnage& joueur);
+    void DemandeAttaque(Personnage& joueur1, Personnage& joueur2);
 };
 
 

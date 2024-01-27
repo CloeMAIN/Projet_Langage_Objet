@@ -73,7 +73,8 @@ void Afficheur::afficher(const Projectile& projectile) {
 void Afficheur::afficher(Jeu& jeu) {
     // inclut le nom du personnage au-dessus et une pdp du perso
     // la barre de vie
-    window.clear(sf::Color::Green); // enlever le menu
+    window.clear(); // enlever le menu
+    window.draw(jeu.getSprite());
     afficherSol();
     afficherBarreVieJ1(jeu.getJoueur1().getVie());
     afficherBarreVieJ2(jeu.getJoueur2().getVie());
@@ -128,6 +129,7 @@ void Afficheur::afficher(Menu menu){
     afficher(menu.getListeBoutons()[0].first, menu.getListeBoutons()[0].second.first, menu.getListeBoutons()[0].second.second);
     afficher(menu.getListeBoutons()[1].first, menu.getListeBoutons()[1].second.first, menu.getListeBoutons()[1].second.second);
     afficher(menu.getListeBoutons()[2].first, menu.getListeBoutons()[2].second.first, menu.getListeBoutons()[2].second.second);
+    afficher(menu.getListeBoutons()[3].first, menu.getListeBoutons()[3].second.first, menu.getListeBoutons()[3].second.second);
     window.display();
 }
 

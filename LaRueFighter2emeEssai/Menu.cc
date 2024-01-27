@@ -44,6 +44,11 @@ int Menu::lancer(Afficheur* afficheur){
                         // std::cout << "Quitter" << std::endl;
                         afficheur->getWindow()->close();
                         return 3;}
+                    
+                    //else si je clique sur le bouton questionnaire
+                    else if (event.mouseButton.x >= listeBoutons[3].second.first.GaucheHaut.x && event.mouseButton.x <= listeBoutons[3].second.first.DroiteBas.x && event.mouseButton.y >= listeBoutons[3].second.first.GaucheHaut.y && event.mouseButton.y <= listeBoutons[3].second.first.DroiteBas.y){
+                        // std::cout << "Questionnaire" << std::endl;
+                        return 4;}
 
                 }
             }
