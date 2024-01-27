@@ -27,7 +27,7 @@ const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
 const float VITESSE_JOUEUR = 10;
 const float VITESSE_JOUEUR_SAUT = -32.0f;
 const Taille TAILLE_JOUEUR_SPRITE = {70, 164};
-const float POINTS_DE_VIE_JOUEUR = 40;
+const float POINTS_DE_VIE_JOUEUR = 3500;
 
 
 /*----------------------------------------JOUEUR 1-----------------------------------------------*/
@@ -42,7 +42,6 @@ const sf::Keyboard::Key TOUCHE_ATTAQUE1_JOUEUR1 = sf::Keyboard::G;
 const sf::Keyboard::Key TOUCHE_ATTAQUE2_JOUEUR1 = sf::Keyboard::H;
 
 // Personnages: Joueur 1
-const float POINTS_DE_VIE_JOUEUR1 = 3500;
 const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, 0};
 
 
@@ -78,7 +77,6 @@ const sf::Keyboard::Key TOUCHE_ATTAQUE2_JOUEUR2 = sf::Keyboard::M;
 
 
 // Personnages: Joueur 2
-const float POINTS_DE_VIE_JOUEUR2 = 100;
 const Point POSITION_DEPART_JOUEUR2 = {float(TAILLE_FENETRE.x)/3 * 2,0};
 
 // Barre de vie

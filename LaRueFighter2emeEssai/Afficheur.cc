@@ -134,13 +134,15 @@ void Afficheur::afficher(Menu menu){
     afficher(menu.getListeBoutons()[1].first, menu.getListeBoutons()[1].second.first, menu.getListeBoutons()[1].second.second);
     afficher(menu.getListeBoutons()[2].first, menu.getListeBoutons()[2].second.first, menu.getListeBoutons()[2].second.second);
     window.display();
+
 }
 
 void Afficheur::afficherBarreVieJ1(float vie) {
+    const float vieMaximale = POINTS_DE_VIE_JOUEUR;
     const float tailleInitiale = 1000.0f;
 
     // Calcul de la largeur de la barre de vie en fonction de la valeur de "vie"
-    float largeurBarre = (vie > 0) ? (vie * tailleInitiale) / POINTS_DE_VIE_JOUEUR1 : 0;
+    float largeurBarre = (vie > 0) ? (vie / vieMaximale) * tailleInitiale : tailleInitiale;
 
     // Barre de vie
     sf::RectangleShape barreVie(sf::Vector2f(largeurBarre, 50));
@@ -160,14 +162,12 @@ void Afficheur::afficherBarreVieJ1(float vie) {
         window.draw(barreVie);
     }
 }
-
-
-
 void Afficheur::afficherBarreVieJ2(float vie) {
+    const float vieMaximale = POINTS_DE_VIE_JOUEUR;
     const float tailleInitiale = 1000.0f; // Taille initiale de la barre de vie
 
     // Calcul de la largeur de la barre de vie en fonction de la valeur de "vie"
-    float largeurBarre = (vie > 0) ? (vie * tailleInitiale) / POINTS_DE_VIE_JOUEUR1 : 0;
+    float largeurBarre = (vie > 0) ? (vie / vieMaximale) * tailleInitiale : tailleInitiale;
 
     // Barre de vie
     sf::RectangleShape barreVie(sf::Vector2f(largeurBarre, 50));
@@ -176,7 +176,7 @@ void Afficheur::afficherBarreVieJ2(float vie) {
 
     // Fond de la barre de vie
     sf::RectangleShape barreVieFond(sf::Vector2f(tailleInitiale, 50));
-    barreVieFond.setPosition(POSITION_BARRE_J2.x, POSITION_BARRE_J2.y);
+    barreVieFond.setPosition(POSITION_BARRE_J2.x , POSITION_BARRE_J2.y);
     barreVieFond.setFillColor(sf::Color::Black);
 
     // Affichage en fonction de la vie
