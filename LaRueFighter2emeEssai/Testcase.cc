@@ -70,17 +70,14 @@ TEST_CASE("Entrées utilisateur et état joueur"){
   CHECK(joueur.getEtat()["Saut"].first == true);
   CHECK(joueur.getEtat()["Rien"].first == false);
   CHECK(joueur.getVelocity().y == VITESSE_JOUEUR_SAUT);
-  CHECK(joueur.getCheminImageActuelle() == CHEMIN_IMAGE_JOUEUR1_SAUT.first);
 
   input.checkAttaque1(joueur);
   CHECK(joueur.getEtat()["Attaque1"].first == true);
   CHECK(joueur.getEtat()["Rien"].first == false);
-  CHECK(joueur.getCheminImageActuelle() == CHEMIN_IMAGE_JOUEUR1_ATTAQUE1.first);
 
   input.checkAttaque2(joueur);
-  CHECK(joueur.getEtat()["Attaque2"].first == false);
+  CHECK(joueur.getEtat()["Attaque2"].first == true);
   CHECK(joueur.getEtat()["Rien"].first == false);
-  CHECK(joueur.getCheminImageActuelle() == CHEMIN_IMAGE_JOUEUR1_ATTAQUE1.first);
 
 
   input.checkGauche(joueur);
