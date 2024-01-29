@@ -15,13 +15,13 @@ const sf::Vector2f TAILLE_FENETRE = sf::Vector2f(static_cast<float>(sf::VideoMod
 
 // Taille du sol
 const int HAUTEUR_SOL = TAILLE_FENETRE.y/10;
+const Point POSITION_SOL = {0, TAILLE_FENETRE.y - HAUTEUR_SOL};
 
 //Temps pour déplacer les projectiles en continu
 const double DELTA_TIME = 0.05;
 
 // Environnement
 const float GRAVITE = 0.5f;
-
 
 
 // Tests
@@ -88,7 +88,9 @@ const sf::Keyboard::Key TOUCHE_ATTAQUE2_JOUEUR2 = sf::Keyboard::M;
 const Point POSITION_DEPART_JOUEUR2 = {float(TAILLE_FENETRE.x)/3 * 2,0};
 
 // Barre de vie
-const Point POSITION_BARRE_J2 = {float(TAILLE_FENETRE.x)-1020,float(20)};
+const float TAILLE_INITIALE = float(float(TAILLE_FENETRE.x)/2.5);
+
+const Point POSITION_BARRE_J2 = {float(TAILLE_FENETRE.x)-TAILLE_INITIALE -20 ,float(20)};
 const sf::Color COULEUR_BARRE_J2 = sf::Color::Blue;
 
 
@@ -98,13 +100,6 @@ const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR2_AVANCER = {"images
 const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR2_SAUT = {"images/Fighter2/Jump_Right2.png","images/Fighter2/Jump_Left2.png"};
 const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR2_ATTAQUE1= {"images/Fighter2/Fist_Right2.png","images/Fighter2/Fist_Left2.png"};
 const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR2_ATTAQUE2 = {"images/Fighter2/Foot_Right2.png","images/Fighter2/Foot_Left2.png"};
-
-// Nombre d'images par animation
-// const int NB_IMAGE_SPRITE_SAUT = 1;
-// const int NB_IMAGE_SPRITE_RIEN = 6;
-// const int NB_IMAGE_SPRITE_AVANCER = 8;
-// const int NB_IMAGE_ATTAQUE1 = 1;
-// const int NB_IMAGE_ATTAQUE2 = 1;
 
 /*------------------------------------Attaques---------------------------------*/
 
@@ -161,14 +156,9 @@ const HitBox TAILLE_BOUTON_JOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JO
 const HitBox TAILLE_BOUTON_QUESTIONNAIRE = { POSITION_BOUTON_QUESTIONNAIRE.x, POSITION_BOUTON_QUESTIONNAIRE.y , POSITION_BOUTON_QUESTIONNAIRE.x+200 , POSITION_BOUTON_QUESTIONNAIRE.y + float(TAILLE_FENETRE.y)/10};
 
 
-
 /*------------------------------------JEU PRINCIPAL----------------------------------*/
 
-
-const Point POSITION_BOUTON_RETOUR = {0, 0};
-const Point POSITION_BOUTON_PAUSE = {float(TAILLE_FENETRE.x) - 300, 0};
-const Point POSITION_SOL = {0, float(TAILLE_FENETRE.y) - HAUTEUR_SOL};
-
+//Plateformes
 const int NB_PLATEFORMES = 4;
 const Point POSITION_PLATEFORME1 = {float(TAILLE_FENETRE.x)/2 + 250, float(TAILLE_FENETRE.y) - 500};
 const Point POSITION_PLATEFORME2 = {float(TAILLE_FENETRE.x)/2 - 200 , float(TAILLE_FENETRE.y) - 700};
@@ -177,10 +167,6 @@ const Point POSITION_PLATEFORME4 = {float(TAILLE_FENETRE.x) - 500 , float(TAILLE
 
 const Taille TAILLE_PLATEFORME = {float(TAILLE_FENETRE.x)/8, 25};
 const HitBox PLATEFORME = {POSITION_PLATEFORME1.x, POSITION_PLATEFORME1.y, POSITION_PLATEFORME1.x + TAILLE_PLATEFORME.largeur, POSITION_PLATEFORME1.y + TAILLE_PLATEFORME.hauteur};
-//Taille des boutons:
-// const HitBox TAILLE_BOUTON_RETOUR = { 80 , 80 };
-// const HitBox TAILLE_BOUTON_PAUSE = { 80 , 80 };
-// const HitBox TAILLE_SOL = {TAILLE_FENETRE.x, 100};
 
 const std::vector<std::string> CHEMIN_IMAGE_PARTIE = {"images/LEVEL1.png", "images/LEVEL2.png", "images/LEVEL3.png", "images/LEVEL4.png"};
 const int NB_BACKGROUND = 4;
@@ -192,9 +178,6 @@ const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 const std::string CHEMIN_PLATEFORME("images/plateformes.png");
 const std::string CHEMIN_SOL("images/Sol.png");
 
-/* Background aléatoire*/
-const std::vector<std::string> CHEMIN_BACKGROUNDS_RANDOM = {"images/background_jeu/louvre.png", "images/background_jeu/triomphe.png"};
-
 /*-----------------------------------MENU DE VICTOIRE-----------------------------------------*/
 // Chemins des images:
 const std::string CHEMIN_BACKGROUND_VICTOIRE_J1("images/Victoire_J1.png");
@@ -203,10 +186,10 @@ const std::string CHEMIN_BACKGROUND_VICTOIRE_J2("images/Victoire_J1.png");
 const std::string CHEMIN_BOUTON_REJOUER("images/Rejouer.png");
 
 //Position des boutons:
-const Point POSITION_BOUTON_REJOUER = {float(TAILLE_FENETRE.x)/2 -100 , float(TAILLE_FENETRE.y) - 325};
+const Point POSITION_BOUTON_REJOUER = {float(TAILLE_FENETRE.x)/2 - float(TAILLE_FENETRE.x)/6 , float(TAILLE_FENETRE.y)/2 + float(TAILLE_FENETRE.y)/6};
 
 //Taille des boutons:
-const HitBox TAILLE_BOUTON_REJOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JOUER.y , POSITION_BOUTON_JOUER.x+200 , POSITION_BOUTON_JOUER.y+100};
+const HitBox TAILLE_BOUTON_REJOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JOUER.y , POSITION_BOUTON_JOUER.x+200 , POSITION_BOUTON_JOUER.y+ float(TAILLE_FENETRE.y)/10};
 
 /*-----------------------------------QUESTIONS POUR FORMULAIRE-----------------------------------------*/
 

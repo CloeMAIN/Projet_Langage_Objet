@@ -143,10 +143,9 @@ void Afficheur::afficher(Menu menu){
 
 void Afficheur::afficherBarreVieJ1(float vie) {
     const float vieMaximale = POINTS_DE_VIE_JOUEUR;
-    const float tailleInitiale = 1000.0f;
-
+    
     // Calcul de la largeur de la barre de vie en fonction de la valeur de "vie"
-    float largeurBarre = (vie > 0) ? (vie / vieMaximale) * tailleInitiale : tailleInitiale;
+    float largeurBarre = (vie > 0) ? (vie / vieMaximale) * TAILLE_INITIALE : TAILLE_INITIALE;
 
     // Barre de vie
     sf::RectangleShape barreVie(sf::Vector2f(largeurBarre, 50));
@@ -154,7 +153,7 @@ void Afficheur::afficherBarreVieJ1(float vie) {
     barreVie.setFillColor(COULEUR_BARRE_J1);
 
     // Fond de la barre de vie
-    sf::RectangleShape barreVieFond(sf::Vector2f(tailleInitiale, 50));
+    sf::RectangleShape barreVieFond(sf::Vector2f(TAILLE_INITIALE, 50));
     barreVieFond.setPosition(POSITION_BARRE_J1.x, POSITION_BARRE_J1.y);
     barreVieFond.setFillColor(sf::Color::Black);
 
@@ -168,18 +167,17 @@ void Afficheur::afficherBarreVieJ1(float vie) {
 }
 void Afficheur::afficherBarreVieJ2(float vie) {
     const float vieMaximale = POINTS_DE_VIE_JOUEUR;
-    const float tailleInitiale = 1000.0f; // Taille initiale de la barre de vie
 
     // Calcul de la largeur de la barre de vie en fonction de la valeur de "vie"
-    float largeurBarre = (vie > 0) ? (vie / vieMaximale) * tailleInitiale : tailleInitiale;
+    float largeurBarre = (vie > 0) ? (vie / vieMaximale) * TAILLE_INITIALE : TAILLE_INITIALE;
 
     // Barre de vie
     sf::RectangleShape barreVie(sf::Vector2f(largeurBarre, 50));
-    barreVie.setPosition(POSITION_BARRE_J2.x + (tailleInitiale - largeurBarre), POSITION_BARRE_J2.y);
+    barreVie.setPosition(POSITION_BARRE_J2.x + (TAILLE_INITIALE - largeurBarre), POSITION_BARRE_J2.y);
     barreVie.setFillColor(COULEUR_BARRE_J2);
 
     // Fond de la barre de vie
-    sf::RectangleShape barreVieFond(sf::Vector2f(tailleInitiale, 50));
+    sf::RectangleShape barreVieFond(sf::Vector2f(TAILLE_INITIALE, 50));
     barreVieFond.setPosition(POSITION_BARRE_J2.x , POSITION_BARRE_J2.y);
     barreVieFond.setFillColor(sf::Color::Black);
 
