@@ -45,12 +45,20 @@ bool Personnage::surPlateforme(std::vector<ElementJeu> plateformes){
                 position = {position.x, plateformes[i].getPosition().y - TAILLE_JOUEUR_SPRITE.hauteur};
                 setEtat("Saut", false);
                 setVelocityY(VITESSE_JOUEUR_SAUT);
+                // setVelocityY(0);
                 return true;
             }
         }
         i++;
     }
     return false;
+}
+
+void Personnage::appliquerGravite(std::vector<ElementJeu> Plateformes){
+    if (not(surPlateforme(Plateformes) || position.y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y ) ){
+        velocity.y += GRAVITE;
+        update();
+    }
 }
 
 void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
@@ -96,9 +104,10 @@ void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
         sprite.move(0,VITESSE_JOUEUR_SAUT);
         position = {sprite.getPosition().x,sprite.getPosition().y}; 
 
-        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y ) {
+        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y || surPlateforme(Plateformes) ) {
             etatPlusChemin["Saut"].first = false;
         }
+        std::cout<< etatPlusChemin["Saut"].first << std::endl;
     }
 }
 
@@ -197,14 +206,7 @@ void Personnage::gestionBlocageAttaque(int i, int j){
         }
 }
 
-void Personnage::appliquerGravite(std::vector<ElementJeu> Plateformes){
-    if (position.y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y ) {
-        velocity.y += GRAVITE;
-        update();
-    }
 
-
-}
 
 void Personnage::GestionProjectileZigZag(){
     if(etatPlusChemin["Projectile"].first){
