@@ -52,10 +52,10 @@ void Afficheur::afficher(const Personnage& joueur) {
 }
 
 void Afficheur::afficher(const ElementJeu& element) {
-    sf::RectangleShape test(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
-    test.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
-    test.setFillColor(sf::Color::Black);
-    window.draw(test);
+    // sf::RectangleShape test(sf::Vector2f(element.getTaille().largeur, element.getTaille().hauteur)); // Utilisation de Vector2f pour la taille
+    // test.setPosition(element.getPosition().x, element.getPosition().y); // Positionné au bas au milieu
+    // test.setFillColor(sf::Color::Black);
+    // window.draw(test);
 }
 
 void Afficheur::afficher(const Projectile& projectile) {
@@ -117,9 +117,10 @@ void Afficheur:: afficher(std::string cheminBackground){
 
 
 void Afficheur::afficherSol() {
-    sf::Sprite sol;
-    sol.setTexture(fondTexture);
-    sol.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sol.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sol.getLocalBounds().height));
+    sf::RectangleShape sol(sf::Vector2f(TAILLE_FENETRE.x, HAUTEUR_SOL)); // Utilisation de Vector2f pour la taille
+    // couleur
+    sol.setFillColor(sf::Color(128, 128, 128));
+    //sol.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sol.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sol.getLocalBounds().height));
     sol.setPosition(0, TAILLE_FENETRE.y-HAUTEUR_SOL); // Positionné au bas au milieu
     window.draw(sol);
 }

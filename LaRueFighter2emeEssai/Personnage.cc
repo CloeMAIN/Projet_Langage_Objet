@@ -134,12 +134,12 @@ std::string Personnage::toString(){
 };
 
 
-void Personnage::update_attaque(){
+void Personnage::update_attaque(sf::Clock & clock){
     int i= 1, j =1;
     if(direction == Direction::GAUCHE){
         i= -1; j=0;}
     ElementJeu element;
-
+    
     if (!blockAtt){
         if(etatPlusChemin["Attaque1"].first){     
             gestionattaque1(i);
@@ -152,6 +152,13 @@ void Personnage::update_attaque(){
     else{
         gestionBlocageAttaque(i,j);
     }
+
+    if(clockAtt.getElapsedTime() > sf::seconds(TEMPS_BLOCAGE_ATTAQUE)){
+        etatPlusChemin["Attaque2"].first = false;
+        etatPlusChemin["Attaque1"].first = false;
+        clock.restart();
+    }
+
 }
 
 void Personnage::gestionattaque1(int i){
@@ -315,12 +322,12 @@ void Personnage::contact_attaque(Personnage& personnage){
         if(direction == Direction::GAUCHE)i=-1;
         if(etatPlusChemin["Attaque1"].first){
             personnage.setVie(personnage.getVie() - DEGAT_ATTAQUE1);
-            etatPlusChemin["Attaque1"].first = false;
+            //etatPlusChemin["Attaque1"].first = false;
             personnage.setPosition({personnage.getPosition().x + i*RECUL_ATTAQUE1, personnage.getPosition().y});
         }
         else if(etatPlusChemin["Attaque2"].first){
             personnage.setVie(personnage.getVie() - DEGAT_ATTAQUE2);
-            etatPlusChemin["Attaque2"].first = false;
+            //etatPlusChemin["Attaque2"].first = false;
             personnage.setPosition({personnage.getPosition().x + i*RECUL_ATTAQUE2, personnage.getPosition().y});
         }
         

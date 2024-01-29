@@ -114,7 +114,7 @@ const float RECUL_ATTAQUE1 = float(TAILLE_FENETRE.x)/10;
 const float RECUL_ATTAQUE2 = float(TAILLE_FENETRE.x)/10;
 
 //Temps de blocage des attaques (mêmes pour les deux joueurs)
-const float TEMPS_BLOCAGE_ATTAQUE = 10;
+const float TEMPS_BLOCAGE_ATTAQUE = 0.3;
 const float TEMPS_BLOCAGE_PROJECTILE = 2;
 
 //Projectiles: Direct
