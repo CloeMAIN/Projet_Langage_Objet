@@ -87,29 +87,50 @@ TEST_CASE("Entrées utilisateur et état joueur"){
   CHECK(joueur.getDirection() == Direction::DROITE);
 
 }
-// TEST_CASE("Projectiles"){
-//   Personnage joueur1;
-//   joueur1 = Personnage(POSITION_DEPART_JOUEUR1,
-//                             POINTS_DE_VIE_JOUEUR, 
-//                             {CHEMIN_IMAGE_JOUEUR1_RIEN, CHEMIN_IMAGE_JOUEUR1_AVANCER, CHEMIN_IMAGE_JOUEUR1_SAUT,CHEMIN_IMAGE_JOUEUR1_ATTAQUE1, CHEMIN_IMAGE_JOUEUR1_ATTAQUE2, CHEMIN_IMAGE_JOUEUR1_ATTAQUE1}, 
-//                             Direction::DROITE, 
-//                             TAILLE_JOUEUR_SPRITE,
-//                             CHEMIN_IMAGE_JOUEUR1_RIEN.first);
-//   CHECK(joueur1.getListeProjectiles().size() == 0);
-//   CHECK(joueur1.getClockProj().getElapsedTime().asSeconds() == 0);
+TEST_CASE("Projectiles"){
 
-//     std::cout << "" << std::endl;
-//     std::cout << "--------------------------- Création des projectiles --------------------------" << std::endl;
-//     std::cout << "" << std::endl;
-//   //créer un projectile
-//   ProjectileLineaire projectileLineaire = ProjectileLineaire({0,0}, VITESSE_DIRECT, DEGAT_DIRECT, RAYON_DIRECT, CHEMIN_IMAGE_DIRECT, Direction::DROITE);
+  std::cout << "" << std::endl;
+  std::cout << "--------------------------- Création des projectiles --------------------------" << std::endl;
+  std::cout << "" << std::endl;
 
-//   // Affichage toString du projectile
-//   std::cout << "Projectile : \n " << projectileLineaire.toString() << std::endl;
-//   CHECK(joueur1.getListeProjectiles().size() == 1);
+  //créer un projectile
+  ProjectileLineaire projectileLineaire = ProjectileLineaire({0,0}, VITESSE_DIRECT, DEGAT_DIRECT, RAYON_DIRECT, CHEMIN_IMAGE_DIRECT, Direction::DROITE);
+
+  // Affichage toString du projectile
+  std::cout << "Projectile : \n " << projectileLineaire.toString() << std::endl;
 
 
-//}
+  Personnage joueur1;
+  joueur1 = Personnage(POSITION_DEPART_JOUEUR1,
+                            POINTS_DE_VIE_JOUEUR, 
+                            {CHEMIN_IMAGE_JOUEUR1_RIEN, CHEMIN_IMAGE_JOUEUR1_AVANCER, CHEMIN_IMAGE_JOUEUR1_SAUT,CHEMIN_IMAGE_JOUEUR1_ATTAQUE1, CHEMIN_IMAGE_JOUEUR1_ATTAQUE2, CHEMIN_IMAGE_JOUEUR1_ATTAQUE1}, 
+                            Direction::DROITE, 
+                            TAILLE_JOUEUR_SPRITE,
+                            CHEMIN_IMAGE_JOUEUR1_RIEN.first);
+
+  CHECK(joueur1.getListeProjectiles().size() == 0);
+  joueur1.setEtat("Projectile",true);
+  joueur1.GestionProjectileLineaire();
+  CHECK(joueur1.getListeProjectiles().size() == 1);
+
+  Personnage joueur2;
+  joueur2 = Personnage(POSITION_DEPART_JOUEUR2,
+                            POINTS_DE_VIE_JOUEUR,
+                            {CHEMIN_IMAGE_JOUEUR2_RIEN, CHEMIN_IMAGE_JOUEUR2_AVANCER,
+                             CHEMIN_IMAGE_JOUEUR2_SAUT,CHEMIN_IMAGE_JOUEUR2_ATTAQUE1,
+                             CHEMIN_IMAGE_JOUEUR2_ATTAQUE2, CHEMIN_IMAGE_JOUEUR2_ATTAQUE1}, 
+                            Direction::GAUCHE,
+                            TAILLE_JOUEUR_SPRITE, 
+                            CHEMIN_IMAGE_JOUEUR1_RIEN.first);
+
+  CHECK(joueur2.getListeProjectiles().size() == 0);
+  joueur2.setEtat("Projectile",true);
+  joueur2.GestionProjectileZigZag();
+    CHECK(joueur1.getListeProjectiles().size() == 1);
+
+
+
+}
 
 
 
