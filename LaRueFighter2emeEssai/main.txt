@@ -1,3 +1,4 @@
+#include "constant.hh"
 #include "Menu.hh"
 #include "Jeu.hh"
 #include "Afficheur.hh"
@@ -6,7 +7,7 @@
 #include "Projectile.hh"
 #include "ProjectileZigZag.hh"
 #include "InputUser.hh"
-#include "constant.hh"
+#include "Formulaire.hh"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <list>
@@ -16,38 +17,25 @@
 int main(int argc, char const *argv[])
 {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
-    Jeu jeu;
     Afficheur afficheur;
     Menu menu ({CHEMIN_BACKGROUND_MENU, CHEMIN_BACKGROUND_COMMANDES}, {{CHEMIN_BOUTON_JOUER,{TAILLE_BOUTON_JOUER, POSITION_BOUTON_JOUER}},
                                                                     {CHEMIN_BOUTON_COMMANDES,{TAILLE_BOUTON_COMMANDES, POSITION_BOUTON_COMMANDES}}, 
                                                                     {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}, 
                                                                     {CHEMIN_BOUTON_QUESTIONNAIRE, {TAILLE_BOUTON_QUESTIONNAIRE, POSITION_BOUTON_QUESTIONNAIRE}}}); // Remove the parentheses here
-    int test = 0;
-    test  = menu.lancer(&afficheur);
-    int Partie = 0;
-    afficheur.loadFondJeu();
+    int test = -1;
     
+    int Partie = 0;
     
     while(Partie == 0){
+
+        if (test == -1){
+            test = menu.lancer(&afficheur);
+        }
+        
         if (test == 0){
-            jeu.reinitialiser();
+            Jeu jeu;
             //Le jeu lance la partie
             test = jeu.lancer(&afficheur);
-            // //Initialiser la seed pour la génération aléatoire
-            // std::srand(static_cast<unsigned int>(std::time(nullptr)));
-
-            // // Définir les bornes inférieure et supérieure
-            // int borneInferieure = 1;
-            // int borneSuperieure = CHEMIN_BACKGROUNDS_RANDOM.size();;
-
-            // // Calculer la plage de nombres possibles
-            // int plage = borneSuperieure - borneInferieure;
-
-            // // Générer un nombre aléatoire entre les bornes
-            // int nombreAleatoire = rand() % plage + borneInferieure;
-
-            // afficheur.afficher(CHEMIN_BACKGROUNDS_RANDOM[nombreAleatoire]);
-
             }
             //On affiche le menu dans le cas où le joueur 1 a perdu
         if (test == 1){
@@ -75,7 +63,7 @@ int main(int argc, char const *argv[])
             Formulaire formulaire(QUESTIONS, NB_QUESTIONS);
 
             // Lance la fonction membre lancer() de la classe Formulaire
-            test = formulaire.lancer(); 
+            test = formulaire.lancer(&afficheur); 
         }
 
         if (test == 5){
@@ -86,6 +74,11 @@ int main(int argc, char const *argv[])
                                                             {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}});
         }
 
+        if (afficheur.getWindow()->isOpen() == false){
+            Partie = 1;
+        }
+
     }
+
     return 0;
 }
