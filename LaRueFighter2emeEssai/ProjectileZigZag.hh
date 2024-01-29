@@ -24,4 +24,5 @@ public:
 
     // Méthodes
     void deplacement(double deltaTime) override;
+    std::string toString() override;
 };

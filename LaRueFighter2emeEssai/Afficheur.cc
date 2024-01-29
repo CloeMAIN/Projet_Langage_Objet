@@ -45,6 +45,8 @@ void Afficheur::afficher(const Personnage& joueur) {
     sprite.setPosition({joueur.getPosition().x, joueur.getPosition().y});
     // Affiche le personnage
     window.draw(sprite);
+    //afficher le sprite pendant 10 ms
+    
 
     
 }

@@ -11,9 +11,7 @@
 #include "ProjectileZigZag.hh"
 #include "ProjectileLineaire.hh"
 
-enum Action {
-    Droite,Gauche,SautGauche,SautDroit,Rien, Poing, Pied
-};
+
 class Personnage : public ElementJeu {
 
 private:
@@ -34,7 +32,7 @@ private:
     };
     sf::Vector2f velocity;
     bool block = false;
-    sf::Clock clockProj ;
+    sf::Clock clockProj;
     sf::Clock clockAtt;
     bool blockAtt = false;
 public:
@@ -72,7 +70,7 @@ public:
 
     /* Méthode */
     void mouvement(std::vector<ElementJeu> plateformes);
-    void appliquerGravite();
+    void appliquerGravite(std::vector<ElementJeu>& Plateformes);
     void chargerEtAfficherImage(const std::string& etat, int largeur, int hauteur, int directionMultiplier);
     void deplacerPersonnage(float deplacementX, float deplacementY);
     void GestionProjectileZigZag();

@@ -55,7 +55,7 @@ bool Personnage::surPlateforme(std::vector<ElementJeu> plateformes){
 
 void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
     int i = 1; // Variable pour gérer la direction du personnage (1 pour droite, -1 pour gauche)
-    appliquerGravite(); // Appelle la fonction pour appliquer la gravité au personnage
+    appliquerGravite(Plateformes); // Appelle la fonction pour appliquer la gravité au personnage
     
     // Vérifie la direction du personnage
     if(direction == Direction::GAUCHE){
@@ -96,7 +96,7 @@ void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
         sprite.move(0,VITESSE_JOUEUR_SAUT);
         position = {sprite.getPosition().x,sprite.getPosition().y}; 
 
-        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y && !surPlateforme(Plateformes)) {
+        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y ) {
             etatPlusChemin["Saut"].first = false;
         }
     }
@@ -179,11 +179,12 @@ void Personnage::update_attaque(){
     }
 };
 
-void Personnage::appliquerGravite(){
-    if (position.y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y) {
+void Personnage::appliquerGravite(std::vector<ElementJeu>& Plateformes){
+    if (position.y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y ) {
         velocity.y += GRAVITE;
         update();
     }
+
 
 }
 

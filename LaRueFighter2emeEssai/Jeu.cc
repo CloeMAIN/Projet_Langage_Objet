@@ -104,6 +104,7 @@ void Jeu::empecherSortie(){
             joueur2.setVelocityY(0); // Arrêter la chute pour joueur2
         }
 
+
 }
 
 
