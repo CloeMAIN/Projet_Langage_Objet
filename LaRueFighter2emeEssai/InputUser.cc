@@ -127,7 +127,7 @@ void InputUser::checkDroite(Personnage& joueur){
 }
 
 void InputUser::checkRien(Personnage& joueur){
-    if(!joueur.getEtat().at("Saut").first){
+    if(!joueur.getEtat().at("Saut").first && !joueur.getEtat().at("Attaque1").first && !joueur.getEtat().at("Attaque2").first){
         joueur.setVelocityX(0.0f);
         joueur.setEtat("Avancer", false);
         joueur.setEtat("Saut", false);
@@ -136,17 +136,21 @@ void InputUser::checkRien(Personnage& joueur){
 }
 
 void InputUser::checkAttaque1(Personnage& joueur){
-    joueur.setVelocityX(0.0f);
-    joueur.setEtat("Avancer", false);
-    joueur.setEtat("Rien", false);
-    joueur.setEtat("Attaque1", true);
+    if(not(joueur.getBlockAtt())){
+        joueur.setVelocityX(0.0f);
+        joueur.setEtat("Avancer", false);
+        joueur.setEtat("Rien", false);
+        joueur.setEtat("Attaque1", true);
+    }
 }
 
 void InputUser::checkAttaque2(Personnage& joueur){
-    joueur.setVelocityX(0.0f);
-    joueur.setEtat("Avancer", false);
-    joueur.setEtat("Rien", false);
-    joueur.setEtat("Attaque2", true);
+    if(not(joueur.getBlockAtt())){
+        joueur.setVelocityX(0.0f);
+        joueur.setEtat("Avancer", false);
+        joueur.setEtat("Rien", false);
+        joueur.setEtat("Attaque2", true);
+    }
 }
 
 void InputUser::checkProjectile(Personnage& joueur){
