@@ -7,6 +7,12 @@
 #include "InputUser.hh"
 #include "constant.hh"
 #include "Projectile.hh"
+#include "Personnage.hh"
+#include "InputUser.hh"
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <iostream>
+#include <string>
 #include <list>
 #include <cstdlib>
 #include <ctime>

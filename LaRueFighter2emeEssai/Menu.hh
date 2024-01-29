@@ -5,6 +5,7 @@
 #include "ElementJeu.hh"
 #include <vector>
 #include <string>
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 class Afficheur;

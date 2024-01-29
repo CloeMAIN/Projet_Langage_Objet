@@ -4,7 +4,16 @@
 int Menu::lancer(Afficheur* afficheur){
 
     bool lancerMenu = true;
+    sf::Music music; 
 
+  
+    if(!music.openFromFile("Son/Kamado Tanjiro.wav"))
+        std::cout << "Erreur lors du chargement de la musique" << std::endl;
+    else
+        std::cout << "Musique chargée" << std::endl;
+
+    music.setLoop(true); 
+    music.play();
     // sf::RenderWindow* window = afficheur->getWindow();
 
     // Affichage de texte

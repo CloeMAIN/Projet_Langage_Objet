@@ -32,8 +32,8 @@ void Afficheur::afficher(const Personnage& joueur) {
 
     sf::Sprite sprite = joueur.getSprite();
     sprite.setTexture(texture);
-    sprite.setScale(2.f, 2.f); // Ajuste l'échelle en fonction de la direction
-
+    int diviseur = 850;
+    sprite.setScale(TAILLE_FENETRE.x / diviseur, TAILLE_FENETRE.x / diviseur);
     // Calcul de la position X de la texture à afficher
     int largeurImage = texture.getSize().x / joueur.getNbImageSprite(); //8
     int xTexture = static_cast<int>(joueur.getPosition().x) / largeurImage % joueur.getNbImageSprite();

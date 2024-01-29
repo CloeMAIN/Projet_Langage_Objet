@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-c
-LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
+LDFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -lopenal
 SOURCES= $(wildcard *.cc)
 OBJECTS=$(SOURCES:.cc=.o)
 EXECUTABLE=mon_programme

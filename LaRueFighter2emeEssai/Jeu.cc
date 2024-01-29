@@ -1,12 +1,5 @@
 #include "Jeu.hh"
-#include "Personnage.hh"
-#include "InputUser.hh"
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <list>
-#include <string>
-#include "ProjectileZigZag.hh"
-#include "ProjectileLineaire.hh"
+
 
 Jeu::Jeu(){
     joueur1 = Personnage(POSITION_DEPART_JOUEUR1,
@@ -43,6 +36,13 @@ int Jeu::lancer(Afficheur* afficheur)
     InputUser inputUser;
     sf::RenderWindow* window = afficheur->getWindow();
     
+    sf::Music music; 
+    if(!music.openFromFile("Son/Eye Of The Tiger.wav"))
+        std::cout << "Erreur lors du chargement de la musique" << std::endl;
+    else
+        std::cout << "Musique chargée" << std::endl;
+    music.setLoop(true); 
+    music.play();
     
 
     while (afficheur->getWindow()->isOpen() && lancerJeu)
