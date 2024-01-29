@@ -5,17 +5,6 @@
 #include "Personnage.hh"
 
 
-struct Commande {
-    sf::Keyboard::Key Droite;
-    sf::Keyboard::Key Gauche;
-    // Ajoutez d'autres actions ici (ex: Attaquer droite, Attaquer gauche, Sauter, S'accroupir)
-};
-
-struct EtatJoueur {
-    Action actionJ1;
-    Action actionJ2;
-};
-
 class InputUser {
 public:
     // ... (autres membres et méthodes)

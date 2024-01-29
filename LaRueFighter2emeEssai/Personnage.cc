@@ -96,7 +96,7 @@ void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
         sprite.move(0,VITESSE_JOUEUR_SAUT);
         position = {sprite.getPosition().x,sprite.getPosition().y}; 
 
-        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y && !surPlateforme(Plateformes)) {
+        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y ) {
             etatPlusChemin["Saut"].first = false;
         }
     }
@@ -202,6 +202,7 @@ void Personnage::appliquerGravite(std::vector<ElementJeu> Plateformes){
         velocity.y += GRAVITE;
         update();
     }
+
 
 }
 

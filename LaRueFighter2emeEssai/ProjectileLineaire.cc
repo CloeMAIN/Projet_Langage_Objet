@@ -24,3 +24,15 @@ void ProjectileLineaire::deplacement(double deltaTime)
         a_detruire = true;
     }
 }
+
+std::string ProjectileLineaire::toString(){
+    std::string str = "ProjectileLineaire : ";
+    str += "position : " + std::to_string(position.x) + " " + std::to_string(position.y) +" ";
+    str += "vitesse : " + std::to_string(vitesse) + " ";
+    str += "degat : " + std::to_string(degat) + " ";
+    str += "rayon : " + std::to_string(rayon) + " ";
+    str += "temps_de_vie : " + std::to_string(temps_de_vie) + " ";
+    str += "a_detruire : " + std::to_string(a_detruire) + " ";
+    str += "direction : " + std::to_string(direction) + " ";
+    return str;
+}

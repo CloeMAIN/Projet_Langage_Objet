@@ -36,3 +36,18 @@ void ProjectileZigZag::deplacement(double deltaTime)
         a_detruire = true;
     }
 }
+
+std::string ProjectileZigZag::toString(){
+    std::string str = "ProjectileZigZag : ";
+    str += "position : " + std::to_string(position.x) + " " + std::to_string(position.y) +" ";
+    str += "vitesse : " + std::to_string(vitesse) + " ";
+    str += "degat : " + std::to_string(degat) + " ";
+    str += "rayon : " + std::to_string(rayon) + " ";
+    str += "amplitude : " + std::to_string(amplitude) + " ";
+    str += "angle_tir : " + std::to_string(angle_tir) + " ";
+    str += "frequence : " + std::to_string(frequence) + " ";
+    str += "temps_de_vie : " + std::to_string(temps_de_vie) + " ";
+    str += "a_detruire : " + std::to_string(a_detruire) + " ";
+    str += "direction : " + std::to_string(direction) + " ";
+    return str;
+}

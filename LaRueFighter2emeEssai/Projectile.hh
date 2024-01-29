@@ -38,7 +38,7 @@ public:
     void setCheminImage(std::string chemin){chemin_image = chemin;}
 
     // Méthodes
-    std::string toString(); 
+    virtual std::string toString(); 
     virtual void deplacement(double deltaTime) = 0 ;
     
 };

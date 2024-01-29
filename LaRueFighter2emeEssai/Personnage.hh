@@ -11,9 +11,7 @@
 #include "ProjectileZigZag.hh"
 #include "ProjectileLineaire.hh"
 
-enum Action {
-    Droite,Gauche,SautGauche,SautDroit,Rien, Poing, Pied
-};
+
 class Personnage : public ElementJeu {
 
 private:
@@ -34,7 +32,7 @@ private:
     };
     sf::Vector2f velocity;
     bool block = false;
-    sf::Clock clockProj ;
+    sf::Clock clockProj;
     sf::Clock clockAtt;
     bool blockAtt = false;
 public:
