@@ -44,14 +44,17 @@ int Jeu::lancer(Afficheur* afficheur)
     music.setLoop(true); 
     music.play();
     
+    sf::Clock clock;
+    clock.restart();
 
     while (afficheur->getWindow()->isOpen() && lancerJeu)
     {
         // Gestion des événements
         inputUser.gererEvenements(afficheur->getWindow(), joueur1, joueur2, plateformes);
 
+
         //Mise à jour des joueurs
-        majJoueurs();
+        majJoueurs(clock);
         
         //Gérer tous les affichages
         afficheur->afficher(*this); 
@@ -110,7 +113,7 @@ void Jeu::empecherSortie(){
 }
 
 
-void Jeu::majJoueurs(){
+void Jeu::majJoueurs(sf::Clock &clock){
     // Appliquer la gravité pour les deux joueurs
         joueur1.surPlateforme(plateformes);
         joueur2.surPlateforme(plateformes);
@@ -131,10 +134,11 @@ void Jeu::majJoueurs(){
         joueur2.GestionProjectileZigZag();
         joueur1.majProjectiles(DELTA_TIME);
         joueur2.majProjectiles(DELTA_TIME);
-
+    
         //Gerer les actions des joueurs
-        joueur1.update_attaque();
-        joueur2.update_attaque();
+        joueur1.update_attaque(clock);
+        joueur2.update_attaque(clock);
+
 
         //Gérer les contacts des joueurs
         joueur1.update_contact(joueur2);

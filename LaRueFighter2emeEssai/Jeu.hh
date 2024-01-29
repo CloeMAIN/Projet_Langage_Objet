@@ -45,7 +45,7 @@ class Jeu
         sf::Texture getTexture(){return texture;}
         
         /* Méthode */
-        void majJoueurs();
+        void majJoueurs(sf::Clock & clock);
         void empecherSortie();
         
 };

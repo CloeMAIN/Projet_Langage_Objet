@@ -81,7 +81,7 @@ public:
     void contact_attaque(Personnage& personnage);
     void contact_projectile(); 
     std::string toString();
-    void update_attaque();
+    void update_attaque(sf::Clock & clock);
     bool surPlateforme(std::vector<ElementJeu> plateformes);
     void gestionBlocageAttaque(int i, int j);
     void gestionattaque1(int i);
