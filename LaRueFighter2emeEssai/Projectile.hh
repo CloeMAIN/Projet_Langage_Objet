@@ -1,3 +1,6 @@
+#ifndef PROJECTILE_HH
+#define PROJECTILE_HH
+
 #pragma once
 #include <string>
 #include "ElementJeu.hh"
@@ -39,3 +42,5 @@ public:
     virtual void deplacement(double deltaTime) = 0 ;
     
 };
+
+#endif // PROJECTILE_HH

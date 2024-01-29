@@ -20,7 +20,7 @@ class Afficheur
         sf::RenderWindow window;
         sf::Texture fondTexture;
     public:
-        Afficheur(/* args */);
+        Afficheur();
         ~Afficheur();
 
         /* Getter */

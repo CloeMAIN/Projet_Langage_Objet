@@ -1,17 +1,20 @@
+#ifndef CONSTANT_HH
+#define CONSTANT_HH
+
 #pragma once
 #include <array>
 #include <string>
 #include <list>
-#include "Formulaire.hh"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "ElementJeu.hh"
+#include "Question.hh"
 
 // Taille fenêtre
 const sf::Vector2f TAILLE_FENETRE = sf::Vector2f(static_cast<float>(sf::VideoMode::getDesktopMode().width), static_cast<float>(sf::VideoMode::getDesktopMode().height));
 
 // Taille du sol
-const int HAUTEUR_SOL = 100;
+const int HAUTEUR_SOL = TAILLE_FENETRE.y/10;
 
 //Temps pour déplacer les projectiles en continu
 const double DELTA_TIME = 0.05;
@@ -30,8 +33,9 @@ const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
 // Constantes communes aux deux joueurs a modifier dans code
 const float VITESSE_JOUEUR = 10;
 const float VITESSE_JOUEUR_SAUT = -32.0f;
-const Taille TAILLE_JOUEUR_SPRITE = {70, 164};
+const Taille TAILLE_JOUEUR_SPRITE = {float(TAILLE_FENETRE.x)/12, float(float(TAILLE_FENETRE.y)/6.5)};
 const float POINTS_DE_VIE_JOUEUR = 3500;
+
 
 
 /*----------------------------------------JOUEUR 1-----------------------------------------------*/
@@ -111,6 +115,8 @@ const float DECALAGE_Y_PIED = 65;
 const float DECALAGE_Y_POING = 55;
 const Taille TAILLE_ATTAQUE1= {40, 20};
 const Taille TAILLE_ATTAQUE2 = {50, 20};
+const float RECUL_ATTAQUE1 = float(TAILLE_FENETRE.x)/10;
+const float RECUL_ATTAQUE2 = float(TAILLE_FENETRE.x)/10;
 
 //Temps de blocage des attaques (mêmes pour les deux joueurs)
 const float TEMPS_BLOCAGE_ATTAQUE = 10;
@@ -143,16 +149,16 @@ const std::string CHEMIN_BACKGROUND_COMMANDES("images/BackgroundCommandes.jpg");
 const std::string CHEMIN_BOUTON_QUESTIONNAIRE("images/Questionnaire.png");
 
 //Position des boutons:
-const Point POSITION_BOUTON_JOUER = {float(TAILLE_FENETRE.x)/2 -100 , float(TAILLE_FENETRE.y) - 325};
-const Point POSITION_BOUTON_COMMANDES = { float(TAILLE_FENETRE.x) / 2 - 100 , float(TAILLE_FENETRE.y)- 225};
-const Point POSITION_BOUTON_QUITTER = {float(TAILLE_FENETRE.x)/2 - 100, float(TAILLE_FENETRE.y) - 125};
-const Point POSITION_BOUTON_QUESTIONNAIRE = {float(TAILLE_FENETRE.x)/2 - 100, float(TAILLE_FENETRE.y) - 425};
+const Point POSITION_BOUTON_JOUER = {float(TAILLE_FENETRE.x)/2 - float(TAILLE_FENETRE.x)/6 , float(TAILLE_FENETRE.y)/2 + float(TAILLE_FENETRE.y)/6};
+const Point POSITION_BOUTON_COMMANDES = { float(TAILLE_FENETRE.x) / 2 - float(TAILLE_FENETRE.x)/6  , float(TAILLE_FENETRE.y)/2 + float(TAILLE_FENETRE.y)/3};
+const Point POSITION_BOUTON_QUITTER = {float(TAILLE_FENETRE.x)/2 +float(TAILLE_FENETRE.x)/6 - float(TAILLE_FENETRE.x)/10, float(TAILLE_FENETRE.y)/2+ float(TAILLE_FENETRE.y)/6};
+const Point POSITION_BOUTON_QUESTIONNAIRE = {float(TAILLE_FENETRE.x)/2 + float(TAILLE_FENETRE.x)/6 - float(TAILLE_FENETRE.x)/10, float(TAILLE_FENETRE.y)/2 + float(TAILLE_FENETRE.y)/3};
 
 //Taille des boutons:
-const HitBox TAILLE_BOUTON_QUITTER = {POSITION_BOUTON_QUITTER.x, POSITION_BOUTON_QUITTER.y, POSITION_BOUTON_QUITTER.x+200 , POSITION_BOUTON_QUITTER.y+100 };
-const HitBox TAILLE_BOUTON_COMMANDES = { POSITION_BOUTON_COMMANDES.x, POSITION_BOUTON_COMMANDES.y , POSITION_BOUTON_COMMANDES.x+200 , POSITION_BOUTON_COMMANDES.y+100 };
-const HitBox TAILLE_BOUTON_JOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JOUER.y , POSITION_BOUTON_JOUER.x+200 , POSITION_BOUTON_JOUER.y+100};
-const HitBox TAILLE_BOUTON_QUESTIONNAIRE = { POSITION_BOUTON_QUESTIONNAIRE.x, POSITION_BOUTON_QUESTIONNAIRE.y , POSITION_BOUTON_QUESTIONNAIRE.x+200 , POSITION_BOUTON_QUESTIONNAIRE.y+100};
+const HitBox TAILLE_BOUTON_QUITTER = {POSITION_BOUTON_QUITTER.x, POSITION_BOUTON_QUITTER.y, POSITION_BOUTON_QUITTER.x+ float(TAILLE_FENETRE.x)/10, POSITION_BOUTON_QUITTER.y + float(TAILLE_FENETRE.y)/10};
+const HitBox TAILLE_BOUTON_COMMANDES = { POSITION_BOUTON_COMMANDES.x, POSITION_BOUTON_COMMANDES.y , POSITION_BOUTON_COMMANDES.x+200 , POSITION_BOUTON_COMMANDES.y+ float(TAILLE_FENETRE.y)/10 };
+const HitBox TAILLE_BOUTON_JOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JOUER.y , POSITION_BOUTON_JOUER.x+200 , POSITION_BOUTON_JOUER.y+ float(TAILLE_FENETRE.y)/10};
+const HitBox TAILLE_BOUTON_QUESTIONNAIRE = { POSITION_BOUTON_QUESTIONNAIRE.x, POSITION_BOUTON_QUESTIONNAIRE.y , POSITION_BOUTON_QUESTIONNAIRE.x+200 , POSITION_BOUTON_QUESTIONNAIRE.y + float(TAILLE_FENETRE.y)/10};
 
 
 
@@ -184,6 +190,7 @@ const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");
 const std::string CHEMIN_BACKGROUND_ROUND1("../images/Round2.jpg");
 const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 const std::string CHEMIN_PLATEFORME("images/plateformes.png");
+const std::string CHEMIN_SOL("images/Sol.png");
 
 /* Background aléatoire*/
 const std::vector<std::string> CHEMIN_BACKGROUNDS_RANDOM = {"images/background_jeu/louvre.png", "images/background_jeu/triomphe.png"};
@@ -230,3 +237,6 @@ const Question QUESTIOND = Question(QUESTION4, FORMAT4, REPONSE4, BACKGROUND4);
 
 const std::list<Question> QUESTIONS = {QUESTIONA, QUESTIONB, QUESTIONC, QUESTIOND};
 const int NB_QUESTIONS = 4;
+
+
+#endif // CONSTANT_HH

@@ -8,7 +8,7 @@ Formulaire::Formulaire(std::list<Question> questions, int nbQuestions){
     this->prenom = "";
 }
 
-int Formulaire::lancer(){
+int Formulaire::lancer(Afficheur* afficheur){
 
     // system("x-terminal-emulator");
 
@@ -17,7 +17,7 @@ int Formulaire::lancer(){
     for(int i = 0; i < this->nbQuestions; i++){
         boucleLancer(i);
     }
-    return finLancer();
+    return finLancer(afficheur);
 
    // Fermer un terminal
     // Note : cela fermera le terminal où le programme est exécuté
@@ -62,16 +62,27 @@ void Formulaire::boucleLancer(int i){
         std::cout << std::endl;
 }
 
-int Formulaire::finLancer(){
+int Formulaire::finLancer(Afficheur* afficheur){
     std::cout << "Fin du formulaire" << std::endl;
     std::cout << "Votre score est de " << this->score << "/" << this->nbQuestions << std::endl;
     std::cout << "Merci d'avoir participé !" << std::endl;
+    
     if (this->score == this->nbQuestions){
-        std::cout << "Vous avez eu un sans faute !" << std::endl;
-        return 1;
+        std::cout << "Vous avez eu un sans faute !\n Si vous voulez rejouer, taper 1.\n Si vous voulez quitter taper 2" << std::endl;
     }
     else{
-        std::cout << "Retentez une autre fois !" << std::endl;
-        return 0;
+        std::cout << "Retentez une autre fois !\n Si vous voulez rejouer, taper 1.\n Si vous voulez quitter taper 2" << std::endl;
+        }
+
+    std::string reponse;
+    std::cin >> reponse;
+    if (reponse == "1"){
+        afficheur->getWindow()->setVisible(true);
+        return -1;
     }
+    else if (reponse == "2"){
+        afficheur->getWindow()->close();
+        return 3;
+    }
+    return 0;
 }

@@ -1,3 +1,6 @@
+#ifndef PROJECTILELINEAIRE_HH
+#define PROJECTILELINEAIRE_HH
+
 #pragma once
 #include "Projectile.hh"
 #include "constant.hh"
@@ -12,3 +15,5 @@ public:
     // Méthodes
     void deplacement(double deltaTime) override;
 };
+
+#endif // PROJECTILELINEAIRE_HH

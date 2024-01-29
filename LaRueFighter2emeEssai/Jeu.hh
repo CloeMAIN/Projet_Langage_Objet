@@ -16,26 +16,10 @@ class Afficheur;
 class Jeu
 {
     private:
-        Personnage joueur1{POSITION_DEPART_JOUEUR1,
-                            POINTS_DE_VIE_JOUEUR, 
-                            {CHEMIN_IMAGE_JOUEUR1_RIEN, CHEMIN_IMAGE_JOUEUR1_AVANCER, CHEMIN_IMAGE_JOUEUR1_SAUT,CHEMIN_IMAGE_JOUEUR1_ATTAQUE1, CHEMIN_IMAGE_JOUEUR1_ATTAQUE2, CHEMIN_IMAGE_JOUEUR1_ATTAQUE1}, 
-                            Direction::DROITE, 
-                            TAILLE_JOUEUR_SPRITE,
-                            CHEMIN_IMAGE_JOUEUR1_RIEN.first};
+        Personnage joueur1; // Personnage joueur1
+        Personnage joueur2; // Personnage joueur2
 
-        Personnage joueur2{POSITION_DEPART_JOUEUR2,
-                            POINTS_DE_VIE_JOUEUR,
-                            {CHEMIN_IMAGE_JOUEUR2_RIEN, CHEMIN_IMAGE_JOUEUR2_AVANCER,
-                             CHEMIN_IMAGE_JOUEUR2_SAUT,CHEMIN_IMAGE_JOUEUR2_ATTAQUE1,
-                             CHEMIN_IMAGE_JOUEUR2_ATTAQUE2, CHEMIN_IMAGE_JOUEUR2_ATTAQUE1}, 
-                            Direction::GAUCHE,
-                            TAILLE_JOUEUR_SPRITE, 
-                            CHEMIN_IMAGE_JOUEUR1_RIEN.first};
-
-        std::vector<ElementJeu> plateformes = {ElementJeu(POSITION_PLATEFORME1, Direction::GAUCHE, TAILLE_PLATEFORME),
-                                                ElementJeu(POSITION_PLATEFORME2, Direction::GAUCHE, TAILLE_PLATEFORME), 
-                                                ElementJeu(POSITION_PLATEFORME3, Direction::GAUCHE, TAILLE_PLATEFORME),
-                                                ElementJeu(POSITION_PLATEFORME4, Direction::GAUCHE, TAILLE_PLATEFORME),};
+        std::vector<ElementJeu> plateformes; // Plateformes du jeu
 
         std::string chemin_image_fond; 
         sf::Texture texture;
@@ -57,7 +41,6 @@ class Jeu
         /* Méthode */
         void majJoueurs();
         void empecherSortie();
-        void reinitialiser();
         
 };
 

@@ -1,3 +1,6 @@
+#ifndef PROJECTILEZIGZAG_HH
+#define PROJECTILEZIGZAG_HH
+
 #pragma once
 #include "Projectile.hh"
 #include "constant.hh"
@@ -25,3 +28,5 @@ public:
     // Méthodes
     void deplacement(double deltaTime) override;
 };
+
+#endif // PROJECTILEZIGZAG_HH

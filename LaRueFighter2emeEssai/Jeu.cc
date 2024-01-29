@@ -9,14 +9,6 @@
 #include "ProjectileLineaire.hh"
 
 Jeu::Jeu(){
-    chemin_image_fond = CHEMIN_IMAGE_PARTIE[rand() % NB_BACKGROUND ];
-    texture.loadFromFile(chemin_image_fond);
-    sprite.setTexture(texture);
-    sprite.setPosition(0, 0);
-    sprite.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sprite.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sprite.getLocalBounds().height));
-}
-
-void Jeu::reinitialiser(){
     joueur1 = Personnage(POSITION_DEPART_JOUEUR1,
                             POINTS_DE_VIE_JOUEUR, 
                             {CHEMIN_IMAGE_JOUEUR1_RIEN, CHEMIN_IMAGE_JOUEUR1_AVANCER, CHEMIN_IMAGE_JOUEUR1_SAUT,CHEMIN_IMAGE_JOUEUR1_ATTAQUE1, CHEMIN_IMAGE_JOUEUR1_ATTAQUE2, CHEMIN_IMAGE_JOUEUR1_ATTAQUE1}, 
@@ -31,9 +23,19 @@ void Jeu::reinitialiser(){
                             Direction::GAUCHE,
                             TAILLE_JOUEUR_SPRITE, 
                             CHEMIN_IMAGE_JOUEUR1_RIEN.first);
-
-    Jeu();
+    
+    plateformes = {ElementJeu(POSITION_PLATEFORME1, Direction::GAUCHE, TAILLE_PLATEFORME),
+                    ElementJeu(POSITION_PLATEFORME2, Direction::GAUCHE, TAILLE_PLATEFORME),
+                    ElementJeu(POSITION_PLATEFORME3, Direction::GAUCHE, TAILLE_PLATEFORME),
+                    ElementJeu(POSITION_PLATEFORME4, Direction::GAUCHE, TAILLE_PLATEFORME)};
+                    
+    chemin_image_fond = CHEMIN_IMAGE_PARTIE[rand() % NB_BACKGROUND ];
+    texture.loadFromFile(chemin_image_fond);
+    sprite.setTexture(texture);
+    sprite.setPosition(0, 0);
+    sprite.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sprite.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sprite.getLocalBounds().height));
 }
+
 
 int Jeu::lancer(Afficheur* afficheur)
 {

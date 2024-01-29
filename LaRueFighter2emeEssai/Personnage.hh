@@ -72,7 +72,7 @@ public:
 
     /* Méthode */
     void mouvement(std::vector<ElementJeu> plateformes);
-    void appliquerGravite();
+    void appliquerGravite(std::vector<ElementJeu> plateformes);
     void chargerEtAfficherImage(const std::string& etat, int largeur, int hauteur, int directionMultiplier);
     void deplacerPersonnage(float deplacementX, float deplacementY);
     void GestionProjectileZigZag();
@@ -85,6 +85,13 @@ public:
     std::string toString();
     void update_attaque();
     bool surPlateforme(std::vector<ElementJeu> plateformes);
+    void gestionBlocageAttaque(int i, int j);
+    void gestionattaque1(int i);
+    void gestionattaque2(int j);
+    void gestionRien();
+    void gestionAvancer();
+    void gestionSaut(std::vector<ElementJeu> plateformes);
+
 
     
 };

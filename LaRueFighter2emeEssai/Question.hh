@@ -1,3 +1,7 @@
+#ifndef QUESTION_HH
+#define QUESTION_HH
+
+#pragma once
 #include <iostream>
 #include <string>
 
@@ -25,3 +29,5 @@ class Question{
         bool verifierBackground(std::string backgroundUtilisateur);
 
 };
+
+#endif // QUESTION_HH

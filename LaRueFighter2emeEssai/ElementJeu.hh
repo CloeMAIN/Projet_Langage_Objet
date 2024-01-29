@@ -55,7 +55,7 @@ public:
     // Méthodes
     float distance(const ElementJeu& b)const;
     bool contact(const ElementJeu& b) const;
-   
+
 };
 
 #endif // ELEMENTJEU_HH

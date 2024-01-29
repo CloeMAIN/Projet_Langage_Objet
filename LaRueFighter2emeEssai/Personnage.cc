@@ -44,7 +44,7 @@ bool Personnage::surPlateforme(std::vector<ElementJeu> plateformes){
             if(position.y + TAILLE_JOUEUR_SPRITE.hauteur >plateformes[i].getPosition().y && position.y + TAILLE_JOUEUR_SPRITE.hauteur < plateformes[i].getPosition().y + plateformes[i].getTaille().hauteur){
                 position = {position.x, plateformes[i].getPosition().y - TAILLE_JOUEUR_SPRITE.hauteur};
                 setEtat("Saut", false);
-                setVelocityY(0.0f);
+                setVelocityY(VITESSE_JOUEUR_SAUT);
                 return true;
             }
         }
@@ -55,7 +55,7 @@ bool Personnage::surPlateforme(std::vector<ElementJeu> plateformes){
 
 void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
     int i = 1; // Variable pour gérer la direction du personnage (1 pour droite, -1 pour gauche)
-    appliquerGravite(); // Appelle la fonction pour appliquer la gravité au personnage
+    appliquerGravite(Plateformes); // Appelle la fonction pour appliquer la gravité au personnage
     
     // Vérifie la direction du personnage
     if(direction == Direction::GAUCHE){
@@ -102,6 +102,10 @@ void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
     }
 }
 
+void Personnage::gestionSaut(std::vector<ElementJeu> Plateformes){
+
+}
+
 
 void Personnage::update(){
     sprite.move(velocity); // Déplace le personnage en fonction de sa vélocité
@@ -129,40 +133,55 @@ void Personnage::update_attaque(){
 
     if (!blockAtt){
         if(etatPlusChemin["Attaque1"].first){     
-            nbImageSprite = NB_IMAGE_ATTAQUE1;
-            if(direction == Direction::GAUCHE){
-                cheminImageActuelle = etatPlusChemin["Attaque1"].second.second;
-            }
-            else{
-                cheminImageActuelle = etatPlusChemin["Attaque1"].second.first;
-            }
-            element.setTaille(TAILLE_ATTAQUE1);
-            element.setDirection(direction);
-            element.setPosition({position.x + taille.largeur/2 +i*TAILLE_ATTAQUE1.largeur, position.y + DECALAGE_Y_POING});
-            clockAtt.restart();
-            blockAtt = true;
+            gestionattaque1(i);
         }
 
-    else if(etatPlusChemin["Attaque2"].first){
-            nbImageSprite = NB_IMAGE_ATTAQUE2;
-            if(direction == Direction::GAUCHE){
-                cheminImageActuelle = etatPlusChemin["Attaque2"].second.second;
-            }
-            else{
-                cheminImageActuelle = etatPlusChemin["Attaque2"].second.first;
-            }
-
-            element.setTaille(TAILLE_ATTAQUE2);
-            element.setDirection(direction);
-            element.setPosition({position.x + taille.largeur/2 + j*TAILLE_ATTAQUE2.largeur, position.y + DECALAGE_Y_PIED});
-            clockAtt.restart();
-            blockAtt = true;
+        else if(etatPlusChemin["Attaque2"].first){
+            gestionattaque2(j);
         }
-        attaque = element;
     }
-    
-     else{
-        if((clockAtt.getElapsedTime() > sf::seconds(TEMPS_BLOCAGE_ATTAQUE)) or (etatPlusChemin["Rien"].first)){
+    else{
+        gestionBlocageAttaque(i,j);
+    }
+}
+
+void Personnage::gestionattaque1(int i){
+    ElementJeu element;    
+    nbImageSprite = NB_IMAGE_ATTAQUE1;
+    if(direction == Direction::GAUCHE){
+        cheminImageActuelle = etatPlusChemin["Attaque1"].second.second;
+    }
+    else{
+        cheminImageActuelle = etatPlusChemin["Attaque1"].second.first;
+    }
+    element.setTaille(TAILLE_ATTAQUE1);
+    element.setDirection(direction);
+    element.setPosition({position.x + taille.largeur/2 +i*TAILLE_ATTAQUE1.largeur, position.y + DECALAGE_Y_POING});
+    clockAtt.restart();
+    blockAtt = true;
+    attaque = element;
+}
+
+void Personnage::gestionattaque2(int j){
+    ElementJeu element;
+    nbImageSprite = NB_IMAGE_ATTAQUE2;
+    if(direction == Direction::GAUCHE){
+        cheminImageActuelle = etatPlusChemin["Attaque2"].second.second;
+    }
+    else{
+        cheminImageActuelle = etatPlusChemin["Attaque2"].second.first;
+    }
+
+    element.setTaille(TAILLE_ATTAQUE2);
+    element.setDirection(direction);
+    element.setPosition({position.x + taille.largeur/2 + j*TAILLE_ATTAQUE2.largeur, position.y + DECALAGE_Y_PIED});
+    clockAtt.restart();
+    blockAtt = true;
+    attaque = element;
+}
+
+void Personnage::gestionBlocageAttaque(int i, int j){
+    if((clockAtt.getElapsedTime() > sf::seconds(TEMPS_BLOCAGE_ATTAQUE)) or (etatPlusChemin["Rien"].first)){
                 attaque = nullptr;
                 blockAtt = false;
                 etatPlusChemin["Attaque1"].first = false;
@@ -176,11 +195,10 @@ void Personnage::update_attaque(){
                 attaque.setPosition({position.x + j*TAILLE_ATTAQUE2.largeur, position.y + DECALAGE_Y_PIED});
             }
         }
-    }
-};
+}
 
-void Personnage::appliquerGravite(){
-    if (position.y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y) {
+void Personnage::appliquerGravite(std::vector<ElementJeu> Plateformes){
+    if (position.y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y ) {
         velocity.y += GRAVITE;
         update();
     }
@@ -295,12 +313,12 @@ void Personnage::contact_attaque(Personnage& personnage){
         if(etatPlusChemin["Attaque1"].first){
             personnage.setVie(personnage.getVie() - DEGAT_ATTAQUE1);
             etatPlusChemin["Attaque1"].first = false;
-            personnage.setPosition({personnage.getPosition().x + i*TAILLE_ATTAQUE1.largeur, personnage.getPosition().y});
+            personnage.setPosition({personnage.getPosition().x + i*RECUL_ATTAQUE1, personnage.getPosition().y});
         }
         else if(etatPlusChemin["Attaque2"].first){
             personnage.setVie(personnage.getVie() - DEGAT_ATTAQUE2);
             etatPlusChemin["Attaque2"].first = false;
-            personnage.setPosition({personnage.getPosition().x + i*TAILLE_ATTAQUE2.largeur, personnage.getPosition().y});
+            personnage.setPosition({personnage.getPosition().x + i*RECUL_ATTAQUE2, personnage.getPosition().y});
         }
         
             

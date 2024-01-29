@@ -1,7 +1,15 @@
+#ifndef FORMULAIRE_HH
+#define FORMULAIRE_HH
+
 #pragma once
 #include "Question.hh"
+#include "Afficheur.hh"
 #include <list>
 #include <string>
+
+class Afficheur;
+
+class Question;
 
 class Formulaire 
 {
@@ -31,10 +39,12 @@ class Formulaire
         void setQuestions(std::list<Question> questions);
 
         //Méthode
-        int lancer();
+        int lancer(Afficheur* afficheur);
         void debutLancer();
         void boucleLancer(int i);
-        int finLancer();
+        int finLancer(Afficheur* afficheur);
 
 
 };
+
+#endif // FORMULAIRE_HH

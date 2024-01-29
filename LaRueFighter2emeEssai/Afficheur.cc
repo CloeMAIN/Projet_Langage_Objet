@@ -1,11 +1,11 @@
 #include "Afficheur.hh"
 
 
-Afficheur::Afficheur(/* args */) : window(sf::VideoMode::getDesktopMode(), "Jeu", sf::Style::Fullscreen)
+Afficheur::Afficheur() : window(sf::VideoMode::getDesktopMode(), "Jeu", sf::Style::Fullscreen)
 {
     // créer une fenêtre SFLM
     window.setFramerateLimit(60); // Limiter le taux de rafraîchissement à 60 images par seconde
-
+    fondTexture.loadFromFile(CHEMIN_SOL);
 
 }
 
@@ -75,19 +75,19 @@ void Afficheur::afficher(Jeu& jeu) {
     // la barre de vie
     window.clear(); // enlever le menu
     window.draw(jeu.getSprite());
-    // window.clear(sf::Color::Black); // enlever le menu
-    // /* afficher un des backgrounds dans la*/
-    // //afficher(CHEMIN_BACKGROUNDS_RANDOM);
-    // afficherFondJeu();
+    //On affiche un écran noir transparent
+    sf::RectangleShape rectangle(sf::Vector2f(TAILLE_FENETRE.x, TAILLE_FENETRE.y));
+    rectangle.setFillColor(sf::Color(0, 0, 0, 150));
+    window.draw(rectangle);
     afficherSol();
     afficherBarreVieJ1(jeu.getJoueur1().getVie());
     afficherBarreVieJ2(jeu.getJoueur2().getVie());
-    afficher(jeu.getJoueur1()); // Affiche le joueur 1
-    afficher(jeu.getJoueur2()); // Affiche le joueur 2
+    
     for (int i = 0; i < NB_PLATEFORMES; i++) {
         afficher(CHEMIN_PLATEFORME, PLATEFORME, jeu.getPlateforme(i).getPosition());
     }
-    // Ajoutez d'autres éléments à afficher en fonction de l'objet Jeu
+    afficher(jeu.getJoueur1()); // Affiche le joueur 1
+    afficher(jeu.getJoueur2()); // Affiche le joueur 2
     window.display();
 }
 
@@ -115,9 +115,10 @@ void Afficheur:: afficher(std::string cheminBackground){
 
 
 void Afficheur::afficherSol() {
-    sf::RectangleShape sol(sf::Vector2f(TAILLE_FENETRE.x, HAUTEUR_SOL)); // Utilisation de Vector2f pour la taille
+    sf::Sprite sol;
+    sol.setTexture(fondTexture);
+    sol.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sol.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sol.getLocalBounds().height));
     sol.setPosition(0, TAILLE_FENETRE.y-HAUTEUR_SOL); // Positionné au bas au milieu
-    sol.setFillColor(sf::Color::Blue);
     window.draw(sol);
 }
 
@@ -132,10 +133,8 @@ void Afficheur::afficher(Menu menu){
     afficher(menu.getCheminBackgroundMenu()[0]);
     
     /*Affichage des différents boutons*/
-    afficher(menu.getListeBoutons()[0].first, menu.getListeBoutons()[0].second.first, menu.getListeBoutons()[0].second.second);
-    afficher(menu.getListeBoutons()[1].first, menu.getListeBoutons()[1].second.first, menu.getListeBoutons()[1].second.second);
-    afficher(menu.getListeBoutons()[2].first, menu.getListeBoutons()[2].second.first, menu.getListeBoutons()[2].second.second);
-    afficher(menu.getListeBoutons()[3].first, menu.getListeBoutons()[3].second.first, menu.getListeBoutons()[3].second.second);
+    for(int i = 0; i <menu.getListeBoutons().size()  ; i++)
+        afficher(menu.getListeBoutons()[i].first, menu.getListeBoutons()[i].second.first, menu.getListeBoutons()[i].second.second);
     window.display();
 
 }
@@ -190,23 +189,3 @@ void Afficheur::afficherBarreVieJ2(float vie) {
         window.draw(barreVie);
     }
 }
-
-void Afficheur::afficherFondJeu() {
-            sf::Sprite sprite;
-            sprite.setTexture(fondTexture);
-            sprite.setPosition(0, 0);
-            sprite.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sprite.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sprite.getLocalBounds().height));
-            window.draw(sprite);
-            // ca affiche par dessus un ecran noir transparent
-            sf::RectangleShape rectangle(sf::Vector2f(TAILLE_FENETRE.x, TAILLE_FENETRE.y));
-            rectangle.setFillColor(sf::Color(0, 0, 0, 200));
-            window.draw(rectangle);
-        }
-
-void Afficheur::loadFondJeu() {
-            // genere un nombre aleatoire entre 0 et la taille de CHEMIN_BACKGROUNDS_RANDOM
-            srand(static_cast<unsigned int>(time(nullptr)));
-            int nombreAleatoire = rand() % CHEMIN_BACKGROUNDS_RANDOM.size();
-            fondTexture.loadFromFile(CHEMIN_BACKGROUNDS_RANDOM[nombreAleatoire]);
-        // Charger d'autres textures au besoin
-        }   
