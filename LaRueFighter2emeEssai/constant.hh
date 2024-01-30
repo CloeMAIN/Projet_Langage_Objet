@@ -32,7 +32,7 @@ const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
 
 // Constantes communes aux deux joueurs a modifier dans code
 const float VITESSE_JOUEUR = 10;
-const float VITESSE_JOUEUR_SAUT = -(float)TAILLE_FENETRE.y/42.0f;
+const float VITESSE_JOUEUR_SAUT = -(float)TAILLE_FENETRE.y/35.0f;
 const Taille TAILLE_JOUEUR_SPRITE = {float(TAILLE_FENETRE.x)/20, float(float(TAILLE_FENETRE.y)/6.5)};
 const float POINTS_DE_VIE_JOUEUR = 3500;
 
@@ -160,8 +160,8 @@ const HitBox TAILLE_BOUTON_QUESTIONNAIRE = { POSITION_BOUTON_QUESTIONNAIRE.x, PO
 
 //Plateformes
 const int NB_PLATEFORMES = 2;
-const Point POSITION_PLATEFORME1 = {float(TAILLE_FENETRE.x)/2  - 3*float(TAILLE_FENETRE.x)/8, float(TAILLE_FENETRE.y)/2};
-const Point POSITION_PLATEFORME2 = {float(TAILLE_FENETRE.x)/2  + float(TAILLE_FENETRE.x)/8, float(TAILLE_FENETRE.y)/2};
+const Point POSITION_PLATEFORME1 = {float(TAILLE_FENETRE.x)/2  - 3*float(TAILLE_FENETRE.x)/8, float(TAILLE_FENETRE.y)/2 + 200};
+const Point POSITION_PLATEFORME2 = {float(TAILLE_FENETRE.x)/2  + float(TAILLE_FENETRE.x)/8, float(TAILLE_FENETRE.y)/2 + 200};
 
 const Taille TAILLE_PLATEFORME = {float(TAILLE_FENETRE.x)/4, 25};
 const HitBox PLATEFORME = {POSITION_PLATEFORME1.x, POSITION_PLATEFORME1.y, POSITION_PLATEFORME1.x + TAILLE_PLATEFORME.largeur, POSITION_PLATEFORME1.y + TAILLE_PLATEFORME.hauteur};
