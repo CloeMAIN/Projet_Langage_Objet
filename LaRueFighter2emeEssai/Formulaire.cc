@@ -4,85 +4,91 @@ Formulaire::Formulaire(std::list<Question> questions, int nbQuestions){
     this->questions = questions;
     this->nbQuestions = nbQuestions;
     this->score = 0;
-    this->nom = "";
-    this->prenom = "";
+    this->pseudo = "";
+    this->questionCourante = 0; 
 }
 
 int Formulaire::lancer(Afficheur* afficheur){
+    int etape = 1; 
+    bool finquestion = 0;
+    InputUser inputUser;
+    sf::RenderWindow* window = afficheur->getWindow();
+    sf::Text text; sf::Text rep; 
+    sf::Font font;
+    font.loadFromFile("Font/DEJAVUSANS.TTF");
+    text.setFont(font);
+    text.setCharacterSize(50);
+    text.setFillColor(sf::Color::Black);
+    text.setPosition(float(TAILLE_FENETRE.x)/8,2*float(TAILLE_FENETRE.y)/3);
+    text.setString(L"Réponse :");
 
-    // system("x-terminal-emulator");
+    rep.setFont(font);
+    rep.setCharacterSize(50);
+    rep.setFillColor(sf::Color::Black);
+    rep.setPosition(float(TAILLE_FENETRE.x)/8,float(TAILLE_FENETRE.y)/2);
+    rep.setString(L"Réponse :");
+    std::string Reponse; 
+    std::string Background; 
 
-    debutLancer();
+    std::cout << "Lancement Formulaire" << std::endl;
 
-    for(int i = 0; i < this->nbQuestions; i++){
-        boucleLancer(i);
+     while (afficheur->getWindow()->isOpen() && etape!=4){
+        if(etape == 1){
+            inputUser.gererPremiereEtape(afficheur->getWindow(), &pseudo, &text, &etape);
+            std::cout << "Pseudo : " << pseudo << std::endl;
+            // afficheur->getWindow()->draw(text);
+            afficheur->afficherquizz(CHEMIN_PRESENTATION_FORMULAIRE, text);
+        }
+
+        if (etape== 2){
+            finquestion = inputUser.gererFormulaire(afficheur->getWindow(), &Reponse, &Background, &rep, &questionCourante); 
+            if (finquestion == 1){
+                majFormulaire(&Reponse, &Background, &etape, &finquestion, &rep);
+            }
+            afficheur->afficher(*this, rep);
+        }
+
+        if (etape == 3){
+            etape=4; 
+            return finLancer(afficheur);
+        }
+    afficheur->getWindow()->display();
+     }
+    return 0;
+}
+
+
+void Formulaire::majFormulaire(std::string* reponseUtilisateur, std::string* backgroundUtilisateur, int* etape, bool* finquestion, sf::Text* rep){
+    if(this->questions.front().verifierReponse(*reponseUtilisateur) && this->questions.front().verifierBackground(*backgroundUtilisateur)){
+        this->score++;
+        printf("Bonne réponse\n");
     }
-    return finLancer(afficheur);
+    else{
+        printf("Mauvaise réponse\n");
+    }
+    rep->setString(L"Réponse :");
+    *reponseUtilisateur = "";
+    *backgroundUtilisateur = "";
+    *finquestion = 0;
+    Question temp = this->questions.front();
+    this->questions.pop_front();//
+    this->questions.push_back(temp);
+    if(questionCourante == nbQuestions){
+        *etape = 3; 
+    }
 
-   // Fermer un terminal
-    // Note : cela fermera le terminal où le programme est exécuté
-    // system("kill -9 $$"); 
-}
-
-
-void Formulaire::debutLancer(){
-    std::cout << "Bienvenue dans le formulaire de Quizz.\nIci, on vous propose de mettre votre capacité d'analys a rude épreuve.\n Tout au long de vos combat,s les arrières plans cachent des indices et solutions\n Avez-vous su les repérer et les analyser ?\n C'est ce que nous allons voir. " << std::endl;
-    std::cout << "Veuillez saisir votre nom : " << std::endl;
-    std::cin >> this->nom;
-    std::cout << "Veuillez saisir votre prenom : " << std::endl;
-    std::cin >> this->prenom;
-    std::cin.ignore();
-    std::cout << "Bonjour " << this->prenom << " " << this->nom << std::endl;
-    std::cout << "Vous allez répondre à " << this->nbQuestions << " questions" << std::endl;
-    std::cout << "Bonne chance !" << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-}
-
-void Formulaire::boucleLancer(int i){
-    std::cout << "Question " << i+1 << " : " << std::endl;
-        std::cout << this->questions.front().getQuestion() << std::endl;
-        std::string reponseUtilisateur;
-        std::cout << "Veuillez saisir votre réponse : " << std::endl;
-        std::getline(std::cin, reponseUtilisateur);
-        std::cout << "Veuillez saisir le background de votre réponse : " << std::endl;
-        std::string backgroundUtilisateur;
-        std::getline(std::cin, backgroundUtilisateur);
-        if(this->questions.front().verifierReponse(reponseUtilisateur) && this->questions.front().verifierBackground(backgroundUtilisateur)){
-            std::cout << "Bonne réponse !" << std::endl;
-            this->score++;
-        }
-        else{
-            std::cout << "Mauvaise réponse !" << std::endl;
-        }
-        this->questions.pop_front();
-        std::cout << std::endl;
-        std::cout << std::endl;
-        std::cout << std::endl;
 }
 
 int Formulaire::finLancer(Afficheur* afficheur){
-    std::cout << "Fin du formulaire" << std::endl;
-    std::cout << this->prenom << this->nom<< ", ton score est de " << this->score << "/" << this->nbQuestions << std::endl;
-    std::cout << "Merci d'avoir participé !" << std::endl;
-    
     if (this->score == this->nbQuestions){
-        std::cout << "Vous avez eu un sans faute !\n Si vous voulez rejouer, taper 1.\n Si vous voulez quitter taper 2" << std::endl;
-    }
+        return 5;
+        }
     else{
-        std::cout << "Retentez une autre fois !\n Si vous voulez rejouer, taper 1.\n Si vous voulez quitter taper 2" << std::endl;
+        return 6;
         }
 
-    std::string reponse;
-    std::cin >> reponse;
-    if (reponse == "1"){
-        afficheur->getWindow()->setVisible(true);
-        return -1;
-    }
-    else if (reponse == "2"){
-        afficheur->getWindow()->close();
-        return 3;
-    }
-    return 0;
+}
+
+void Formulaire::genererText(sf::Text* text){
+    
 }

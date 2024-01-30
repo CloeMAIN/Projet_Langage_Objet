@@ -1,10 +1,11 @@
 #include "Question.hh"
 
-Question::Question(std::string question, std::string format , std::string reponse, std::string background){
+Question::Question(std::string question, std::string format , std::string reponse, std::string background, std::string cheminImageQuestion){
     this->question = question;
     this->reponse = reponse;
     this->background = background;
     this->formatReponse = format;
+    this->cheminImageQuestion = cheminImageQuestion;
 }
 
 bool Question::verifierReponse(std::string reponseUtilisateur){

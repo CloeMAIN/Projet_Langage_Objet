@@ -22,7 +22,12 @@ public:
     void checkAttaque2(Personnage& joueur);
     void checkProjectile(Personnage& joueur);
     void DemandeAttaque(Personnage& joueur1, Personnage& joueur2);
-};
+    
+    //Methode pour formulaire
+    void gererPremiereEtape(sf::RenderWindow* window, std::string* pseudo, sf::Text* text, int* etape);
+    int gererFormulaire(sf::RenderWindow* window, std::string* Reponse, std::string* Background, sf::Text* text1, int* questionCourante);
+    void gererFinformulaire(sf::RenderWindow* window);
+    };
 
 
 

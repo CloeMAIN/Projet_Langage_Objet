@@ -17,32 +17,33 @@ class Formulaire
         std::list<Question> questions;
         int score;
         int nbQuestions;
-        std::string nom;
-        std::string prenom;
+        std::string pseudo;
+        int questionCourante;
     
     public:
         Formulaire(std::list<Question> questions, int nbQuestions);
         ~Formulaire(){};
 
         //Getter
-        int getScore();
-        int getNbQuestions();
-        std::string getNom();
-        std::string getPrenom();
-        std::list<Question> getQuestions();
+        int getScore(){return score;};
+        int getNbQuestions(){return nbQuestions;};
+        std::string getPseudo(){return pseudo;};
+        std::list<Question> getQuestions(){return questions;};
+        int getQuestionCourante(){return questionCourante;};
 
         //Setter
         void setScore(int score);
         void setNbQuestions(int nbQuestions);
-        void setNom(std::string nom);
-        void setPrenom(std::string prenom);
+        void setPseudo(std::string pseudo);
         void setQuestions(std::list<Question> questions);
+        void setQuestionCourante(int questionCourante);
 
         //Méthode
         int lancer(Afficheur* afficheur);
         void debutLancer();
-        void boucleLancer(int i);
+        void majFormulaire(std::string* reponseUtilisateur, std::string* backgroundUtilisateur, int* etape, bool* finquestion, sf::Text* rep);
         int finLancer(Afficheur* afficheur);
+        void genererText(sf::Text* text);
 
 
 };

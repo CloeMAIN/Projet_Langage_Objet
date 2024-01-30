@@ -159,3 +159,89 @@ void InputUser::checkProjectile(Personnage& joueur){
         joueur.setBlock(true);
     }
 }
+
+
+int InputUser::gererFormulaire(sf::RenderWindow* window, std::string* Reponse, std::string* Background, sf::Text* text1, int* questionCourante){
+    sf::Event event;
+    while (window->pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window->close();
+        else if (event.type == sf::Event::TextEntered)
+        {
+            if (event.text.unicode < 128) // Assurez-vous que le caractère est ASCII
+            {
+                if (event.text.unicode == 8) // Vérifie si la touche Backspace est pressée
+                {
+                    if (!(*Reponse).empty())
+                        (*Reponse).pop_back();
+                }
+                else
+                {
+                    *Reponse += static_cast<char>(event.text.unicode);
+                }
+
+                text1->setString(*Reponse);
+            }
+        }
+
+        else if(event.type == sf::Event::MouseButtonPressed){
+            //si je clique sur le bouton jouer
+            if(event.mouseButton.button == sf::Mouse::Left){
+                if (event.mouseButton.x >= TAILLE_NOTRE_DAME.GaucheHaut.x && event.mouseButton.x <= TAILLE_NOTRE_DAME.DroiteBas.x && event.mouseButton.y >= TAILLE_NOTRE_DAME.GaucheHaut.y && event.mouseButton.y <= TAILLE_NOTRE_DAME.DroiteBas.y){
+                    *Background = "Notre Dame";
+                    }
+                else if (event.mouseButton.x >= TAILLE_LOUVRES.GaucheHaut.x && event.mouseButton.x <= TAILLE_LOUVRES.DroiteBas.x && event.mouseButton.y >= TAILLE_LOUVRES.GaucheHaut.y && event.mouseButton.y <= TAILLE_LOUVRES.DroiteBas.y){
+                    *Background = "Louvres";
+                }
+                else if (event.mouseButton.x >= TAILLE_TOUR_EIFFEL.GaucheHaut.x && event.mouseButton.x <= TAILLE_TOUR_EIFFEL.DroiteBas.x && event.mouseButton.y >= TAILLE_TOUR_EIFFEL.GaucheHaut.y && event.mouseButton.y <= TAILLE_TOUR_EIFFEL.DroiteBas.y ){
+                    *Background = "Tour Eiffel";
+                }
+                else if (event.mouseButton.x >= TAILLE_ARC_DE_TRIOMPHE.GaucheHaut.x && event.mouseButton.x <= TAILLE_ARC_DE_TRIOMPHE.DroiteBas.x && event.mouseButton.y >= TAILLE_ARC_DE_TRIOMPHE.GaucheHaut.y && event.mouseButton.y <= TAILLE_ARC_DE_TRIOMPHE.DroiteBas.y){
+                    *Background = "Arc de Triomphe";
+                }
+                else if (event.mouseButton.x >= TAILLE_VALIDE.GaucheHaut.x && event.mouseButton.x <= TAILLE_VALIDE.DroiteBas.x && event.mouseButton.y >= TAILLE_VALIDE.GaucheHaut.y && event.mouseButton.y <= TAILLE_VALIDE.DroiteBas.y){
+                    *questionCourante +=1;
+                    return 1; 
+                }
+            }
+        }
+
+    }
+}
+
+void InputUser::gererPremiereEtape(sf::RenderWindow* window, std::string* pseudo, sf::Text* text, int* etape){
+    sf::Event event;
+    while (window->pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+            window->close();
+        else if (event.type == sf::Event::TextEntered)
+        {
+            if (event.text.unicode < 128) // Assurez-vous que le caractère est ASCII
+            {
+                if (event.text.unicode == 8) // Vérifie si la touche Backspace est pressée
+                {
+                    if (!(*pseudo).empty())
+                        (*pseudo).pop_back();
+                }
+                else
+                {
+                    *pseudo += static_cast<char>(event.text.unicode);
+                }
+
+                text->setString(*pseudo);
+            }
+        }
+        else if(event.type == sf::Event::MouseButtonPressed){
+            //si je clique sur le bouton jouer
+            if(event.mouseButton.button == sf::Mouse::Left){
+                if (event.mouseButton.x >= TAILLE_VALIDE.GaucheHaut.x && event.mouseButton.x <= TAILLE_VALIDE.DroiteBas.x && event.mouseButton.y >= TAILLE_VALIDE.GaucheHaut.y && event.mouseButton.y <= TAILLE_VALIDE.DroiteBas.y){
+                    *etape = 2;
+                    return;
+                }
+            }
+        }
+
+    }
+}

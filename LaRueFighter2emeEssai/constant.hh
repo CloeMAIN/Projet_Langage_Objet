@@ -32,7 +32,7 @@ const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
 
 // Constantes communes aux deux joueurs a modifier dans code
 const float VITESSE_JOUEUR = 10;
-const float VITESSE_JOUEUR_SAUT = -(float)TAILLE_FENETRE.y/35.0f;
+const float VITESSE_JOUEUR_SAUT = -32.0f;
 const Taille TAILLE_JOUEUR_SPRITE = {float(TAILLE_FENETRE.x)/20, float(float(TAILLE_FENETRE.y)/6.5)};
 const float POINTS_DE_VIE_JOUEUR = 3500;
 
@@ -55,7 +55,7 @@ const Point POSITION_DEPART_JOUEUR1 = {float(TAILLE_FENETRE.x)/3, 0};
 
 // Barre de vie
 const Point POSITION_BARRE_J1 = {float(20),float(20)};
-const sf::Color COULEUR_BARRE_J1 = sf::Color::Red;
+const sf::Color COULEUR_BARRE_J1 = sf::Color(255, 165, 0); // Orange
 
 
 // Chemin des images
@@ -169,22 +169,20 @@ const HitBox PLATEFORME = {POSITION_PLATEFORME1.x, POSITION_PLATEFORME1.y, POSIT
 const std::vector<std::string> CHEMIN_IMAGE_PARTIE = {"images/LEVEL1.png", "images/LEVEL2.png", "images/LEVEL3.png", "images/LEVEL4.png"};
 const int NB_BACKGROUND = 4;
 
-const std::string CHEMIN_BOUTON_RETOUR("../images/Home.jpg");
-const std::string CHEMIN_BOUTON_PAUSE("../images/Pause.jpg");
-const std::string CHEMIN_BACKGROUND_ROUND1("../images/Round2.jpg");
-const std::string CHEMIN_BACKGROUND_PAUSE("../images/Pause.jpg");
 const std::string CHEMIN_PLATEFORME("images/plateformes.png");
 const std::string CHEMIN_SOL("images/Sol.png");
 
 /*-----------------------------------MENU DE VICTOIRE-----------------------------------------*/
 // Chemins des images:
 const std::string CHEMIN_BACKGROUND_VICTOIRE_J1("images/Victoire_J1.png");
-const std::string CHEMIN_BACKGROUND_VICTOIRE_J2("images/Victoire_J1.png");
+const std::string CHEMIN_BACKGROUND_VICTOIRE_J2("images/Victoire_J2.png");
+const std::string CHEMIN_BACKGROUND_VICTOIRE_QUIZZ("images/Victoire_Quizz.png");
+const std::string CHEMIN_BACKGROUND_DEFAITE_QUIZZ("images/Defaite_Quizz.png");
 
 const std::string CHEMIN_BOUTON_REJOUER("images/Rejouer.png");
 
 //Position des boutons:
-const Point POSITION_BOUTON_REJOUER = {float(TAILLE_FENETRE.x)/2 - float(TAILLE_FENETRE.x)/6 , float(TAILLE_FENETRE.y)/2 + float(TAILLE_FENETRE.y)/6};
+const Point POSITION_BOUTON_REJOUER = {float(TAILLE_FENETRE.x)/2 - float(TAILLE_FENETRE.x)/6 , float(TAILLE_FENETRE.y)/2 + float(TAILLE_FENETRE.y)/3};
 
 //Taille des boutons:
 const HitBox TAILLE_BOUTON_REJOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JOUER.y , POSITION_BOUTON_JOUER.x+200 , POSITION_BOUTON_JOUER.y+ float(TAILLE_FENETRE.y)/10};
@@ -195,29 +193,56 @@ const std::string QUESTION1 = "Qui est le Judoka le plus médaillé aux JO et co
 const std::string FORMAT1 = "Nom Prénom, nombre";
 const std::string REPONSE1 = "Tadahiro Nomura,3";
 const std::string BACKGROUND1 = "Louvres";
+const std::string CHEMIN_QUESTION1 = "images/Questions/Question1.png";
 
 const std::string QUESTION2 = "En quelle année le Judo a été introduit en tant que sport olympique ? ";
 const std::string FORMAT2 = "Année";
 const std::string REPONSE2 = "1964";
 const std::string BACKGROUND2 = "Tour Eiffel";
+const std::string CHEMIN_QUESTION2 = "images/Questions/Question2.png";
+
 
 const std::string QUESTION3 = "Le Judo féminin est arrivé plus tard que le masculin, en quelle année était-ce ?";
 const std::string FORMAT3 = "Année";
 const std::string REPONSE3 = "1988";
 const std::string BACKGROUND3 = "Arc de Triomphe";
+const std::string CHEMIN_QUESTION3 = "images/Questions/Question3.png";
+
 
 const std::string QUESTION4 = "Sérénité, Gentillesse, Politesse, Contrôle de soi, Honneur, Amis, et Respect des autres sont les 7 maximes du Judo. L’une d’entre elles est apparut, laquelle ?";
 const std::string FORMAT4 = "Maxime";
 const std::string REPONSE4 = "Sérénité";
 const std::string BACKGROUND4 = "Notre Dame";
+const std::string CHEMIN_QUESTION4 = "images/Questions/Question4.png";
 
-const Question QUESTIONA = Question(QUESTION1, FORMAT1, REPONSE1, BACKGROUND1);
-const Question QUESTIONB = Question(QUESTION2, FORMAT2, REPONSE2, BACKGROUND2);
-const Question QUESTIONC = Question(QUESTION3, FORMAT3, REPONSE3, BACKGROUND3);
-const Question QUESTIOND = Question(QUESTION4, FORMAT4, REPONSE4, BACKGROUND4);
+
+const Question QUESTIONA = Question(QUESTION1, FORMAT1, REPONSE1, BACKGROUND1, CHEMIN_QUESTION1);
+const Question QUESTIONB = Question(QUESTION2, FORMAT2, REPONSE2, BACKGROUND2, CHEMIN_QUESTION2);
+const Question QUESTIONC = Question(QUESTION3, FORMAT3, REPONSE3, BACKGROUND3, CHEMIN_QUESTION3);
+const Question QUESTIOND = Question(QUESTION4, FORMAT4, REPONSE4, BACKGROUND4, CHEMIN_QUESTION4);
 
 const std::list<Question> QUESTIONS = {QUESTIONA, QUESTIONB, QUESTIONC, QUESTIOND};
 const int NB_QUESTIONS = 4;
+
+//Boutons pour les background :
+const std::string NOTRE_DAME = "images/Questions/Notre Dame.png";
+const std::string LOUVRES = "images/Questions/Louvres.png";
+const std::string TOUR_EIFFEL = "images/Questions/Tour Eiffel.png";
+const std::string ARC_DE_TRIOMPHE = "images/Questions/Arc de Triomphe.png";
+const std::string VALIDE = "images/Questions/Valide.png";
+const std::string CHEMIN_PRESENTATION_FORMULAIRE = "images/Questions/PrestentationFormulaire.png";
+
+const Point POSITION_NOTRE_DAME = {150, float(TAILLE_FENETRE.y) - 450};
+const Point POSITION_LOUVRES = {170 + float(TAILLE_FENETRE.x)/5, float(TAILLE_FENETRE.y) - 450};
+const Point POSITION_TOUR_EIFFEL = {150, float(TAILLE_FENETRE.y) - 300};
+const Point POSITION_ARC_DE_TRIOMPHE = {170+ float(TAILLE_FENETRE.x)/5, float(TAILLE_FENETRE.y) - 300};
+const Point POSITION_VALIDE = {float(TAILLE_FENETRE.x)/2-float(TAILLE_FENETRE.x)/10, float(TAILLE_FENETRE.y) - 250};
+
+const HitBox TAILLE_NOTRE_DAME = {POSITION_NOTRE_DAME.x, POSITION_NOTRE_DAME.y, POSITION_NOTRE_DAME.x + float(TAILLE_FENETRE.x)/5, POSITION_NOTRE_DAME.y + 50};
+const HitBox TAILLE_LOUVRES = {POSITION_LOUVRES.x, POSITION_LOUVRES.y, POSITION_LOUVRES.x + float(TAILLE_FENETRE.x)/5, POSITION_LOUVRES.y + 50};
+const HitBox TAILLE_TOUR_EIFFEL = {POSITION_TOUR_EIFFEL.x, POSITION_TOUR_EIFFEL.y, POSITION_TOUR_EIFFEL.x + float(TAILLE_FENETRE.x)/5, POSITION_TOUR_EIFFEL.y + 50};
+const HitBox TAILLE_ARC_DE_TRIOMPHE = {POSITION_ARC_DE_TRIOMPHE.x, POSITION_ARC_DE_TRIOMPHE.y, POSITION_ARC_DE_TRIOMPHE.x + float(TAILLE_FENETRE.x)/5, POSITION_ARC_DE_TRIOMPHE.y + 50};
+const HitBox TAILLE_VALIDE = {POSITION_VALIDE.x, POSITION_VALIDE.y, POSITION_VALIDE.x + float(TAILLE_FENETRE.x)/5, POSITION_VALIDE.y + 200};
 
 
 #endif // CONSTANT_HH

@@ -5,10 +5,14 @@
 #include "Personnage.hh"
 #include "constant.hh"
 #include "ElementJeu.hh"
+#include "Formulaire.hh"
 #include "Menu.hh"
 #include "Jeu.hh"
 #include <iostream>
 #include "Projectile.hh"
+#include <string>
+
+class Formulaire; 
 
 class Menu;
 // Déclaration anticipée de la classe Jeu pour éviter la dépendance cyclique
@@ -43,6 +47,9 @@ class Afficheur
         void loadFondJeu();
         // Fonction pour afficher le fond lors des parties qui load pas
         void afficherFondJeu();
+        void afficher(std::string cheminImageQuestion, sf::Text ReponseUtilisateur);
+        void afficher(Formulaire form, sf::Text text1);
+        void afficherquizz(std::string cheminImageQuestion, sf::Text text);
 
 
 };

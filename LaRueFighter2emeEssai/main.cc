@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
         }
         //On affiche le menu dans le cas où le joueur 2 a perdu
         if (test == 2){
-            Menu menu({CHEMIN_BACKGROUND_VICTOIRE_J2,  ""}, {{CHEMIN_BOUTON_REJOUER,{TAILLE_BOUTON_REJOUER, POSITION_BOUTON_REJOUER}},
+            Menu menu({CHEMIN_BACKGROUND_VICTOIRE_J1,  ""}, {{CHEMIN_BOUTON_REJOUER,{TAILLE_BOUTON_REJOUER, POSITION_BOUTON_REJOUER}},
                                                                             {CHEMIN_BOUTON_COMMANDES,{TAILLE_BOUTON_COMMANDES, {-200, -200}}}, 
                                                                             {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}},
                                                                             {CHEMIN_BOUTON_QUESTIONNAIRE, {TAILLE_BOUTON_QUESTIONNAIRE, POSITION_BOUTON_QUESTIONNAIRE}}});
@@ -69,9 +69,18 @@ int main(int argc, char const *argv[])
         if (test == 5){
             //On affichera le menu de victoire du questionnaire
             std::cout << "Victoire du questionnaire" << std::endl;
-            Menu menu({CHEMIN_BACKGROUND_VICTOIRE_J2,  ""}, {{CHEMIN_BOUTON_REJOUER,{TAILLE_BOUTON_REJOUER, POSITION_BOUTON_REJOUER}},
+            Menu menu({CHEMIN_BACKGROUND_VICTOIRE_QUIZZ,  ""}, {{CHEMIN_BOUTON_REJOUER,{TAILLE_BOUTON_REJOUER, POSITION_BOUTON_REJOUER}},
                                                             {CHEMIN_BOUTON_COMMANDES,{TAILLE_BOUTON_COMMANDES, {-200, -200}}}, 
                                                             {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}});
+            test = menu.lancer(&afficheur);
+        }
+        if (test == 6){
+            //On affichera le menu de victoire du questionnaire
+            std::cout << "Défaite au questionnaire" << std::endl;
+            Menu menu({CHEMIN_BACKGROUND_DEFAITE_QUIZZ,  ""}, {{CHEMIN_BOUTON_REJOUER,{TAILLE_BOUTON_REJOUER, POSITION_BOUTON_REJOUER}},
+                                                            {CHEMIN_BOUTON_COMMANDES,{TAILLE_BOUTON_COMMANDES, {-200, -200}}}, 
+                                                            {CHEMIN_BOUTON_QUITTER, {TAILLE_BOUTON_QUITTER, POSITION_BOUTON_QUITTER}}});
+            test = menu.lancer(&afficheur);
         }
 
         if (afficheur.getWindow()->isOpen() == false){

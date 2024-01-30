@@ -138,9 +138,13 @@ void Afficheur::afficher(Menu menu){
     /*Affichage des différents boutons*/
     for(int i = 0; i <menu.getListeBoutons().size()  ; i++)
         afficher(menu.getListeBoutons()[i].first, menu.getListeBoutons()[i].second.first, menu.getListeBoutons()[i].second.second);
+    // std::string test1;
+    // std::string test2; 
+    // afficher(CHEMIN_QUESTION1, &test1, &test2);
     window.display();
 
 }
+
 
 void Afficheur::afficherBarreVieJ1(float vie) {
     const float vieMaximale = POINTS_DE_VIE_JOUEUR;
@@ -189,4 +193,51 @@ void Afficheur::afficherBarreVieJ2(float vie) {
         window.draw(barreVieFond);
         window.draw(barreVie);
     }
+}
+
+void Afficheur::afficher(std::string cheminImageQuestion, sf::Text ReponseUtilisateur){
+    sf::Texture texture;
+    texture.loadFromFile(cheminImageQuestion);
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+    sprite.setPosition(0, 0);
+    sprite.setScale(static_cast<float>(TAILLE_FENETRE.x) / static_cast<float>(sprite.getLocalBounds().width), static_cast<float>(TAILLE_FENETRE.y) / static_cast<float>(sprite.getLocalBounds().height));
+    window.draw(sprite);
+    sf::RectangleShape inputRect(sf::Vector2f(float(TAILLE_FENETRE.x)/3, 60.f)); // Rectangle pour le prénom
+    inputRect.setFillColor(sf::Color::White);
+    inputRect.setPosition(float(TAILLE_FENETRE.x)/8,float(TAILLE_FENETRE.y)/2);
+    afficher(TOUR_EIFFEL, TAILLE_TOUR_EIFFEL,POSITION_TOUR_EIFFEL);
+    afficher(LOUVRES, TAILLE_LOUVRES,POSITION_LOUVRES);
+    afficher(NOTRE_DAME, TAILLE_NOTRE_DAME,POSITION_NOTRE_DAME);
+    afficher(ARC_DE_TRIOMPHE, TAILLE_ARC_DE_TRIOMPHE,POSITION_ARC_DE_TRIOMPHE); 
+    afficher(VALIDE, TAILLE_VALIDE,POSITION_VALIDE); 
+    window.draw(ReponseUtilisateur) ;
+    window.draw(inputRect);
+
+}
+
+
+void Afficheur::afficher(Formulaire form, sf::Text text1){
+    window.clear(); 
+    std::string test1;
+    std::string test2; 
+    //On se décale jusquà la question courante
+
+    afficher(form.getQuestions().front().getCheminImageQuestion(), text1);
+    window.draw(text1);
+}
+
+void Afficheur::afficherquizz(std::string cheminbackground, sf::Text text){
+    window.clear();
+    afficher(cheminbackground);
+    afficher(VALIDE, TAILLE_VALIDE, POSITION_VALIDE);
+    sf::RectangleShape inputRect(sf::Vector2f(float(TAILLE_FENETRE.x)/3, 60.f)); // Rectangle pour le prénom
+    inputRect.setFillColor(sf::Color::White);
+    inputRect.setPosition(float(TAILLE_FENETRE.x)/8,2*float(TAILLE_FENETRE.y)/3);
+    window.draw(inputRect);
+    window.draw(text);
+    std::cout << "On affiche le quizz" << std::endl;
+
+
+
 }
