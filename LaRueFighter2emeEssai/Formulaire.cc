@@ -26,7 +26,7 @@ int Formulaire::lancer(Afficheur* afficheur){
 
 
 void Formulaire::debutLancer(){
-    std::cout << "Bienvenue dans le formulaire de Quizz" << std::endl;
+    std::cout << "Bienvenue dans le formulaire de Quizz.\nIci, on vous propose de mettre votre capacité d'analys a rude épreuve.\n Tout au long de vos combat,s les arrières plans cachent des indices et solutions\n Avez-vous su les repérer et les analyser ?\n C'est ce que nous allons voir. " << std::endl;
     std::cout << "Veuillez saisir votre nom : " << std::endl;
     std::cin >> this->nom;
     std::cout << "Veuillez saisir votre prenom : " << std::endl;
@@ -64,7 +64,7 @@ void Formulaire::boucleLancer(int i){
 
 int Formulaire::finLancer(Afficheur* afficheur){
     std::cout << "Fin du formulaire" << std::endl;
-    std::cout << "Votre score est de " << this->score << "/" << this->nbQuestions << std::endl;
+    std::cout << this->prenom << this->nom<< ", ton score est de " << this->score << "/" << this->nbQuestions << std::endl;
     std::cout << "Merci d'avoir participé !" << std::endl;
     
     if (this->score == this->nbQuestions){

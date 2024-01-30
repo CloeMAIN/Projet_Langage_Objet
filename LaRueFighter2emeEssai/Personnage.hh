@@ -35,6 +35,7 @@ private:
     sf::Clock clockProj;
     sf::Clock clockAtt;
     bool blockAtt = false;
+    bool surPlateforme;
 public:
     // Constructeurs et destructeur
     Personnage(){};
@@ -55,6 +56,7 @@ public:
     std::list<Projectile*> getListeProjectiles() const {return listeProjectiles;}
     std::string getCheminImageActuelle()const { return cheminImageActuelle; }
     int getNbImageSprite() const { return nbImageSprite; }
+    bool getSurPlateforme() const { return surPlateforme; }
 
 
     // Méthodes de modification
@@ -66,6 +68,7 @@ public:
     void setClockProj(sf::Time c){this->clockProj.restart();}
     void setClockAtt(sf::Time c){this->clockAtt.restart();}
     void setBlockAtt(bool b){this->blockAtt = b;}
+    void setSurPlateforme(bool b){this->surPlateforme = b;}
     void update();
 
     /* Méthode */
@@ -82,7 +85,7 @@ public:
     void contact_projectile(); 
     std::string toString();
     void update_attaque(sf::Clock & clock);
-    bool surPlateforme(std::vector<ElementJeu> plateformes);
+    void GestionsurPlateforme(std::vector<ElementJeu> plateformes);
     void gestionBlocageAttaque(int i, int j);
     void gestionattaque1(int i);
     void gestionattaque2(int j);

@@ -18,9 +18,7 @@ Jeu::Jeu(){
                             CHEMIN_IMAGE_JOUEUR1_RIEN.first);
     
     plateformes = {ElementJeu(POSITION_PLATEFORME1, Direction::GAUCHE, TAILLE_PLATEFORME),
-                    ElementJeu(POSITION_PLATEFORME2, Direction::GAUCHE, TAILLE_PLATEFORME),
-                    ElementJeu(POSITION_PLATEFORME3, Direction::GAUCHE, TAILLE_PLATEFORME),
-                    ElementJeu(POSITION_PLATEFORME4, Direction::GAUCHE, TAILLE_PLATEFORME)};
+                    ElementJeu(POSITION_PLATEFORME2, Direction::GAUCHE, TAILLE_PLATEFORME)};
                     
     chemin_image_fond = CHEMIN_IMAGE_PARTIE[rand() % NB_BACKGROUND ];
     texture.loadFromFile(chemin_image_fond);
@@ -115,8 +113,8 @@ void Jeu::empecherSortie(){
 
 void Jeu::majJoueurs(sf::Clock &clock){
     // Appliquer la gravité pour les deux joueurs
-        joueur1.surPlateforme(plateformes);
-        joueur2.surPlateforme(plateformes);
+        joueur1.GestionsurPlateforme(plateformes);
+        joueur2.GestionsurPlateforme(plateformes);
         if (joueur1.getPosition().y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y ) {
             joueur1.setVelocityY(joueur1.getVelocity().y + GRAVITE);
         }

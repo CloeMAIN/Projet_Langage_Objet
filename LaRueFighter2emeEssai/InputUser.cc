@@ -24,10 +24,9 @@ void InputUser::gererEvenements(sf::RenderWindow* window, Personnage& joueur1, P
         
             //Gestion des sauts pour les deux joueurs 
             
-            if (event.key.code == sf::Keyboard::Z && (joueur1.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR_SPRITE.hauteur || joueur1.surPlateforme(Plateformes))) { 
+            if (event.key.code == sf::Keyboard::Z && (joueur1.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR_SPRITE.hauteur || joueur1.getSurPlateforme())) { 
                 checkSaut(joueur1);}
-            if (event.key.code == sf::Keyboard::Up && (joueur2.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR_SPRITE.hauteur || joueur2.surPlateforme(Plateformes))) { 
-                std::cout << "Check Saut" << std::endl;
+            if (event.key.code == sf::Keyboard::Up && (joueur2.getPosition().y  == POSITION_SOL.y - TAILLE_JOUEUR_SPRITE.hauteur || joueur2.getSurPlateforme())) { 
                 checkSaut(joueur2);}
             if (sf::Keyboard::isKeyPressed(TOUCHE_DEGAT_J1)){
                 checkDegat(joueur1);}
@@ -99,7 +98,6 @@ void InputUser::DemandeAttaque( Personnage& joueur1, Personnage& joueur2){
 
 void InputUser::checkSaut(Personnage& joueur){
         joueur.setVelocityY(VITESSE_JOUEUR_SAUT); // Définir la vélocité sur la vitesse de saut
-        std::cout << "Check Saut" << std::endl;
         joueur.setEtat("Saut", true);
         joueur.setEtat("Rien", false);
 }

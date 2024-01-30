@@ -38,24 +38,33 @@ Personnage::Personnage(Point position, float vie, std::vector<std::pair<std::str
     
 }
 
-bool Personnage::surPlateforme(std::vector<ElementJeu> plateformes){
-    for (int i = 0; i < NB_PLATEFORMES;){
-        if(position.x > plateformes[i].getPosition().x && position.x < plateformes[i].getPosition().x + plateformes[i].getTaille().largeur){
-            if(position.y + TAILLE_JOUEUR_SPRITE.hauteur >plateformes[i].getPosition().y && position.y + TAILLE_JOUEUR_SPRITE.hauteur < plateformes[i].getPosition().y + plateformes[i].getTaille().hauteur){
-                position = {position.x, plateformes[i].getPosition().y - TAILLE_JOUEUR_SPRITE.hauteur};
-                setEtat("Saut", false);
-                setVelocityY(VITESSE_JOUEUR_SAUT);
-                // setVelocityY(0);
-                return true;
+void Personnage::GestionsurPlateforme(std::vector<ElementJeu> plateformes) {
+        // ... Autres parties de la fonction ...
+
+        for (int i = 0; i < NB_PLATEFORMES; i++) {
+            if (position.x > plateformes[i].getPosition().x && position.x < plateformes[i].getPosition().x + plateformes[i].getTaille().largeur) {
+                if (position.y + TAILLE_JOUEUR_SPRITE.hauteur > plateformes[i].getPosition().y && position.y + TAILLE_JOUEUR_SPRITE.hauteur < plateformes[i].getPosition().y + plateformes[i].getTaille().hauteur) {
+                    if (!surPlateforme) {
+                        // Le personnage vient d'arriver sur la plateforme
+                        surPlateforme = true;
+                        setVelocityY(0);
+                        position = { position.x, plateformes[i].getPosition().y - TAILLE_JOUEUR_SPRITE.hauteur};
+                        etatPlusChemin["Saut"].first = false;
+                        }
+
+                    if (etatPlusChemin["Saut"].first) {
+                        surPlateforme = false;
+                        std::cout<< "Velocité quand sur plateforme et saut : " << velocity.y << "\n";
+                        setVelocityY(VITESSE_JOUEUR_SAUT);
+                    }
+                }
             }
         }
-        i++;
-    }
-    return false;
+        surPlateforme = false; // Mettez à jour l'état si le personnage n'est pas sur la plateforme
 }
 
 void Personnage::appliquerGravite(std::vector<ElementJeu> Plateformes){
-    if (not(surPlateforme(Plateformes) || position.y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y ) ){
+    if (!surPlateforme && position.y + TAILLE_JOUEUR_SPRITE.hauteur < POSITION_SOL.y ){
         velocity.y += GRAVITE;
         update();
     }
@@ -104,12 +113,16 @@ void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
         sprite.move(0,VITESSE_JOUEUR_SAUT);
         position = {sprite.getPosition().x,sprite.getPosition().y}; 
 
-        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y || surPlateforme(Plateformes) ) {
+        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y){
+            std::cout << "Vélocité quand sur sol : " << velocity.y << "\n";
+        }
+
+        if (position.y + TAILLE_JOUEUR_SPRITE.hauteur >= POSITION_SOL.y || surPlateforme ) {
             etatPlusChemin["Saut"].first = false;
         }
-        std::cout<< etatPlusChemin["Saut"].first << std::endl;
     }
 }
+
 
 void Personnage::gestionSaut(std::vector<ElementJeu> Plateformes){
 

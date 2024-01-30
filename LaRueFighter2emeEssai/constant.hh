@@ -33,7 +33,7 @@ const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
 // Constantes communes aux deux joueurs a modifier dans code
 const float VITESSE_JOUEUR = 10;
 const float VITESSE_JOUEUR_SAUT = -32.0f;
-const Taille TAILLE_JOUEUR_SPRITE = {float(TAILLE_FENETRE.x)/15, float(float(TAILLE_FENETRE.y)/6.5)};
+const Taille TAILLE_JOUEUR_SPRITE = {float(TAILLE_FENETRE.x)/20, float(float(TAILLE_FENETRE.y)/6.5)};
 const float POINTS_DE_VIE_JOUEUR = 3500;
 
 
@@ -59,7 +59,7 @@ const sf::Color COULEUR_BARRE_J1 = sf::Color::Red;
 
 
 // Chemin des images
-const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_RIEN ={"images/Fighter/Idle_Right.png","images/Fighter/Idle_Left.png"};
+const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_RIEN ={"images/Fighter/Idle_Rightb.png","images/Fighter/Idle_Leftb.png"};
 const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_AVANCER = {"images/Fighter/Walk_Right.png","images/Fighter/Walk_Left.png"};
 const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_SAUT = {"images/Fighter/Saut_Right.png","images/Fighter/Saut_Left.png"};
 const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_ATTAQUE1= {"images/Fighter/Fist_Right.png","images/Fighter/Fist_Left.png"};
@@ -67,7 +67,7 @@ const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR1_ATTAQUE2 = {"image
 
 // Nombre d'images par animation
 const int NB_IMAGE_SPRITE_SAUT = 1;
-const int NB_IMAGE_SPRITE_RIEN = 6;
+const int NB_IMAGE_SPRITE_RIEN = 1;
 const int NB_IMAGE_SPRITE_AVANCER = 8;
 const int NB_IMAGE_ATTAQUE1 = 1;
 const int  NB_IMAGE_ATTAQUE2 = 1;
@@ -104,8 +104,8 @@ const std::pair<std::string,std::string> CHEMIN_IMAGE_JOUEUR2_ATTAQUE2 = {"image
 /*------------------------------------Attaques---------------------------------*/
 
 //Attaques physiques (mêmes pour les deux joueurs)
-const float DEGAT_ATTAQUE1 = 100;
-const float DEGAT_ATTAQUE2 = 150;
+const float DEGAT_ATTAQUE1 = 25;
+const float DEGAT_ATTAQUE2 = 50;
 const float DECALAGE_Y_PIED = 65;
 const float DECALAGE_Y_POING = 55;
 const Taille TAILLE_ATTAQUE1= {40, 20};
@@ -120,11 +120,11 @@ const float TEMPS_BLOCAGE_PROJECTILE = 2;
 //Projectiles: Direct
 const int RAYON_DIRECT = 5;
 const float VITESSE_DIRECT = 400;
-const float DEGAT_DIRECT = 300;
+const float DEGAT_DIRECT = 125;
 
 //Projectiles: ZigZag
 const float VITESSE_ZIGZAG = 200;
-const float DEGAT_ZIGZAG = 250;
+const float DEGAT_ZIGZAG = 100;
 const float RAYON_ZIGZAG = 5;
 const double AMPLITUDE_ZIGZAG = 300;
 const double ANGLE_TIR_ZIGZAG = 90;
@@ -159,13 +159,11 @@ const HitBox TAILLE_BOUTON_QUESTIONNAIRE = { POSITION_BOUTON_QUESTIONNAIRE.x, PO
 /*------------------------------------JEU PRINCIPAL----------------------------------*/
 
 //Plateformes
-const int NB_PLATEFORMES = 4;
-const Point POSITION_PLATEFORME1 = {float(TAILLE_FENETRE.x)/2 + 250, float(TAILLE_FENETRE.y) - 500};
-const Point POSITION_PLATEFORME2 = {float(TAILLE_FENETRE.x)/2 - 200 , float(TAILLE_FENETRE.y) - 700};
-const Point POSITION_PLATEFORME3 = {float(TAILLE_FENETRE.x)/2 - 500 , float(TAILLE_FENETRE.y) - 450};
-const Point POSITION_PLATEFORME4 = {float(TAILLE_FENETRE.x) - 500 , float(TAILLE_FENETRE.y) - 200};
+const int NB_PLATEFORMES = 2;
+const Point POSITION_PLATEFORME1 = {float(TAILLE_FENETRE.x)/2  - 3*float(TAILLE_FENETRE.x)/8, float(TAILLE_FENETRE.y)/2};
+const Point POSITION_PLATEFORME2 = {float(TAILLE_FENETRE.x)/2  + float(TAILLE_FENETRE.x)/8, float(TAILLE_FENETRE.y)/2};
 
-const Taille TAILLE_PLATEFORME = {float(TAILLE_FENETRE.x)/8, 25};
+const Taille TAILLE_PLATEFORME = {float(TAILLE_FENETRE.x)/4, 25};
 const HitBox PLATEFORME = {POSITION_PLATEFORME1.x, POSITION_PLATEFORME1.y, POSITION_PLATEFORME1.x + TAILLE_PLATEFORME.largeur, POSITION_PLATEFORME1.y + TAILLE_PLATEFORME.hauteur};
 
 const std::vector<std::string> CHEMIN_IMAGE_PARTIE = {"images/LEVEL1.png", "images/LEVEL2.png", "images/LEVEL3.png", "images/LEVEL4.png"};
