@@ -32,7 +32,7 @@ const sf::Keyboard::Key TOUCHE_DEGAT_J2 = sf::Keyboard::B;
 
 // Constantes communes aux deux joueurs a modifier dans code
 const float VITESSE_JOUEUR = 10;
-const float VITESSE_JOUEUR_SAUT = -32.0f;
+const float VITESSE_JOUEUR_SAUT = -(float)TAILLE_FENETRE.y/42.0f;
 const Taille TAILLE_JOUEUR_SPRITE = {float(TAILLE_FENETRE.x)/20, float(float(TAILLE_FENETRE.y)/6.5)};
 const float POINTS_DE_VIE_JOUEUR = 3500;
 
