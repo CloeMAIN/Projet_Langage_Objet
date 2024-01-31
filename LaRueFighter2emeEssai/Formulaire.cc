@@ -12,6 +12,15 @@ int Formulaire::lancer(Afficheur* afficheur){
     int etape = 1; 
     bool finquestion = 0;
     InputUser inputUser;
+
+    sf::Music music; 
+    if(!music.openFromFile("Son/Clock.wav"))
+        std::cout << "Erreur lors du chargement de la musique" << std::endl;
+    else
+        std::cout << "Musique chargée" << std::endl;
+    music.setLoop(true); 
+    music.play();
+
     sf::RenderWindow* window = afficheur->getWindow();
     sf::Text text; sf::Text rep; 
     sf::Font font;
