@@ -208,6 +208,7 @@ int InputUser::gererFormulaire(sf::RenderWindow* window, std::string* Reponse, s
         }
 
     }
+    return 0; 
 }
 
 void InputUser::gererPremiereEtape(sf::RenderWindow* window, std::string* pseudo, sf::Text* text, int* etape){
