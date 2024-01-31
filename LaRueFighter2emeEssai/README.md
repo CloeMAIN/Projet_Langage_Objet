@@ -12,10 +12,11 @@ combats. Le second est un quizz dont les réponses aux questions se trouvent sou
 
 ## Installation
 
-Vérifier la présence de la biliothèque SFML dans votre ordinateur.
-Cloner le git
-Utiliser Makefile situé dans Source pour lancer le jeu
-Pour les testscases : utiiser make run dans le dossier tests
+-Vérifier la présence de la biliothèque SFML dans votre ordinateur.
+-Vérifier la présence de la librairie OpenAL, à installer avec sudo apt-get install libopenal-dev pour les environnements linux
+-Cloner le git
+-Utiliser Makefile situé dans Source pour lancer le jeu
+-Pour les testscases : utiiser make run dans le dossier tests
 
 ## Utilisation
 
@@ -28,9 +29,9 @@ En cliquant sur "Try Form" on passe en mode quizz pour tenter d'y répondre.
 
 Des musiques sont licenciées sont présentent tout au long du jeu:
 Eye of the tiger de  Survivor 
-clocks soundtrack de Guru Prasanna
+Clocks soundtrack de Guru Prasanna
 Kamado Tanjirou no Uta de Masaru Shiina
 
 ## Contribution
-Ce projet a été réalisé par 2 étudiantes de MAIN à Polytech sorbonne:
+Ce projet a été réalisé par 2 étudiantes de MAIN à Polytech Sorbonne:
 RASOLOMANANA Aurélie  et SASTRE Cloé
