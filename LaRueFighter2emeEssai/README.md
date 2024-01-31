@@ -14,8 +14,8 @@ combats. Le second est un quizz dont les réponses aux questions se trouvent sou
 
 Vérifier la présence de la biliothèque SFML dans votre ordinateur.
 Cloner le git
-Utiliser make pour lancer le jeu
-Pour les testscases : utiiser make test
+Utiliser Makefile situé dans Source pour lancer le jeu
+Pour les testscases : utiiser make run dans le dossier tests
 
 ## Utilisation
 
