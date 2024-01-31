@@ -32,29 +32,8 @@ int Formulaire::lancer(Afficheur* afficheur){
 
     std::cout << "Lancement Formulaire" << std::endl;
 
-     while (afficheur->getWindow()->isOpen() && etape!=4){
-        if(etape == 1){
-            inputUser.gererPremiereEtape(afficheur->getWindow(), &pseudo, &text, &etape);
-            std::cout << "Pseudo : " << pseudo << std::endl;
-            // afficheur->getWindow()->draw(text);
-            afficheur->afficherquizz(CHEMIN_PRESENTATION_FORMULAIRE, text);
-        }
-
-        if (etape== 2){
-            finquestion = inputUser.gererFormulaire(afficheur->getWindow(), &Reponse, &Background, &rep, &questionCourante); 
-            if (finquestion == 1){
-                majFormulaire(&Reponse, &Background, &etape, &finquestion, &rep);
-            }
-            afficheur->afficher(*this, rep);
-        }
-
-        if (etape == 3){
-            etape=4; 
-            return finLancer(afficheur);
-        }
-    afficheur->getWindow()->display();
-     }
-    return 0;
+    int result = bouclelancer(&etape, &text, &rep,&finquestion, &Reponse, &Background, afficheur, &inputUser);
+    return result;
 }
 
 
@@ -89,6 +68,27 @@ int Formulaire::finLancer(Afficheur* afficheur){
 
 }
 
-void Formulaire::genererText(sf::Text* text){
-    
+int Formulaire::bouclelancer(int* etape, sf::Text* text, sf::Text* rep, bool* finquestion, std::string* Reponse, std::string* Background, Afficheur* afficheur, InputUser* inputUser){
+    while (afficheur->getWindow()->isOpen() && *etape!=4){
+        if(*etape == 1){
+            inputUser->gererPremiereEtape(afficheur->getWindow(), &pseudo, text, etape);
+            std::cout << "Pseudo : " << pseudo << std::endl;
+            afficheur->afficherquizz(CHEMIN_PRESENTATION_FORMULAIRE, *text);
+        }
+
+        if (*etape== 2){
+            *finquestion = inputUser->gererFormulaire(afficheur->getWindow(), Reponse, Background, rep, &questionCourante); 
+            if (*finquestion == 1){
+                majFormulaire(Reponse, Background, etape, finquestion, rep);
+            }
+            afficheur->afficher(*this, *rep);
+        }
+
+        if (*etape == 3){
+            *etape=4; 
+            return finLancer(afficheur);
+        }
+    afficheur->getWindow()->display();
+     }
+        
 }

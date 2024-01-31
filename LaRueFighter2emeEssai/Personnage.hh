@@ -89,9 +89,6 @@ public:
     void gestionBlocageAttaque(int i, int j);
     void gestionattaque1(int i);
     void gestionattaque2(int j);
-    void gestionRien();
-    void gestionAvancer();
-    void gestionSaut(std::vector<ElementJeu> plateformes);
 
 
     

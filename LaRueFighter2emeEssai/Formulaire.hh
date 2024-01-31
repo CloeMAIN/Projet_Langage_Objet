@@ -4,6 +4,7 @@
 #pragma once
 #include "Question.hh"
 #include "Afficheur.hh"
+#include "InputUser.hh"
 #include <list>
 #include <string>
 
@@ -44,6 +45,7 @@ class Formulaire
         void majFormulaire(std::string* reponseUtilisateur, std::string* backgroundUtilisateur, int* etape, bool* finquestion, sf::Text* rep);
         int finLancer(Afficheur* afficheur);
         void genererText(sf::Text* text);
+        int bouclelancer(int* etape, sf::Text* text, sf::Text* rep, bool* finquestion, std::string* Reponse, std::string* Background, Afficheur* afficheur, InputUser* inputUser);
 
 
 };

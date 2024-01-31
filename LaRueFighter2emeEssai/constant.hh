@@ -140,7 +140,7 @@ const std::string CHEMIN_BACKGROUND_MENU("images/BackgroundMenu.jpg");
 const std::string CHEMIN_BOUTON_JOUER("images/Jouer.jpg");
 const std::string CHEMIN_BOUTON_QUITTER("images/Quitter.jpg");
 const std::string CHEMIN_BOUTON_COMMANDES("images/Commandes.jpg");
-const std::string CHEMIN_BACKGROUND_COMMANDES("images/BackgroundCommandes.jpg");
+const std::string CHEMIN_BACKGROUND_COMMANDES("images/BackgroundCommandes.png");
 const std::string CHEMIN_BOUTON_QUESTIONNAIRE("images/Questionnaire.png");
 
 //Position des boutons:
@@ -182,8 +182,7 @@ const std::string CHEMIN_BACKGROUND_DEFAITE_QUIZZ("images/Defaite_Quizz.png");
 const std::string CHEMIN_BOUTON_REJOUER("images/Rejouer.png");
 
 //Position des boutons:
-const Point POSITION_BOUTON_REJOUER = {float(TAILLE_FENETRE.x)/2 - float(TAILLE_FENETRE.x)/6 , float(TAILLE_FENETRE.y)/2 + float(TAILLE_FENETRE.y)/3};
-
+const Point POSITION_BOUTON_REJOUER = {float(TAILLE_FENETRE.x)/2 - float(TAILLE_FENETRE.x)/6 , float(TAILLE_FENETRE.y)/2 + float(TAILLE_FENETRE.y)/6};
 //Taille des boutons:
 const HitBox TAILLE_BOUTON_REJOUER = { POSITION_BOUTON_JOUER.x, POSITION_BOUTON_JOUER.y , POSITION_BOUTON_JOUER.x+200 , POSITION_BOUTON_JOUER.y+ float(TAILLE_FENETRE.y)/10};
 

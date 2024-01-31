@@ -123,12 +123,6 @@ void Personnage::mouvement(std::vector<ElementJeu> Plateformes){
     }
 }
 
-
-void Personnage::gestionSaut(std::vector<ElementJeu> Plateformes){
-
-}
-
-
 void Personnage::update(){
     sprite.move(velocity); // Déplace le personnage en fonction de sa vélocité
     position.x += velocity.x; // Met à jour la position X du personnage
